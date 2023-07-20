@@ -1612,3 +1612,5 @@ const capitals4 = function(word) {
 }
 
 console.log(capitals4('CodEWaRS'));
+
+//some changes
