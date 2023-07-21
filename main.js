@@ -1658,3 +1658,22 @@ function noSpace(x){return x.split(' ').join('')}
 
 
 console.log(noSpace(" aa aa b   ss ss  "))
+
+
+const  uniqueInOrder=function(iterable){
+  
+  let iterableArray;
+  
+  typeof iterable === "string" ? iterableArray = iterable.split("") : iterableArray = iterable;
+  
+  for(let i = 0; i < iterableArray.length; i++) {
+    if(iterableArray[i] === iterableArray[i+1]) {
+      iterableArray.splice(i+1, 1);
+      i--;
+    } 
+   }
+    return iterableArray;
+}
+
+
+console.log(uniqueInOrder('AAAABBBCCDAABBB'));
