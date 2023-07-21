@@ -1613,3 +1613,48 @@ const capitals4 = function(word) {
 
 console.log(capitals4('CodEWaRS'));
 
+
+/* 8 kyu
+Remove String Spaces
+Write a function that removes the spaces from the string, then return the resultant string.
+
+Examples:
+
+Input -> Output
+"8 j 8   mBliB8g  imjB8B8  jl  B" -> "8j8mBliB8gimjB8B8jlB"
+"8 8 Bi fk8h B 8 BB8B B B  B888 c hl8 BhB fd" -> "88Bifk8hB8BB8BBBB888chl8BhBfd"
+"8aaaaa dddd r     " -> "8aaaaaddddr"
+ */
+
+//simple:
+
+function noSpace(x){
+  const stringArray = x.split(" ");
+  const arrayZeroSpaces = [];
+  for(let e of stringArray) {
+    if(e) {
+      arrayZeroSpaces.push(e);
+    };
+  }
+  return arrayZeroSpaces.join("");
+}
+
+//with reduce:
+
+function noSpace(x) {
+  const stringArray = x.split(" ");
+  return stringArray.reduce((acc, crr) => {
+    return crr ? acc.concat(crr) : acc
+  }, [] )
+  .join("");
+}
+
+
+//the simplest solution:
+
+function noSpace(x){return x.split(' ').join('')}
+
+//join doesnt include the empty strings produced by split!
+
+
+console.log(noSpace(" aa aa b   ss ss  "))
