@@ -1731,3 +1731,43 @@ function between(a, b) {
 //also works:
 
 const between2 = (a, b) => Array.from(new Array(b-a+1), (_, i) => a + i);
+
+
+/* 7 kyu
+Exes and Ohs
+Check to see if a string has the same amount of 'x's and 'o's. The method must return a boolean and be case insensitive. The string can contain any char.
+
+Examples input/output:
+
+XO("ooxx") => true
+XO("xooxx") => false
+XO("ooxXm") => true
+XO("zpzpzpp") => true // when no 'x' and 'o' is present should return true
+XO("zzoo") => false */
+
+function XO(str) { 
+  const counterObj = { x: 0, o: 0};
+  
+  for( let e of str.toLowerCase()) {
+    if (e === "o" || e === "x") {
+      counterObj[e]++;
+    }
+  }
+  return counterObj.x === counterObj.o;
+};
+
+
+//simpler:
+
+
+function XO(str) {
+  let numOfXs = 0;
+  let numOfOs = 0;
+
+  for(let e of str.toLowerCase()) {
+    if(e === "x") numOfXs++
+    else if (e === "o") numOfOs++
+  }
+
+  return numOfOs === numOfXs;
+}
