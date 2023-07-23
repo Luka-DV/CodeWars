@@ -1700,6 +1700,34 @@ Examples
 25  =>  true
 26  =>  false */
 
-const isSquare = function(n){
+const isSquare1 = function(n){
   return Math.sqrt(n) % 1 === 0 ? true : false;
 };
+
+//you dont need the explicit true : false:
+
+const isSquare2 = function(n){
+  return Math.sqrt(n) % 1 === 0 
+};
+
+
+
+/* 8 kyu
+What is between?
+Complete the function that takes two integers (a, b, where a < b) and return an array of all integers between the input parameters, including them. */
+
+function between(a, b) {
+
+  const numArray = [];
+  
+  for(let i = a; i <= b; i++) {
+    numArray.push(i);
+  }
+  
+  return numArray;
+
+}
+
+//also works:
+
+const between2 = (a, b) => Array.from(new Array(b-a+1), (_, i) => a + i);
