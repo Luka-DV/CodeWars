@@ -1867,3 +1867,26 @@ function makeNegative(num) {
   return num <= 0 ? num : -num;
 }
 
+
+/* 7 kyu
+Jaden Casing Strings
+Your task is to convert strings to how they would be written by Jaden Smith. The strings are actual quotes from Jaden Smith, but they are not capitalized in the same way he originally typed them.
+
+Example:
+
+Not Jaden-Cased: "How can mirrors be real if our eyes aren't real"
+Jaden-Cased:     "How Can Mirrors Be Real If Our Eyes Aren't Real" */
+
+
+String.prototype.toJadenCase = function () {
+  
+  const array = this.split(" ");
+  const jadenArray = [];
+  for(let e of array) {
+   jadenArray.push(e.replace(e[0], e[0].toUpperCase()));
+  }
+  return jadenArray.join(" ");
+};
+
+
+
