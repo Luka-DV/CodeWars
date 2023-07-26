@@ -1880,13 +1880,20 @@ Jaden-Cased:     "How Can Mirrors Be Real If Our Eyes Aren't Real" */
 
 String.prototype.toJadenCase = function () {
   
-  const array = this.split(" ");
+  const stringToArray = this.split(" ");
   const jadenArray = [];
-  for(let e of array) {
+  for(let e of stringToArray) {
    jadenArray.push(e.replace(e[0], e[0].toUpperCase()));
   }
   return jadenArray.join(" ");
 };
 
+//or, more elegant: 
 
+String.prototype.toJadenCase = function () {
+ 
+  return this.split(" ")
+    .map(e => e.replace(e[0], e[0].toUpperCase()))
+    .join(" ");
+};
 
