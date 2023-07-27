@@ -1914,3 +1914,60 @@ arrayDiff([1,2,2,2,3],[2]) == [1,3] */
 function arrayDiff(a, b) {
   return a.filter(num => !b.includes(num));
 };
+
+
+/* +++++++++++++6 kyu
+Find the unique number
+There is an array with some numbers. All numbers are equal except for one. Try to find it!
+
+findUniq([ 1, 1, 1, 2, 1, 1 ]) === 2
+findUniq([ 0, 0, 0.55, 0, 0 ]) === 0.55
+
+It’s guaranteed that array contains at least 3 numbers.
+
+The tests contain some very huge arrays, so think about performance. */
+
+function findUniq(arr) {
+  let counterObj = [];
+   for(let e of arr) {
+     counterObj[e] = (counterObj[e] || 0) + 1;
+   };
+   for(let e in counterObj) {
+     if (counterObj[e] === 1) {
+       return +e;
+     };
+   };
+ }
+
+ console.log(findUniq([ 1, 1, 1, 2, 1, 1 ]));
+
+
+ //OR using reduce:
+
+ function findUniq2(arr) {
+  
+  const counterObj = arr.reduce((acc, crr) => {
+    acc[crr] = (acc[crr] || 0) + 1;
+    return acc
+  }, []);
+
+   for(let e in counterObj) {
+     if (counterObj[e] === 1) {
+       return +e;
+     };
+   };
+ }
+
+ console.log(findUniq2([ 1, 1, 1, 2, 3, 2, 1, 1 ]));
+
+function sth88() {
+  const arr45 = [1,1,1,1,1,1,1,4,1,1,1]
+
+  let (a,b,c) = arr45.slice(0,3);
+ 
+  console.log(a);
+  console.log(b);
+  console.log(c);
+}
+
+sth88();
