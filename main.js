@@ -2044,7 +2044,7 @@ Notes:
 
     //a nice CW solution:
 
-    const mostMoney = students => {
+  /*   const mostMoney = students => {
       let money = students.map(st => st.fives * 5 + st.tens * 10 + st.twenties * 20);
 
       if (money.length > 1 && money.every(val => val == money[0])){
@@ -2053,7 +2053,7 @@ Notes:
 
       let idx = money.indexOf(Math.max(...money));
       return students[idx].name;
-    }
+    } */
 
 
 
@@ -2074,7 +2074,7 @@ function solution(string) {
   .join("")
 }
 
-/* 8 kyu
+/* ++++++++++++8 kyu
 A Needle in the Haystack
 Can you find the needle in the haystack?
 
@@ -2094,3 +2094,28 @@ function findNeedle(haystack) {
   const needlePosition = haystack.indexOf("needle");
   return `found the needle at position ${needlePosition}`;
 }
+
+/*+++++++++++++++++++7 kyu
+Don't give me five!
+
+In this kata you get the start number and the end number of a region and should return the count of all numbers except numbers with a 5 in it. The start and the end number are both inclusive!
+
+Examples:
+
+1,9 -> 1,2,3,4,6,7,8,9 -> Result 8
+4,17 -> 4,6,7,8,9,10,11,12,13,14,16,17 -> Result 12
+
+The result may contain fives. ;-)
+The start number will always be smaller than the end number. Both numbers can be also negative! */
+
+function dontGiveMeFive(start, end) {
+  
+  let numCount = 0;
+  for(let i = start; i <= end; i++) {
+    if(String(i).includes("5")) continue;  //or if(!String(i).includes("5"))
+    numCount++;
+  }
+  return numCount;
+}
+
+console.log(dontGiveMeFive(4,17))
