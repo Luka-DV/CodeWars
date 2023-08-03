@@ -2226,3 +2226,35 @@ function gimme (triplet) {
 console.log(gimme([2,3,1]));
 
 
+/* 8 kyu
+Removing Elements
+
+Take an array and remove every second element from the array. Always keep the first element and start removing with the next element.
+Example:
+
+["Keep", "Remove", "Keep", "Remove", "Keep", ...] --> ["Keep", "Keep", "Keep", ...]
+
+None of the arrays will be empty, so you don't have to worry about tha */
+
+function removeEveryOther(arr){
+  return arr.filter((_,ind) => ind % 2 === 0);
+}
+
+/* 7 kyu
+Binary Addition
+Implement a function that adds two numbers together and returns their sum in binary. The conversion can be done before, or after the addition.
+
+The binary number returned should be a string.
+
+Examples:(Input1, Input2 --> Output (explanation)))
+
+1, 1 --> "10" (1 + 1 = 2 in decimal or 10 in binary)
+5, 9 --> "1110" (5 + 9 = 14 in decimal or 1110 in binary */
+
+function addBinary(a,b) {
+
+  return (a + b).toString(2);
+}
+
+
+
