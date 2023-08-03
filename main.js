@@ -2257,4 +2257,107 @@ function addBinary(a,b) {
 }
 
 
+/* 8 kyu
+Color Ghost
+
+Create a class Ghost
+
+Ghost objects are instantiated without any arguments.
+
+Ghost objects are given a random color attribute of "white" or "yellow" or "purple" or "red" when instantiated
+
+ghost = new Ghost();
+ghost.color //=> "white" or "yellow" or "purple" or "red"
+ */
+
+
+/* class Ghost {
+  constructor() {
+    this.color = (
+      function() {
+        const randomNum = Math.random();
+        if(randomNum < 0.25) return "white"
+        else if(randomNum < 0.50) return "yellow"
+        else if(randomNum < 0.75) return "purple"
+        else return "red"
+      }
+    )()
+  }
+}
+
+
+//using abstraction:
+
+function Ghost() {
+  
+  const colorPicker =  function() {
+    const randomNum = Math.random();
+    if(randomNum < 0.25) return "white"
+    else if(randomNum < 0.50) return "yellow"
+    else if(randomNum < 0.75) return "purple"
+    else return "red"
+  }
+
+  const color = colorPicker();
+
+ Object.defineProperty(this, "color", {
+  get: function() {
+    return color;
+  }
+ })
+} */
+
+
+//modern (best), using private fields (#) to achieve abstraciton :
+
+/* class Ghost {
+ #color;
+ constructor() {
+    const colorPicker =  function() {
+      const randomNum = Math.random();
+      if(randomNum < 0.25) return "white"
+      else if(randomNum < 0.50) return "yellow"
+      else if(randomNum < 0.75) return "purple"
+      else return "red"
+    };
+
+    this.#color = colorPicker()
+ }
+
+ get color() {
+  return this.#color
+ }
+} */
+
+
+//using classes but without privat fields (codewars doesnt support them yes):
+
+class Ghost {
+  constructor() {
+    
+    const colorPicker =  function() {
+       const randomNum = Math.random();
+       if(randomNum < 0.25) return "white"
+       else if(randomNum < 0.50) return "yellow"
+       else if(randomNum < 0.75) return "purple"
+       else return "red"
+     };
+ 
+    let color = colorPicker();
+
+    Object.defineProperty(this, "color", {
+      get: function() {
+        return color;
+      }
+    })
+  }
+ }
+
+
+const ghost1 = new Ghost();
+const ghost2 = new Ghost();
+const ghost3 = new Ghost();
+
+console.log(ghost1, ghost2, ghost3);
+
 
