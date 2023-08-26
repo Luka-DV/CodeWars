@@ -2463,3 +2463,113 @@ function AmIAfraid(day, num) {
     "Sunday"   : Math.abs(num) === 666
   }[day];
 }
+
+/* 8 kyu
+Double Char
+
+Given a string, you have to return a string in which each character (case-sensitive) is repeated once.
+Examples (Input -> Output):
+
+* "String"      -> "SSttrriinngg"
+* "Hello World" -> "HHeelllloo  WWoorrlldd"
+* "1234!_ "     -> "11223344!!__  " */
+
+function doubleChar(str) {
+  return str.split("")
+        .map(e => e.repeat(2))
+        .join("");
+}
+
+//without repeating the whitespace:
+
+function doubleChar(str) {
+  return str.split("")
+        .map(e => e != " " ? e.repeat(2) : e)
+        .join("");
+}
+
+console.log(doubleChar("ABC ABC"));
+
+/* 6 kyu
+Your order, please
+
+Your task is to sort a given string. Each word in the string will contain a single number. This number is the position the word should have in the result.
+
+Note: Numbers can be from 1 to 9. So 1 will be the first word (not 0).
+
+If the input string is empty, return an empty string. The words in the input String will only contain valid consecutive numbers.
+Examples
+
+"is2 Thi1s T4est 3a"  -->  "Thi1s is2 3a T4est"
+"4of Fo1r pe6ople g3ood th5e the2"  -->  "Fo1r the2 g3ood 4of th5e pe6ople"
+""  -->  "" */
+
+
+/* function order(words){
+  const wordsArray = words.split(" ");
+  const counterObj = {};
+  const orderedArray = [];
+  
+  for(let e of wordsArray) {
+    let letterArray = e.split("");
+    for(let el of letterArray) {
+      console.log(el)
+      if(!isNaN(el)) {
+        counterObj[el] = e;
+        break
+      }
+    }
+  }
+  
+  for(let i in counterObj) {
+    orderedArray.push(counterObj[i])
+  }
+  
+  return orderedArray.join(" ")
+} */
+
+
+function order(words){
+  const wordsArray = words.split(" ");
+  const orderedArray = [];
+
+  if(!words) return words;
+  
+  for(let word of wordsArray) {
+    let letterArray = word.split("");
+    for(let char of letterArray) {
+      if(!isNaN(char)) {
+        orderedArray[+char-1] = word;
+        break
+      }
+    }
+  }
+  return orderedArray.join(" ")
+}
+console.log(order("is2 Thi1s T4est 3a"), "huheh");
+
+
+/* 
++++++++++++7 kyu
+Sort Number
+Finish the solution so that it sorts the passed in array of numbers. If the function passes in an empty array or null/nil value then it should return an empty array.
+
+For example:
+
+solution([1, 2, 10, 50, 5]); // should return [1,2,5,10,50]
+solution(null); // should return [] */
+
+function solution23(nums){
+
+  if(!nums || nums.length === 0 ) return [];
+  
+  return nums.sort((a,b) => a - b);
+}
+
+//CW:
+
+function solution233(nums){
+  return (nums || []).sort(function(a, b){
+    return a - b
+  });
+}
