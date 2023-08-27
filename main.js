@@ -2573,3 +2573,35 @@ function solution233(nums){
     return a - b
   });
 }
+
+
+
+
+//fibonacci practice
+
+//Given a number n, find the first n elements of the fibonacci sequence
+
+function fibonacci(n) {
+  const fibonacciArray = [0,1];
+
+  if(n === 1) return [0];
+
+  for(let i = 2; i <= n - 1; i++) {
+    fibonacciArray.push(fibonacciArray[i-2] + fibonacciArray[i-1])
+  }
+
+  return fibonacciArray;
+}
+
+console.log(fibonacci(7))
+
+
+//function that gives the value at index N using resursion:
+ 
+function fibonacciNumAtIndexN(n) {
+  if (n <= 1) return n;
+  return fibonacciNumAtIndexN (n - 2) + fibonacciNumAtIndexN (n - 1);
+}
+
+console.log(fibonacciNumAtIndexN(6))
+
