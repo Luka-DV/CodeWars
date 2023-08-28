@@ -2596,12 +2596,202 @@ function fibonacci(n) {
 console.log(fibonacci(7))
 
 
-//function that gives the value at index N using resursion:
- 
+//function that gives the value at index N using recursion:
+
 function fibonacciNumAtIndexN(n) {
   if (n <= 1) return n;
   return fibonacciNumAtIndexN (n - 2) + fibonacciNumAtIndexN (n - 1);
 }
 
 console.log(fibonacciNumAtIndexN(6))
+
+
+
+//6kyu kata
+//Given an input:
+
+//"?foo=hello&bar=world&baz&foo=again"
+
+/* output an object like this:
+
+output: {
+  foo: ["hello", "again"]
+  bar: "world",
+  baz: "true"
+} */
+
+
+function formatQueryString(str) {
+
+  const keyValuePairs = str.slice(1).split("&");
+
+  const output = {};
+
+  for (let pair of keyValuePairs) {
+    const [key,value] = pair.split("=")
+    if(key) output[key] = value ?? "true";
+  }
+
+  return output;
+}
+
+console.log(formatQueryString("?foo=hello&bar=world&baz&foo=again"));
+
+/* 
+function formatQueryString(str) {
+
+  const keyValuePairs = str.slice(1).split("&");
+
+  const output = {};
+
+  for (let pair of keyValuePairs) {
+    const [key,value] = pair.split("=")
+    if(key) {
+      if(typeof output[key] === "object") {
+        output[key].push(value)
+      } else if(output[key] )output[key] = [output[key], value]
+     else  output[key] = value ?? "true";
+    }
+  }
+
+  return output;
+} */
+
+
+function formatQueryString(str) {
+
+  if(str === null || str === undefined) {
+    throw new Error("No input given.")
+  }
+  const keyValuePairs = str.slice(1).split("&");
+
+  const output = {};
+
+  for (let pair of keyValuePairs) {
+    const [key,value] = pair.split("=")
+    if(key) { //checks that the input is not empty (if "?" reuturns an empty object)
+      if(output[key]) { //checks if the given key allready has a value
+        typeof output[key] === "object" ? output[key].push(value) : output[key] = [output[key], value] //array: push value, not array: create array
+      }
+     else  output[key] = value ?? "true";
+    }
+  }
+  return output;
+}
+
+
+function formatQueryString(str) {
+
+  if(str === null || str === undefined) {
+    throw new Error("No input given.")
+  }
+  const keyValuePairs = str.slice(1).split("&");
+
+  const output = {};
+
+  for (let pair of keyValuePairs) {
+    const [key,value] = pair.split("=")
+    if(key) { //checks that the input is not empty (if "?" returns an empty object)
+      if(output[key]) { //checks if the given key allready has a value
+        output[key] = [output[key], value ?? "true"].flat() //better, less verbose code
+      }
+     else  output[key] = value ?? "true";
+    }
+  }
+  return output;
+}
+
+console.log(formatQueryString("?foo=hello&bar=world&?=javascript&foo=again&bar=again&baz4&foo"), "to OBJECT");
+
+
+
+//now code the reverse problem (from object to query string)
+
+function fromObjectToQueryString(obj) {
+
+  const queryStringArray = [];
+
+  for(let key in obj) {
+    if(typeof obj[key] === "object") { //check if array
+      for(let i of obj[key]) {
+        queryStringArray.push(`&${key}${i === "true" ? "": "="+ i }`);
+      }
+    } else {
+      queryStringArray.push(`&${key}${obj[key] === "true" ? "": "=" + obj[key]}`);
+    }
+  }
+  //return `?${queryStringArray.join("").slice(1)}` OR:
+  return "?" + queryStringArray.join("").slice(1)
+
+}
+
+
+const object1 = {
+  foo: ["hello", "again", "true"],
+  bar: "world",
+  baz: "true"
+} 
+
+console.log(fromObjectToQueryString(object1));
+
+/* const queryObject = formatQueryString("?foo=hello&bar=world&baz=javascript&foo=again&bar=again&baz4&foo")
+console.log("format to object= ", queryObject)
+
+const backToQuery = fromObjectToQueryString(queryObject);
+console.log("format back to string= ", backToQuery, typeof backToQuery); */
+
+
+//with a clear function for the "true" value:
+
+function fromObjectToQueryString2(obj) {
+
+  const queryStringArray = [];
+
+  function clearTrue(value) {
+    return value === "true" ? "": "=" + value
+  }
+
+  for(let key in obj) {
+    if(typeof obj[key] === "object") { //check if array
+      for(let i of obj[key]) {
+        queryStringArray.push(`&${key}${clearTrue(i)}`);
+      }
+    } else {
+      queryStringArray.push(`&${key}${clearTrue(obj[key])}`);
+    }
+  }
+  //return `?${queryStringArray.join("").slice(1)}` OR:
+  return "?" + queryStringArray.join("").slice(1)
+}
+
+
+console.log(fromObjectToQueryString2(object1));
+
+
+
+function formatQueryString33(str) {
+
+  if(str === null || str === undefined) {
+    throw new Error("No input given.")
+  }
+  const keyValuePairs = str.slice(1).split("&").map(decodeURIComponent); //ko passaš funkcijo v map ne uporabiš (): je enako kot map(e => decodeURIComponent(e))
+
+  const output = {};
+
+  for (let pair of keyValuePairs) {
+    const [key,value] = pair.split("=")
+    if(key) { //checks that the input is not empty (if "?" returns an empty object)
+      if(output[key]) { //checks if the given key allready has a value
+        output[key] = [output[key], value ?? "true"].flat() //better, less verbose code
+      }
+     else  output[key] = value ?? "true";
+    }
+  }
+  return output;
+}
+
+console.log(formatQueryString33("?foo=hello&qmark=%3F&bar=world&baz=javascript&foo=again&bar=again&baz4&foo&qmark=%3F"), "to OBJECT33");
+
+
+
 
