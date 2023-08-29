@@ -2795,6 +2795,35 @@ function formatQueryString33(str) {
 console.log(formatQueryString33("?foo=hello&qmark=%3F&bar=world&baz=javascript&foo=again&bar=again&baz4&foo&qmark=%3F"), "to OBJECT33");
 
 
+
+/* 7 kyu
+Remove anchor from URL
+
+Complete the function/method so that it returns the url with anything after the anchor (#) removed.
+Examples
+
+"www.codewars.com#about" --> "www.codewars.com"
+"www.codewars.com?page=1" -->"www.codewars.com?page=1" */
+
+function removeUrlAnchor(url){
+
+  const urlArray = [];
+  for(let ch of url) {
+    if(ch === "#") break
+    urlArray.push(ch);
+  }
+  return urlArray.join("")
+}
+
+//cw, split :
+
+function removeUrlAnchor(url){
+  return url.split('#')[0];
+}
+
+
+
+
  
 
 
