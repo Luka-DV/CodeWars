@@ -2752,7 +2752,7 @@ function fromObjectToQueryString2(obj) {
   }
 
   for(let key in obj) {
-    if(typeof obj[key] === "object") { //check if array
+    if(typeof obj[key] === "object") { 
       for(let i of obj[key]) {
         queryStringArray.push(`&${key}${clearTrue(i)}`);
       }
@@ -2760,7 +2760,7 @@ function fromObjectToQueryString2(obj) {
       queryStringArray.push(`&${key}${clearTrue(obj[key])}`);
     }
   }
-  //return `?${queryStringArray.join("").slice(1)}` OR:
+  
   return "?" + queryStringArray.join("").slice(1)
 }
 
@@ -2769,17 +2769,19 @@ console.log(fromObjectToQueryString2(object1));
 
 
 
+//with decoding:
+
 function formatQueryString33(str) {
 
   if(str === null || str === undefined) {
     throw new Error("No input given.")
   }
-  const keyValuePairs = str.slice(1).split("&").map(decodeURIComponent); //ko passaš funkcijo v map ne uporabiš (): je enako kot map(e => decodeURIComponent(e))
+  const keyValuePairs = str.slice(1).split("&"); 
 
   const output = {};
 
   for (let pair of keyValuePairs) {
-    const [key,value] = pair.split("=")
+    const [key,value] = pair.split("=").map(decodeURIComponent) // 1. za .split("="), ker so simboli encodani (&, =,...) 2. ko passaš funkcijo v map ne uporabiš (): je enako kot map(e => decodeURIComponent(e))
     if(key) { //checks that the input is not empty (if "?" returns an empty object)
       if(output[key]) { //checks if the given key allready has a value
         output[key] = [output[key], value ?? "true"].flat() //better, less verbose code
@@ -2793,5 +2795,6 @@ function formatQueryString33(str) {
 console.log(formatQueryString33("?foo=hello&qmark=%3F&bar=world&baz=javascript&foo=again&bar=again&baz4&foo&qmark=%3F"), "to OBJECT33");
 
 
+ 
 
 
