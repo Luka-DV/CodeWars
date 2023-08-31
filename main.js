@@ -2859,3 +2859,46 @@ function twoSum(numbers, target) {
     seen.set(x, i);
   }
 }
+
+
+/* 7 kyu
+Two Oldest Ages
+The two oldest ages function/method needs to be completed. It should take an array of numbers as its argument and return the two highest numbers within the array. The returned value should be an array in the format [second oldest age,  oldest age].
+
+The order of the numbers passed in could be any order. The array will always include at least 2 items. If there are two or more oldest age, then return both of them in array format.
+
+For example (Input --> Output):
+
+[1, 2, 10, 8] --> [8, 10]
+[1, 5, 87, 45, 8, 8] --> [45, 87]
+[1, 3, 10, 0]) --> [3, 10] */
+
+//easiest: 
+
+function twoOldestAges(ages){
+  ages.sort((a,b) => a-b)
+  return [ages[ages.length-2], ages[ages.length-1]]
+}
+
+//better time complexity:
+
+
+function twoOldestAges(ages) {
+  let oldest = -Infinity;
+  let secondOldest = -Infinity;
+
+  for (const age of ages) {
+    if (age > oldest) {
+      secondOldest = oldest;
+      oldest = age;
+    } else if (age > secondOldest) {
+      secondOldest = age;
+    }
+  }
+  return [secondOldest, oldest];
+}
+
+
+console.log(twoOldestAges([1,5,87,45,8,8]))
+
+
