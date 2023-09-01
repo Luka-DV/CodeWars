@@ -2902,3 +2902,73 @@ function twoOldestAges(ages) {
 console.log(twoOldestAges([1,5,87,45,8,8]))
 
 
+
+/* 5 kyu
+String incrementer
+
+Your job is to write a function which increments a string, to create a new string.
+
+    If the string already ends with a number, the number should be incremented by 1.
+    If the string does not end with a number. the number 1 should be appended to the new string.
+
+Examples:
+
+foo -> foo1
+
+foobar23 -> foobar24
+
+foo0042 -> foo0043
+
+foo9 -> foo10
+
+foo099 -> foo100
+
+Attention: If the number has leading zeros the amount of digits should be considered. */
+
+//this works if the numbers are just at the end of the string:
+
+function incrementString (strng) {
+  for(let ind in strng) {
+    if(!isNaN(+strng[+ind])) {
+      const charString = strng.slice(0,+ind)
+      const numberString = strng.slice(+ind);
+
+      console.log(numberString)
+
+      let convertedToNum = Number(numberString);
+
+      const incrementedNumberString = String(++convertedToNum);
+
+      return charString + incrementedNumberString.padStart(numberString.length, 0)
+    }
+  }
+  return strng + 1;
+}
+
+
+//works in every case (final solution):
+
+
+
+function incrementString (strng) {
+
+  if(!strng) return "1"
+
+  if(!isNaN(strng)) { //if the strng is a number
+    return (parseInt(strng, 10) + 1).toString().padStart(strng.length, 0);
+  }
+
+  for(let ind = strng.length - 1; ind >= 0; ind--) {
+    if(isNaN(strng[ind])) {
+      const charString = strng.slice(0,ind+1)
+      const numberString = strng.slice(ind+1);
+
+      const incrementedNumberString = String(Number(numberString) + 1);
+
+      return charString + incrementedNumberString.padStart(numberString.length, 0)
+    }
+  }
+
+}
+
+console.log(incrementString("foo"))
