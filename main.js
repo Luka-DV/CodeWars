@@ -2903,7 +2903,7 @@ console.log(twoOldestAges([1,5,87,45,8,8]))
 
 
 
-/* 5 kyu
+/* ++++++++++++++++5 kyu
 String incrementer
 
 Your job is to write a function which increments a string, to create a new string.
@@ -2949,7 +2949,6 @@ function incrementString (strng) {
 //works in every case (final solution):
 
 
-
 function incrementString (strng) {
 
   if(!strng) return "1"
@@ -2972,3 +2971,53 @@ function incrementString (strng) {
 }
 
 console.log(incrementString("foo"))
+
+
+/* 7 kyu
+Thinkful - Object Drills: Quarks
+
+Background
+
+You're modelling the interaction between a large number of quarks and have decided to create a Quark class so you can generate your own quark objects.
+
+Quarks are fundamental particles and the only fundamental particle to experience all four fundamental forces.
+Your task
+
+Your Quark class should allow you to create quarks of any valid color ("red", "blue", and "green") and any valid flavor ('up', 'down', 'strange', 'charm', 'top', and 'bottom').
+
+Every quark has the same baryon_number (BaryonNumber in C#): 1/3.
+
+Every quark should have an .interact() (.Interact() in C#) method that allows any quark to interact with another quark via the strong force. When two quarks interact they exchange colors.
+Example
+
+>>> q1 = Quark("red", "up")
+>>> q1.color
+"red"
+>>> q1.flavor
+"up"
+>>> q2 = Quark("blue", "strange")
+>>> q2.color
+"blue"
+>>> q2.baryon_number
+0.3333333333333333
+>>> q1.interact(q2)
+>>> q1.color
+"blue"
+>>> q2.color
+"red" */
+
+class Quark{
+  constructor(quarkColor, quarkFlavor) {
+    this.color = quarkColor,
+    this.flavor = quarkFlavor,
+    this["baryon_number"] = 1/3 
+  }
+  interact(quark) {
+    [this.color, quark.color] = [quark.color, this.color] 
+  }
+}
+
+
+const quark1 = new Quark("green", "up");
+const quark2 = new Quark("blue", "down")
+console.log(quark1, quark2)
