@@ -3055,10 +3055,10 @@ Examples
     
     b.getSurfaceArea() // -> 88
 
-Note: no error checking is needed */ž
+Note: no error checking is needed */
 
 
-class Block{
+class Block2{
 
   constructor([width, length, height]){
     this.width = width,
@@ -3112,3 +3112,22 @@ class Block{
   
 }
 
+
+/* 7 kyu
+Small enough? - Beginner
+You will be given an array and a limit value. You must check that all values in the array are below or equal to the limit value. If they are, return true. Else, return false.
+
+You can assume all values in the array are numbers. */
+
+function smallEnough(a, limit){
+  return a.every(value => value <= limit);
+}
+
+/* 7 kyu
+No oddities here
+Write a small function that returns the values of an array that are not odd.
+
+All values in the array will be integers. Return the good values in the order they are given. */
+function noOdds( values ){
+  return values.filter(num => num % 2 === 0);
+}
