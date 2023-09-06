@@ -3162,7 +3162,7 @@ function checkExam(array1, array2) {
 
 //using reduce:
 
-const checkExam = (array1, array2) => {
+const checkExam33 = (array1, array2) => {
   let score = array2.reduce(
     (acc, crr, i) => {
       if(crr == array1[i]) return acc += 4;
@@ -3198,3 +3198,81 @@ function checkExam(array1, array2) {
 }
 
 
+
+/* ++++++7 kyu
+JavaScript Array Filter
+JavaScript Arrays support a filter function (starting in JavaScript 1.6). Use the filter functionality to complete the function given.
+
+The solution would work like the following:
+
+getEvenNumbers([2,4,5,6]) // should == [2,4,6] */
+
+function getEvenNumbers33(numbersArray){
+  return numbersArray.filter(num => num % 2 === 0);
+}
+
+/* ++++++++7 kyu
+Flatten and sort an array
+Challenge:
+
+Given a two-dimensional array of integers, return the flattened version of the array with all the integers in the sorted (ascending) order.
+
+Example:
+
+Given [[3, 2, 1], [4, 6, 5], [], [9, 7, 8]], your function should return [1, 2, 3, 4, 5, 6, 7, 8, 9].
+
+Addendum:
+
+Please, keep in mind, that JavaScript is by default sorting objects alphabetically. For more information, please consult:
+
+http://stackoverflow.com/questions/6093874/why-doesnt-the-sort-function-of-javascript-work-well */
+
+function flattenAndSort(array) {
+  return array.flat().sort((a,b) => a-b);
+}
+
+/* ++++++++7 kyu
+Fizz Buzz
+Return an array containing the numbers from 1 to N, where N is the parametered value.
+
+Replace certain values however if any of the following conditions are met:
+
+    If the value is a multiple of 3: use the value "Fizz" instead
+    If the value is a multiple of 5: use the value "Buzz" instead
+    If the value is a multiple of 3 & 5: use the value "FizzBuzz" instead
+
+N will never be less than 1.
+
+Method calling example:
+
+fizzbuzz(3) -->  [1, 2, "Fizz"] */
+
+
+// Return an array
+
+function fizzbuzz(n) {
+
+  const fizzBuzzArray = [];
+
+  const rules = new Map([
+    [3, "Fizz"],
+    [5, "Buzz"],
+  ]);
+  
+  for(let i = 1; i <= n; i++) {
+    
+    let container = "";
+
+    for(let [key,value] of rules) {
+      if(i % key === 0) container += value;
+      } 
+    
+    fizzBuzzArray.push(container || i);
+    
+  }
+  
+  return fizzBuzzArray;
+}
+
+
+console.log(fizzbuzz(22))
