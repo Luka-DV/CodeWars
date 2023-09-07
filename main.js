@@ -3275,4 +3275,39 @@ function fizzbuzz(n) {
 }
 
 
-console.log(fizzbuzz(22))
+//console.log(fizzbuzz(22))
+
+
+/* +++++++7 kyu
+String ends with?
+Complete the solution so that it returns true if the first argument(string) passed in ends with the 2nd argument (also a string).
+
+Examples:
+
+solution('abc', 'bc') // returns true
+solution('abc', 'd') // returns false */
+
+function solution(str, ending){
+  return str.endsWith(ending);
+}
+
+/* ++++7 kyu
+Credit Card Mask
+Usually when you buy something, you're asked whether your credit card number, phone number or answer to your most secret question is still correct. However, since someone could look over your shoulder, you don't want that shown on your screen. Instead, we mask it.
+
+Your task is to write a function maskify, which changes all but the last four characters into '#'. */
+
+function maskify(cc) {
+  return cc.split("")
+   .map((char, ind, arr) => {
+    if(ind > arr.length - 5) return char
+    else return "#" 
+  })
+   .join("");
+ }
+
+ //better, simpler:
+
+ function maskify(cc) {
+  return cc.slice(-4).padStart(cc.length, "#");
+}
