@@ -3311,3 +3311,45 @@ function maskify(cc) {
  function maskify(cc) {
   return cc.slice(-4).padStart(cc.length, "#");
 }
+
+/* 7 kyu
+Friend or Foe?
+Make a program that filters a list of strings and returns a list with only your friends name in it.
+
+If a name has exactly 4 letters in it, you can be sure that it has to be a friend of yours! Otherwise, you can be sure he's not...
+
+Ex: Input = ["Ryan", "Kieran", "Jason", "Yous"], Output = ["Ryan", "Yous"] */
+
+function friend(friends){
+  return friends.filter(name => name.length === 4);
+}
+
+/* 7 kyu
+Two to One
+Take 2 strings s1 and s2 including only letters from a to z. Return a new sorted string, the longest possible, containing distinct letters - each taken only once - coming from s1 or s2. */
+
+function longest(s1, s2) {
+  const newString = s1 + s2;
+console.log(newString, "A")
+  const stringToArray = newString.split("");
+console.log(stringToArray, "B")
+  const uniqueCharSet = new Set(stringToArray);
+console.log(uniqueCharSet, "C")
+  const sortedArray = [...uniqueCharSet].sort();
+  console.log(sortedArray, "D")
+  return sortedArray.join("");
+  
+}
+
+let a = "xyaabbbccccdefww"
+let b = "xxxxyyyyabklmopq"
+console.log(longest(a, b));
+
+function longest(s1, s2) {
+  const uniqueCharSet = new Set(s1+s2); //argum can be any iterable
+console.log(uniqueCharSet, "C2")
+  const sortedArray = [...uniqueCharSet].sort();
+  console.log(sortedArray, "D2")
+  return sortedArray.join("");
+  
+}
