@@ -3408,3 +3408,33 @@ class Person {
 
 const sam = new Person();
 
+
+
+/* 7 kyu
+Regex validate PIN code
+ATM machines allow 4 or 6 digit PIN codes and PIN codes cannot contain anything but exactly 4 digits or exactly 6 digits.
+
+If the function is passed a valid PIN string, return true, else return false. */
+
+function validatePIN (pin) {
+  const validInput = [1,2,3,4,5,6,7,8,9,0];
+
+  return pin.split("")
+  .every(input => validInput.includes(+input) && input !== " ") &&
+  (pin.length === 4 || pin.length === 6);
+}
+
+//doesnt work if the string includes \n. This works:
+
+
+function validatePIN(pin) {
+
+  const onlyNums = pin.split('').every(char => typeof +char === "number" 
+  && !isNaN(+char) 
+  && char !== " "  // number value 0
+  && char !== "\n"); // number value 0
+ 
+  return onlyNums && (pin.length === 4 || pin.length === 6)
+}
+
+console.log(validatePIN('-1.234'))
