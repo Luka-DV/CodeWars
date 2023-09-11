@@ -3437,4 +3437,44 @@ function validatePIN(pin) {
   return onlyNums && (pin.length === 4 || pin.length === 6)
 }
 
-console.log(validatePIN('-1.234'))
+//console.log(validatePIN('-1.234'))
+
+/* 7 kyu
+Find the stray number
+
+You are given an odd-length array of integers, in which all of them are the same, except for one single number.
+
+Complete the method which accepts such an array, and returns that single different number.
+
+The input array will always be valid! (odd-length >= 3)
+Examples
+
+[1, 1, 2] ==> 2
+[17, 17, 3, 17, 17, 17, 17] ==> 3 */
+
+
+function stray(numbers) {
+  const counterObject = {};
+  
+  for(let ind = 0; ind < numbers.length; ind++) {
+    counterObject[numbers[ind]] = (counterObject[numbers[ind]] || 0) + 1;
+    if(ind >= 2) {
+      for(let prop in counterObject) {
+        if (counterObject[prop] === 1) return +prop;
+      }
+    }
+  }
+}
+
+//or - simpler:
+
+function stray(numbers) {
+  
+  for(let ind = 0; ind < numbers.length; ind++) {
+    if(numbers.indexOf(numbers[ind]) === numbers.lastIndexOf(numbers[ind])) {
+       return numbers[ind];
+       }
+  }
+}
+
+console.log(stray([2,2,2,2,4]))
