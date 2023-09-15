@@ -3501,13 +3501,13 @@ function arithmetic(a, b, operator){
 }
 
 //or:
-
+/* 
 const arithmetic = (a, b, operator) => ({
   'add'     : a + b,
   'subtract': a - b,
   'multiply': a * b,
   'divide'  : a / b
-}[operator]);
+}[operator]); */
 
 //or: 
 
@@ -3544,4 +3544,52 @@ function alternate(n, firstValue, secondValue){
       array.push(i % 2 === 0 ? firstValue : secondValue)
     }
     return array;
-  }
+  } 
+
+/*   6 kyu
+Highest Scoring Word
+Given a string of words, you need to find the highest scoring word.
+
+Each letter of a word scores points according to its position in the alphabet: a = 1, b = 2, c = 3 etc.
+
+For example, the score of abad is 8 (1 + 2 + 1 + 4).
+
+You need to return the highest scoring word as a string.
+
+If two words score the same, return the word that appears earliest in the original string.
+
+All letters will be lowercase and all inputs will be valid. */
+
+
+function high(x){
+
+//create and array of ASCII codes for alphabet characters (97 to 122):
+
+const charCodesArray = Array.from(Array(26), (_, i) => i + 97)
+
+//change the array to actual letters:
+
+const alphabetArray = charCodesArray.map( num => String.fromCharCode(num));
+
+const referenceObject = {};
+
+//populate the object:
+
+for(let i = 0; i < alphabetArray.length; i++) {
+  referenceObject[alphabetArray[i]] = i + 1;
+}
+
+const arrayOfWords = x.split(" ")
+
+for(let word in arrayOfWords) {
+  let charsOfWord = word.split("");
+  charsOfWord.reduce((acc, crr) => {
+    acc + referenceObject[crr]
+  },0)
+}
+
+
+
+}
+
+high()
