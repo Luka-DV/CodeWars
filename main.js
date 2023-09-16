@@ -3563,33 +3563,77 @@ All letters will be lowercase and all inputs will be valid. */
 
 function high(x){
 
-//create and array of ASCII codes for alphabet characters (97 to 122):
+  if(!x) return ""
 
-const charCodesArray = Array.from(Array(26), (_, i) => i + 97)
+  //create and array of ASCII codes for alphabet characters (97 to 122):
 
-//change the array to actual letters:
+  const charCodesArray = Array.from(Array(26), (_, i) => i + 97)
 
-const alphabetArray = charCodesArray.map( num => String.fromCharCode(num));
+  //change the array to actual letters:
 
-const referenceObject = {};
+  const alphabetArray = charCodesArray.map( num => String.fromCharCode(num));
 
-//populate the object:
+  const referenceObject = {};
 
-for(let i = 0; i < alphabetArray.length; i++) {
-  referenceObject[alphabetArray[i]] = i + 1;
+  //populate the refernce object:
+
+  for(let i = 0; i < alphabetArray.length; i++) {
+    referenceObject[alphabetArray[i]] = i + 1;
+  }
+
+  const arrayOfWords = x.split(" ")
+
+  //create an array of [value, word] pairs:
+
+  const valueWordAray =arrayOfWords.map(word => [ word.split("").reduce((acc,crr) => {
+    return acc + referenceObject[crr]
+  }, 0), word])
+
+  let highestValue = 0;
+  let highestValueWord = "";
+
+  //calculate highest value word:
+
+  for(let [value,word] of valueWordAray) {
+    if(value > highestValue) {
+      highestValue = value;
+      highestValueWord = word;
+    }
+  }
+
+  return highestValueWord;
+
 }
 
-const arrayOfWords = x.split(" ")
 
-for(let word in arrayOfWords) {
-  let charsOfWord = word.split("");
-  charsOfWord.reduce((acc, crr) => {
-    acc + referenceObject[crr]
-  },0)
+//chat gpt solution:
+
+function high2(x) {
+  if (!x) return "";
+
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz'; // <---this part is usefull 
+
+  const wordScores = x.split(' ').map((word) => {
+    const score = word.split('').reduce((acc, char) => {
+      return acc + alphabet.indexOf(char) + 1;
+    }, 0);
+    return { word, score };
+  });
+
+  const highestScoringWord = wordScores.reduce((highest, current) => {
+    return current.score > highest.score ? current : highest;
+  }, { score: 0, word: '' });
+
+  return highestScoringWord.word;
+}
+
+//interesting, short solution from CW:
+
+function high3(s){
+  let as = s.split(' ').map(s=>[...s].reduce((a,b)=>a+b.charCodeAt(0)-96,0));
+  return s.split(' ')[as.indexOf(Math.max(...as))];
 }
 
 
 
-}
-
-high()
+console.log(high("aaa bbbb iiii"));
