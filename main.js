@@ -3546,7 +3546,7 @@ function alternate(n, firstValue, secondValue){
     return array;
   } 
 
-/*   6 kyu
+/*   ++++++++++++6 kyu
 Highest Scoring Word
 Given a string of words, you need to find the highest scoring word.
 
@@ -3637,3 +3637,22 @@ function high3(s){
 
 
 console.log(high("aaa bbbb iiii"));
+
+/* 6 kyu
+Find the odd int
+Given an array of integers, find the one that appears an odd number of times.
+
+There will always be only one integer that appears an odd number of times. */
+
+function findOdd(A) {
+ 
+  const referenceObject = {};
+  
+  for(let element of A) {
+    referenceObject[element] = (referenceObject[element] ?? 0) + 1;
+  }
+  
+  for(let key in referenceObject) {
+    if(referenceObject[key] % 2 === 1) return +key
+  }
+}
