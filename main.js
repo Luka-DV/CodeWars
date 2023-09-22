@@ -3759,3 +3759,73 @@ function longestConsec(strarr, k) {
   }, '');
 }
 
+
+/* 7 kyu
+Combine objects
+Your task is to write a function that takes two or more objects and returns a new object which combines all the input objects.
+
+All input object properties will have only numeric values. Objects are combined together so that the values of matching keys are added together. */
+
+
+/* const objA = { a: 10, b: 20, c: 30 }
+const objB = { a: 3, c: 6, d: 3 }
+
+function combine(objA, objB) {
+  
+  const arrayA = Object.entries(objA);
+  const arrayB = Object.entries(objB);
+  
+  const combinedObject = Object.fromEntries(arrayA);
+
+  console.log(combinedObject)
+  
+} */
+
+
+const objA = { a: 10, b: 20, c: 30 }
+const objB = { a: 3, c: 6, d: 3 }
+const objC = {a: 100, c: 100, d: 100}
+
+
+
+// using the flat method:
+
+
+function combine1(...args) {
+
+  const combinedArray = args.map(object => Object.entries(object)).flat();
+
+  const combinedObject = combinedArray.reduce((acc, crr) => {
+    if(crr[0] in acc) {
+      acc[crr[0]] += crr[1];
+      return acc
+    }
+    acc[crr[0]] = crr[1];
+    return acc
+
+  }, {})
+
+  return combinedObject
+}
+
+//using concat to flatten the array:
+
+
+function combine2(...args) {
+
+  const combinedArray = args.map(object => Object.entries(object));
+
+  const spreadArray = [].concat(...combinedArray);
+
+  const combinedObject = spreadArray.reduce((acc, crr) => {
+    if(crr[0] in acc) {
+      acc[crr[0]] += crr[1];
+      return acc
+    }
+    acc[crr[0]] = crr[1];
+    return acc
+
+  }, {})
+
+  return combinedObject
+}
