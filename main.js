@@ -3808,7 +3808,7 @@ function combine1(...args) {
   return combinedObject
 }
 
-//using concat to flatten the array:
+//using concat to flatten the array:¸
 
 
 function combine2(...args) {
@@ -3829,3 +3829,104 @@ function combine2(...args) {
 
   return combinedObject
 }
+
+
+/* 
++++++++++++++7 kyu
+Sum of the first nth term of Series
+Task:
+
+Your task is to write a function which returns the sum of following series upto nth term(parameter).
+
+Series: 1 + 1/4 + 1/7 + 1/10 + 1/13 + 1/16 +...
+
+Rules:
+
+    You need to round the answer to 2 decimal places and return it as String.
+
+    If the given value is 0 then it should return 0.00
+
+    You will only be given Natural Numbers as arguments.
+
+Examples:(Input --> Output)
+
+1 --> 1 --> "1.00"
+2 --> 1 + 1/4 --> "1.25"
+5 --> 1 + 1/4 + 1/7 + 1/10 + 1/13 --> "1.57" */
+
+function SeriesSum(n) {  
+  let divisor = 1;
+  let seriesNum;
+  let result = 0;
+  
+  for(let i = 1; i <= n; i++) {
+    
+    seriesNum = 1/(divisor);
+    result += seriesNum;
+    divisor += 3;
+    
+  }
+  
+  return result.toFixed(2);
+}
+
+//a bit refactored:
+
+function SeriesSum(n) {  
+  let divisor = 1;
+  let result = 0;
+  
+  for(let i = 1; i <= n; i++) {
+    
+    result += 1/(divisor);
+    divisor += 3;
+  }
+  
+  return result.toFixed(2);
+}
+
+
+
+/* 6 kyu
+Delete occurrences of an element if it occurs more than n times
+
+Task
+Given a list and a number, create a new list that contains each number of list at most N times, without reordering.
+For example if the input number is 2, and the input list is [1,2,3,1,2,1,2,3], you take [1,2,3,1,2], drop the next [1,2] since this would lead to 1 and 2 being in the result 3 times, and then take 3, which leads to [1,2,3,1,2,3].
+With list [20,37,20,21] and number 1, the result would be [20,37,21].  */
+
+
+// First iteration:
+
+function deleteNth1(arr,n){
+  
+  const referenceObj = {};
+  const newList = [];
+  
+  for(let item of arr) {
+    if(referenceObj[item]) {
+      if(referenceObj[item] < n) {
+        newList.push(item);
+        ++referenceObj[item];
+      }
+    } else {
+      newList.push(item);
+      referenceObj[item] = 1;
+    }
+  }
+  
+  return newList;
+}
+
+//OR using reduce:
+
+function deleteNth2(arr,n){
+  
+  const referenceObj = {};
+  
+   return arr.filter(item => {
+    referenceObj[item] = (referenceObj[item] || 0) + 1;
+    return referenceObj[item] <= n;
+  })
+}
+
