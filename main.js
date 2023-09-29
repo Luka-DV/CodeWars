@@ -4011,7 +4011,7 @@ joe.greet('Kate'); // should return 'Hello Kate, my name is Joe'
 joe.name           // should == 'Joe' */
 
 
-class Person{
+class Person66{
   constructor(myName) {
     this.name = myName;
   }
@@ -4020,3 +4020,72 @@ class Person{
      return `Hello ${yourName}, my name is ${this.name}`;
   }
 }
+
+
+/* ++++++++++7 kyu
+What a "Classy" Song
+
+Your job is to create a class called Song.
+
+A new Song will take two parameters, title and artist.
+
+const mountMoose = new Song('Mount Moose', 'The Snazzy Moose');
+
+mountMoose.title => 'Mount Moose'
+mountMoose.artist => 'The Snazzy Moose'
+
+You will also have to create an instance method named howMany() (or how_many()).
+
+The method takes an array of people who have listened to the song that day. The output should be how many new listeners the song gained on that day out of all listeners. Names should be treated in a case-insensitive manner, i.e. "John" is the same as "john".
+Example
+
+const mountMoose = new Song('Mount Moose', 'The Snazzy Moose');
+
+// day 1 (or test 1)
+mountMoose.howMany(['John', 'Fred', 'BOb', 'carl', 'RyAn']); => 5
+// These are all new since they are the first listeners.
+
+// day 2
+mountMoose.howMany(['JoHn', 'Luke', 'AmAndA']); => 2
+// Luke and Amanda are new, john already listened to it the previous day
+
+Also if the same person listened to it more than once a day it should only count them once. */
+
+
+class Song {
+  constructor(title, artist) {
+    this.title = title;
+    this.artist = artist;
+  }
+  
+  #allListeners = [];
+  
+  howMany(listeners) {
+    const todaysListenersSet = new Set(listeners.map(listener => listener.toLowerCase())); //create unique listeners array
+    const todaysListeners = [...todaysListenersSet];
+    
+    const newListeners = todaysListeners.filter(listener => !this.#allListeners.includes(listener) ); //filter out known listeners
+    
+    this.#allListeners.push(...newListeners);
+    
+    return newListeners.length;
+                                            
+  }
+
+  get allUniqueListeners() {
+    const uniqueListeners = this.#allListeners;
+    return `All unique listeners of the song ${this.title} : ${uniqueListeners.join(", ")}.`;
+  }
+}
+
+/* 
+let jelly = new Song("Vse je krasno", "Smolar");
+
+jelly.howMany(["11", "22", "33", "11"]);
+
+jelly.howMany(["11", "33", "55", "99", "11"]);
+
+const marma = new Song ("Jamajka","Domicelj");
+
+marma.howMany(["11","12", "13", "11", "67"]) */
+
