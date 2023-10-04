@@ -4089,3 +4089,132 @@ const marma = new Song ("Jamajka","Domicelj");
 
 marma.howMany(["11","12", "13", "11", "67"]) */
 
+
+
+let soemObject = [
+  {
+    personName: "Marija",
+    age: 45,
+    occupation: "nurse"
+  },
+  {
+    personName: "Marjan",
+    age: 55,
+    occupation: "doctor"
+  },
+  "toti list",
+  45
+]
+
+
+let someArr = new Array(...soemObject);
+
+console.log(someArr)
+
+
+
+/* class PaginationHelper {
+	constructor(collection, itemsPerPage) {
+	// The constructor takes in an array of items and a integer indicating how many
+	// items fit within a single page
+    this.collection = collection;
+    this.itemsPerPage = itemsPerPage;
+	}
+	itemCount() {
+    return this.collection.length;
+	}
+	pageCount() {
+    return Math.ceil(this.collection.length/this.itemsPerPage);
+	}
+	pageItemCount(pageIndex) {
+	// returns the number of items on the current page. page_index is zero based.
+	// this method should return -1 for pageIndex values that are out of range
+  if (pageIndex < 0 || pageIndex >= this.pageCount()) {
+    return -1; // Invalid page index
+  }
+    const pageArray = [];
+    let referenceArray = [...this.collection]
+    console.log(referenceArray, "refarray original")
+    console.log(this.itemsPerPage, "item per page")
+    
+    for(let p = 0; p < this.pageCount(); p++) {
+      const page = [];
+  
+      for(let i = 0; i < this.itemsPerPage; i++ ) {
+        if(!referenceArray[i]) break;
+        console.log(i, "this is the i")
+        console.log(referenceArray[i], "!!!item of the refernce array")
+        page.push(referenceArray[i]);
+        console.log(referenceArray, "refernceArray for each loop")
+      }
+      console.log(page, "the pushed page -subarray1")
+      if(p === this.itemsPerPage - 1) {
+        
+      } else {
+        referenceArray = referenceArray.slice(this.itemsPerPage);
+      }
+    
+      pageArray.push(page);
+    }
+    
+
+    console.log(this.pageCount(), "number of pages")
+    console.log(pageArray, "pageArray - whole array");
+    console.log(pageArray[pageIndex], "the called subarray")
+    return pageArray[pageIndex].length
+	}
+	pageIndex(itemIndex) {
+	// determines what page an item is on. Zero based indexes
+	// this method should return -1 for itemIndex values that are out of range
+    if(itemIndex > this.collection.length -1 || itemIndex < 0) {
+      return -1;
+    }
+
+    return (Math.ceil((itemIndex + 1)/this.itemsPerPage) - 1)
+    
+	}
+} */
+
+class PaginationHelper {
+	constructor(collection, itemsPerPage) {
+	// The constructor takes in an array of items and a integer indicating how many
+	// items fit within a single page
+    this.collection = collection;
+    this.itemsPerPage = itemsPerPage;
+	}
+	itemCount() {
+    return this.collection.length;
+	}
+	pageCount() {
+    return Math.ceil(this.collection.length/this.itemsPerPage);
+	}
+	pageItemCount(pageIndex) {
+	// returns the number of items on the current page. page_index is zero based.
+	// this method should return -1 for pageIndex values that are out of range
+  if (pageIndex < 0 || pageIndex >= this.pageCount()) {
+    return -1; // Invalid page index
+}
+
+const pageStart = pageIndex * this.itemsPerPage;
+const pageEnd = pageStart + this.itemsPerPage;
+const itemsOnPage = this.collection.slice(pageStart, pageEnd);
+return itemsOnPage.length;
+
+	}
+	pageIndex(itemIndex) {
+	// determines what page an item is on. Zero based indexes
+	// this method should return -1 for itemIndex values that are out of range
+    if(itemIndex > this.collection.length -1 || itemIndex < 0) {
+      return -1;
+    }
+
+    return (Math.ceil((itemIndex + 1)/this.itemsPerPage) - 1)
+    
+	}
+}
+
+const collection = [1, 2, 3, "h", 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, "j", "5"]
+const helper = new PaginationHelper(collection, 2)
+
+console.log(helper.pageItemCount(0), "page item count")
+console.log(helper.pageIndex(4), "shoudl return 03")
