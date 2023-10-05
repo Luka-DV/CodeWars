@@ -4112,8 +4112,28 @@ let someArr = new Array(...soemObject);
 console.log(someArr)
 
 
+/* +++++++++++++5 kyu
+PaginationHelper
+For this exercise you will be strengthening your page-fu mastery. You will complete the PaginationHelper class, which is a utility class helpful for querying paging information related to an array.
 
-/* class PaginationHelper {
+The class is designed to take in an array of values and an integer indicating how many items will be allowed per each page. The types of values contained within the collection/array are not relevant.
+
+The following are some examples of how this class is used:
+
+var helper = new PaginationHelper(['a','b','c','d','e','f'], 4);
+helper.pageCount(); // should == 2
+helper.itemCount(); // should == 6
+helper.pageItemCount(0); // should == 4
+helper.pageItemCount(1); // last page - should == 2
+helper.pageItemCount(2); // should == -1 since the page is invalid
+
+// pageIndex takes an item index and returns the page that it belongs on
+helper.pageIndex(5); // should == 1 (zero based index)
+helper.pageIndex(2); // should == 0
+helper.pageIndex(20); // should == -1
+helper.pageIndex(-10); // should == -1 */
+
+class PaginationHelper1 {
 	constructor(collection, itemsPerPage) {
 	// The constructor takes in an array of items and a integer indicating how many
 	// items fit within a single page
@@ -4129,40 +4149,32 @@ console.log(someArr)
 	pageItemCount(pageIndex) {
 	// returns the number of items on the current page. page_index is zero based.
 	// this method should return -1 for pageIndex values that are out of range
+
   if (pageIndex < 0 || pageIndex >= this.pageCount()) {
     return -1; // Invalid page index
   }
+
     const pageArray = [];
     let referenceArray = [...this.collection]
-    console.log(referenceArray, "refarray original")
-    console.log(this.itemsPerPage, "item per page")
-    
+  
     for(let p = 0; p < this.pageCount(); p++) {
       const page = [];
   
       for(let i = 0; i < this.itemsPerPage; i++ ) {
-        if(!referenceArray[i]) break;
-        console.log(i, "this is the i")
-        console.log(referenceArray[i], "!!!item of the refernce array")
+        if(!referenceArray[i]) continue;
         page.push(referenceArray[i]);
-        console.log(referenceArray, "refernceArray for each loop")
       }
-      console.log(page, "the pushed page -subarray1")
-      if(p === this.itemsPerPage - 1) {
-        
-      } else {
+
+      if(p !== this.itemsPerPage - 1) {
         referenceArray = referenceArray.slice(this.itemsPerPage);
       }
     
       pageArray.push(page);
     }
     
-
-    console.log(this.pageCount(), "number of pages")
-    console.log(pageArray, "pageArray - whole array");
-    console.log(pageArray[pageIndex], "the called subarray")
     return pageArray[pageIndex].length
 	}
+
 	pageIndex(itemIndex) {
 	// determines what page an item is on. Zero based indexes
 	// this method should return -1 for itemIndex values that are out of range
@@ -4173,9 +4185,11 @@ console.log(someArr)
     return (Math.ceil((itemIndex + 1)/this.itemsPerPage) - 1)
     
 	}
-} */
+}
 
-class PaginationHelper {
+//more elegant, more efficient solution:
+
+class PaginationHelper2 {
 	constructor(collection, itemsPerPage) {
 	// The constructor takes in an array of items and a integer indicating how many
 	// items fit within a single page
@@ -4213,8 +4227,8 @@ return itemsOnPage.length;
 	}
 }
 
-const collection = [1, 2, 3, "h", 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, "j", "5"]
-const helper = new PaginationHelper(collection, 2)
+/* const collection = [1, 2, 3, "h", 5, 6, 7, 8]
+const helper = new PaginationHelper(collection, 13) 
+console.log(helper.pageItemCount(0), "should be 3")
+console.log(helper.pageIndex(1), "shoudl return 0") */
 
-console.log(helper.pageItemCount(0), "page item count")
-console.log(helper.pageIndex(4), "shoudl return 03")
