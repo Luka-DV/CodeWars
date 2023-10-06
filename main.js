@@ -4232,3 +4232,75 @@ const helper = new PaginationHelper(collection, 13)
 console.log(helper.pageItemCount(0), "should be 3")
 console.log(helper.pageIndex(1), "shoudl return 0") */
 
+
+
+
+
+//first version:
+
+function declareWinner1(fighter1, fighter2, firstAttacker) {
+    
+  while(fighter1.health > 0 && fighter2.health > 0) {
+    if(firstAttacker === fighter1.name) {
+      fighter2.health -= fighter1.damagePerAttack;
+      if(fighter2.health <= 0) {
+        return fighter1.name
+      }
+      fighter1.health -= fighter2.damagePerAttack;
+       if(fighter1.health <= 0) {
+        return fighter2.name
+      }
+    }
+    if(firstAttacker === fighter2.name) {
+      fighter1.health -= fighter2.damagePerAttack;
+      if(fighter1.health <= 0) {
+        return fighter2.name
+      }
+      fighter2.health -= fighter1.damagePerAttack;
+       if(fighter2.health <= 0) {
+        return fighter1.name
+      }
+    }
+  }
+}
+
+//refactored:
+
+function declareWinner2(fighter1, fighter2, firstAttacker) {
+  
+  let secondAttacker;
+  
+  if(fighter1.name === firstAttacker) {
+    firstAttacker = fighter1;
+    secondAttacker = fighter2;
+  } else {
+    firstAttacker = fighter2;
+    secondAttacker = fighter1;
+  }
+  
+  while(true) { {
+      secondAttacker.health -= firstAttacker.damagePerAttack;
+      if(secondAttacker.health <= 0) {
+        return firstAttacker.name;
+        }
+      firstAttacker.health -= secondAttacker.damagePerAttack;
+       if(firstAttacker.health <= 0) {
+        return secondAttacker.name;
+      }
+    }
+  }
+}
+
+//smart CW solution:
+
+function declareWinner0(fighter1, fighter2, firstAttacker) {
+  var fac1 = Math.ceil( fighter1.health / fighter2.damagePerAttack );
+  var fac2 = Math.ceil( fighter2.health / fighter1.damagePerAttack );
+  if(fac1 < fac2) {
+    return fighter2.name;
+  } else if(fac2 < fac1) {
+    return fighter1.name;
+  } else {
+    return firstAttacker;
+  }
+}
