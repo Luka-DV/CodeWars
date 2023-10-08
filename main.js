@@ -4373,3 +4373,26 @@ function reverse99(string){
         .join(" ");
 }
 
+
+
+/* ++++++++++++8 kyu
+Replace all vowel to exclamation mark in the sentence */
+
+//using regex:
+
+function replace(s){
+  return s.replace(/[aeiou]/ig, "!");
+}
+
+//only string/array methods:
+
+function replace(s){
+  const vowels = "aeiouAEIOU";
+  return s.split("").map(char => {
+    if(vowels.includes(char)) {
+      return "!"
+    }
+    return char;
+  } )
+  .join("");
+}
