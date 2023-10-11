@@ -4461,3 +4461,20 @@ function divCon(x){
   }, 0);
 }
 
+/* 7 kyu
+Coding Meetup #1 - Higher-Order Functions Series - Count the number of JavaScript developers coming from Europe */
+
+function countDevelopers1(list) {
+  return list.reduce((acc, crr) => {
+    return acc + (crr.continent === "Europe" && crr.language === "JavaScript" ? 1 : 0);
+  }, 0);
+}
+
+// OR:
+
+function countDevelopers2(list) {
+  return list.filter(x=>x.continent=='Europe'&&x.language=='JavaScript').length
+}
+
+
+
