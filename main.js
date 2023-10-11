@@ -4421,3 +4421,43 @@ function sumOfMinimums(arr) {
 
 //the fastest way to find the max value of an array is actually using a normal for loop.
 
+
+
+/* 7 kyu
+Convert an array of strings to array of numbers
+Oh no!
+
+Some really funny web dev gave you a sequence of numbers from his API response as an sequence of strings!
+
+You need to cast the whole array to the correct type.
+
+Create the function that takes as a parameter a sequence of numbers represented as strings and outputs a sequence of numbers.
+
+ie:["1", "2", "3"] to [1, 2, 3]
+
+Note that you can receive floats as well.
+ */
+
+function toNumberArray1(stringarray){
+  return stringarray.map(string => Number(string));
+}
+
+//or:
+
+function toNumberArray2(stringarray)
+{
+  return stringarray.map(parseFloat);
+}
+
+
+/* 7 kyu
+Divide and Conquer
+Given a mixed array of number and string representations of integers, add up the non-string integers and subtract the total of the string integers.
+Return as a number. */
+
+function divCon(x){
+  return x.reduce((acc,crr) => {
+    return acc + (typeof crr === "string" ? -crr : crr)
+  }, 0);
+}
+
