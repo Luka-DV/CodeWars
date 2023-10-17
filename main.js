@@ -4556,3 +4556,53 @@ function countLanguages(list) {
   }, {});
 }
 
+/* ++++++++7 kyu
+Coding Meetup #6 - Higher-Order Functions Series - Can they code in the same language?
+You will be given an array of objects (associative arrays in PHP, tables in COBOL) representing data about developers who have signed up to attend the next coding meetup that you are organising.
+
+Your task is to return either:
+
+true if all developers in the list code in the same language; or
+false otherwise. */
+
+  function isSameLanguage(list) {
+    const language = list[0].language
+    return list.every(person => person.language === language);
+  }
+
+
+/* 6 kyu
+Sort My Animals
+
+Consider the following class:
+
+var Animal = { 
+  name: "Cat", 
+  numberOfLegs: 4 
+}
+
+Write a method that accepts a list of objects of type Animal, and returns a new list. The new list should be a copy of the original list, sorted first by the animal's number of legs, and then by its name.
+
+If an empty list is passed in, it should return an empty list back. */
+
+function sortAnimal01(animals) {
+  if(!animals.length) return [];
+  
+  return [...animals].sort((a,b) => {
+    if(a.numberOfLegs < b.numberOfLegs) return -1; //sort by legs first
+    else if (a.numberOfLegs > b.numberOfLegs) return 1;
+    
+    if(a.name < b.name) return -1; //if number of legs ==, sort by name
+    else if(a.name > b.name) return 1;
+  });
+}
+
+//smart CW solution:
+
+const compareAnimals02 = (a, b) =>
+  a.numberOfLegs - b.numberOfLegs || a.name.localeCompare(b.name)
+  
+const sortAnimal = animals =>
+  animals ? animals.slice().sort(compareAnimals02) : null
+
+  
