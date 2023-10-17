@@ -1,2 +1,2 @@
 # CodeWars
-Solutions to codewars katas
+[CodeWars](https://www.codewars.com) kata exercises.
