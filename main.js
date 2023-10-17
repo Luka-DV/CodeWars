@@ -4604,5 +4604,3 @@ const compareAnimals02 = (a, b) =>
   
 const sortAnimal = animals =>
   animals ? animals.slice().sort(compareAnimals02) : null
-
-  
