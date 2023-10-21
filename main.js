@@ -4671,3 +4671,179 @@ function allContinents1(list) {
 function allContinents2(list) {
   return ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'].every(x => list.some(y => x==y.continent));
 }
+
+
+/* ++++++++++6 kyu
+Coding Meetup #9 - Higher-Order Functions Series - Is the meetup age-diverse?
+You will be given an array of objects (associative arrays in PHP) representing data about developers who have signed up to attend the next coding meetup that you are organising.
+
+Your task is to return:
+
+    true if developers from all of the following age groups have signed up: teens, twenties, thirties, forties, fifties, sixties, seventies, eighties, nineties, centenarian (at least 100 years young).
+    false otherwise.
+
+For example, given the following input array:
+...
+your function should return true as there is at least one developer from each age group.
+
+Notes:
+
+    The input array will always be valid and formatted as in the example above.
+    Age is represented by a number which can be any positive integer up to 199. */
+
+
+
+function isAgeDiverse(list) {
+  let referenceMap = new Map ([
+      ["teens", null],
+      ["twenties", null],
+      ["thirties", null],
+      ["forties", null],
+      ["fifties", null],
+      ["sixties", null],
+      ["seventies", null],
+      ["eighties", null],
+      ["nineties", null],
+      ["centenarian", null]
+  ]);
+
+  for(let person of list) {
+    if(person.age >=10 && person.age < 20) {
+      referenceMap.set("teens", true);
+    } else if(person.age >=20 && person.age < 30) {
+      referenceMap.set("twenties", true);
+    } else if(person.age >=30 && person.age < 40) {
+      referenceMap.set("thirties", true);
+    } else if(person.age >=40 && person.age < 50) {
+      referenceMap.set("forties", true);
+    } else if(person.age >=50 && person.age < 60) {
+      referenceMap.set("fifties", true);
+    } else if(person.age >=60 && person.age < 70) {
+      referenceMap.set("sixties", true);
+    } else if(person.age >=70 && person.age < 80) {
+      referenceMap.set("seventies", true);
+    } else if(person.age >=80 && person.age < 90) {
+      referenceMap.set("eighties", true);
+    } else if(person.age >=90 && person.age < 100) {
+      referenceMap.set("nineties", true);
+    } else if (person.age >=100){
+      referenceMap.set("centenarian", true);
+    }
+  }
+
+  console.log(referenceMap.size)
+  
+  for(let ageGroup of referenceMap) {
+    if(ageGroup[1] === null) {
+      return false
+    }
+  }
+  return true;
+}
+
+
+//second version:
+
+function isAgeDiverse2(list) {
+  let referenceMap = new Map ([]);
+
+  for(let person of list) {
+    if(person.age >=10 && person.age < 20) {
+      referenceMap.set("teens", true);
+      if(referenceMap.size === 10) {
+        return true;
+      }
+    } 
+    else if(person.age >=20 && person.age < 30) {
+      referenceMap.set("twenties", true);
+       if(referenceMap.size === 10) {
+        return true;
+      };
+    } 
+    else if(person.age >=30 && person.age < 40) {
+      referenceMap.set("thirties", true);
+       if(referenceMap.size === 10) {
+        return true;
+      }
+    } 
+    else if(person.age >=40 && person.age < 50) {
+      referenceMap.set("forties", true);
+       if(referenceMap.size === 10) {
+        return true;
+      };
+    } 
+    else if(person.age >=50 && person.age < 60) {
+      referenceMap.set("fifties", true);
+       if(referenceMap.size === 10) {
+        return true;
+      }
+    } 
+    else if(person.age >=60 && person.age < 70) {
+      referenceMap.set("sixties", true);
+       if(referenceMap.size === 10) {
+        return true;
+      }
+    } 
+    else if(person.age >=70 && person.age < 80) {
+      referenceMap.set("seventies", true);
+       if(referenceMap.size === 10) {
+        return true;
+      };
+    }
+    else if(person.age >=80 && person.age < 90) {
+      referenceMap.set("eighties", true);
+       if(referenceMap.size === 10) {
+        return true;
+      };
+    } 
+    else if(person.age >=90 && person.age < 100) {
+      referenceMap.set("nineties", true);
+       if(referenceMap.size === 10) {
+        return true;
+      }
+    } 
+    else if (person.age >=100){
+      referenceMap.set("centenarian", true);
+       if(referenceMap.size === 10) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+//smart chat gpt solution:
+
+function isAgeDiverse3(list) {
+  const ageGroups = [
+    'teens', 'twenties', 'thirties', 'forties', 'fifties',
+    'sixties', 'seventies', 'eighties', 'nineties', 'centenarian'
+  ];
+
+  for (const person of list) {
+    const ageGroup = getAgeGroup(person.age);
+    if (ageGroup !== null) {
+      ageGroups.splice(ageGroups.indexOf(ageGroup), 1);
+    }
+    if (ageGroups.length === 0) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function getAgeGroup(age) {
+  if (age >= 10 && age < 20) return 'teens';
+  if (age >= 20 && age < 30) return 'twenties';
+  if (age >= 30 && age < 40) return 'thirties';
+  if (age >= 40 && age < 50) return 'forties';
+  if (age >= 50 && age < 60) return 'fifties';
+  if (age >= 60 && age < 70) return 'sixties';
+  if (age >= 70 && age < 80) return 'seventies';
+  if (age >= 80 && age < 90) return 'eighties';
+  if (age >= 90 && age < 100) return 'nineties';
+  if (age >= 100) return 'centenarian';
+  return null;
+}
