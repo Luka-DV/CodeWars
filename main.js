@@ -4894,3 +4894,104 @@ Age is represented by a number which can be any positive integer. */
 function getAverageAge0(list) {
   return Math.round(list.reduce((acc, crr) => acc + crr.age, 0)/list.length);
 }
+
+
+/* +++++++++++7 kyu
+Coding Meetup #12 - Higher-Order Functions Series - Find GitHub admins
+You will be given an array of objects representing data about developers who have signed up to attend the next coding meetup that you are organising.
+Given the following input array:
+var list1 = [
+  { firstName: 'Harry', lastName: 'K.', country: 'Brazil', continent: 'Americas', age: 22, language: 'JavaScript', githubAdmin: 'yes' },
+  { firstName: 'Kseniya', lastName: 'T.', country: 'Belarus', continent: 'Europe', age: 49, language: 'Ruby', githubAdmin: 'no' },
+  { firstName: 'Jing', lastName: 'X.', country: 'China', continent: 'Asia', age: 34, language: 'JavaScript', githubAdmin: 'yes' },
+  { firstName: 'Piotr', lastName: 'B.', country: 'Poland', continent: 'Europe', age: 128, language: 'JavaScript', githubAdmin: 'no' }
+];
+write a function that when executed as findAdmin(list1, 'JavaScript') returns only the JavaScript developers who are GitHub admins:
+
+[
+  { firstName: 'Harry', lastName: 'K.', country: 'Brazil', continent: 'Americas', age: 22, language: 'JavaScript', githubAdmin: 'yes' },
+  { firstName: 'Jing', lastName: 'X.', country: 'China', continent: 'Asia', age: 34, language: 'JavaScript', githubAdmin: 'yes' }
+]
+Notes:
+The original order should be preserved.
+If there are no GitHub admin developers in a given language then return an empty array [].
+The input array will always be valid and formatted as in the example above.
+The strings representing whether someone is a GitHub admin will always be formatted as 'yes' and 'no' (all lower-case).
+The strings representing a given language will always be formatted in the same way (e.g. 'JavaScript' will always be formatted with upper-case 'J' and 'S'. */
+
+function findAdmin(list, lang) {
+  return list.filter(dev => dev.language === lang && dev.githubAdmin === "yes");
+}
+
+var list1 = [
+  { firstName: 'Harry', lastName: 'K.', country: 'Brazil', continent: 'Americas', age: 22, language: 'JavaScript', githubAdmin: 'yes' },
+  { firstName: 'Kseniya', lastName: 'T.', country: 'Belarus', continent: 'Europe', age: 49, language: 'Ruby', githubAdmin: 'no' },
+  { firstName: 'Jing', lastName: 'X.', country: 'China', continent: 'Asia', age: 34, language: 'JavaScript', githubAdmin: 'yes' },
+  { firstName: 'Piotr', lastName: 'B.', country: 'Poland', continent: 'Europe', age: 128, language: 'JavaScript', githubAdmin: 'no' }
+];
+
+console.log(findAdmin(list1, 'JavaScript'));
+
+
+/* +++++++++++++++6 kyu
+Coding Meetup #13 - Higher-Order Functions Series - Is the meetup language-diverse?
+You will be given an array of objects representing data about developers who have signed up to attend the next web development meetup that you are organising. Three programming languages will be represented: Python, Ruby and JavaScript.
+Your task is to return either:
+    true if the number of meetup participants representing any of the three programming languages is ** at most 2 times higher than the number of developers representing any of the remaining programming languages**; or
+    false otherwise.
+For example, given the following input array:
+var list1 = [
+  { firstName: 'Daniel', lastName: 'J.', country: 'Aruba', continent: 'Americas', age: 42, language: 'Python' },
+  { firstName: 'Kseniya', lastName: 'T.', country: 'Belarus', continent: 'Europe', age: 22, language: 'Ruby' },
+  { firstName: 'Sou', lastName: 'B.', country: 'Japan', continent: 'Asia', age: 43, language: 'Ruby' },
+  { firstName: 'Hanna', lastName: 'L.', country: 'Hungary', continent: 'Europe', age: 95, language: 'JavaScript' },
+  { firstName: 'Jayden', lastName: 'P.', country: 'Jamaica', continent: 'Americas', age: 18, language: 'JavaScript' },
+  { firstName: 'Joao', lastName: 'D.', country: 'Portugal', continent: 'Europe', age: 25, language: 'JavaScript' }
+];
+your function should return false as the number of JavaScript developers (3) is 3 times higher than the number of Python developers (1). It can't be more than 2 times higher to be regarded as language-diverse.
+Notes:
+The strings representing all three programming languages will always be formatted in the same way (e.g. 'JavaScript' will always be formatted with upper-case 'J' and 'S'.
+The input array will always be valid and formatted as in the example above.
+Each of the 3 programming languages will always be represented. */
+
+
+function isLanguageDiverse1(list) {
+  const numOfLangPerDevsObj = list.reduce((acc, crr) => {
+    acc[crr.language] = (acc[crr.language] || 0) + 1;
+    return acc;
+  }, {});
+  
+  if(list.length === 1) {
+    return false;
+  }
+  
+  const arrayOfNumOfDevsPerLang = [];
+  
+  for(let lang in numOfLangPerDevsObj) {
+    arrayOfNumOfDevsPerLang.push(numOfLangPerDevsObj[lang]);
+  }
+  
+  if(Math.max(...arrayOfNumOfDevsPerLang) <= (Math.min(...arrayOfNumOfDevsPerLang)*2)) {
+    return true;
+  }
+  
+  return false;
+}
+
+// refactored:
+
+function isLanguageDiverse2(list) {
+  const numOfLangPerDevsObj = list.reduce((acc, crr) => {
+    acc[crr.language] = (acc[crr.language] || 0) + 1;
+    return acc;
+  }, {});
+  
+  if(list.length === 1) {
+    return false;
+  }
+  
+  const arrayOfNumOfDevsPerLang = Object.values(numOfLangPerDevsObj);
+
+  return !arrayOfNumOfDevsPerLang.some(langCount => langCount > 2*Math.min(...arrayOfNumOfDevsPerLang));
+}
+
