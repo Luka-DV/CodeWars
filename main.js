@@ -5116,3 +5116,54 @@ function askForMissingDetails(list) {
     return false;
   })
 }
+
+
+
+console.log(parseInt({ toString: () => 2, valueOf: () => 1 }), "parse iNT");
+
+
+/* 6 kyu
+Create Phone Number
+Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers in the form of a phone number.
+Example
+createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) // => returns "(123) 456-7890"
+The returned format must be correct in order to complete this challenge.
+Don't forget the space after the closing parentheses! */
+
+function createPhoneNumber(numbers){
+  
+  const inputNum = (startInd, endInd) => {
+        return numbers.filter((_,ind) => (startInd <= ind) && (ind <= endInd))
+                      .join("");
+    };
+  
+  return `(${inputNum(0,2)}) ${inputNum(3,5)}-${inputNum(6,9)}`;
+}
+
+//higher order function, testing:
+
+function createPhoneNumber(numbers){
+  
+  const inputNumUNI = (array) => {
+        return (startInd, endInd) => array.filter((_,ind) => (startInd <= ind) && (ind <= endInd))
+                                          .join("");
+    };
+  
+  const inputNum = inputNumUNI(numbers);
+  
+  return `(${inputNum(0,2)}) ${inputNum(3,5)}-${inputNum(6,9)}`;
+}
+
+//smart CW solution:
+
+function createPhoneNumber(numbers){
+  const format = "(xxx) xxx-xxxx";
+  
+  for(let i = 0; i < numbers.length; i++)
+  {
+    format = format.replace('x', numbers[i]);
+  }
+  
+  return format;
+}
+
