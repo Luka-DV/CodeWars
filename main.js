@@ -5122,7 +5122,7 @@ function askForMissingDetails(list) {
 console.log(parseInt({ toString: () => 2, valueOf: () => 1 }), "parse iNT");
 
 
-/* 6 kyu
+/* ++++++++++++6 kyu
 Create Phone Number
 Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers in the form of a phone number.
 Example
@@ -5167,3 +5167,44 @@ function createPhoneNumber(numbers){
   return format;
 }
 
+/* ++++++++++++6 kyu
+Detect Pangram
+
+A pangram is a sentence that contains every single letter of the alphabet at least once. For example, the sentence "The quick brown fox jumps over the lazy dog" is a pangram, because it uses the letters A-Z at least once (case is irrelevant).
+
+Given a string, detect whether or not it is a pangram. Return True if it is, False if not. Ignore numbers and punctuation. */
+
+function isPangram1(string){
+  const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+  const lettersInString = [];
+  for(let char of string.toLowerCase()) {
+    if(alphabet.includes(char)) {
+      lettersInString.push(char);
+    }
+  }
+  const uniqueLetter = new Set(lettersInString);
+  
+  return uniqueLetter.size === 26;
+}
+
+//solution using charCodeAt:
+
+function isPangram2(string) {
+  const letterSet = new Set();
+  for (const char of string.toLowerCase()) {
+    const code = char.charCodeAt(0);
+    if (code >= 97 && code <= 122) {
+      letterSet.add(char);
+    }
+  }
+  return letterSet.size === 26;
+}
+
+//smart Cw solution:
+
+function isPangram3(string){
+  string = string.toLowerCase();
+  return "abcdefghijklmnopqrstuvwxyz".split("").every(function(x){
+    return string.indexOf(x) !== -1;
+  });
+}
