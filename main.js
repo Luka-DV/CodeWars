@@ -5222,5 +5222,74 @@ Write a function called checkCoupon which verifies that a coupon code is valid a
 A coupon is no more valid on the day AFTER the expiration date. All dates will be passed as strings in this format: "MONTH DATE, YEAR".
 Examples:
 checkCoupon("123", "123", "July 9, 2015", "July 9, 2015")  ===  true
-checkCoupon("123", "123", "July 9, 2015", "July 2, 2015")  ===  fa */lse
+checkCoupon("123", "123", "July 9, 2015", "July 2, 2015")  ===  false */
 
+
+function checkCoupon(enteredCode, correctCode, currentDate, expirationDate){
+  return enteredCode === correctCode &&
+         Date.parse(currentDate) <= Date.parse(expirationDate);
+}
+
+
+/* 7 kyu
+Alternate capitalization
+Given a string, capitalize the letters that occupy even indexes and odd indexes separately, and return as shown below. Index 0 will be considered even.
+For example, capitalize("abcdef") = ['AbCdEf', 'aBcDeF']. See test cases for more examples.
+The input will be a lowercase string with no spaces. */
+
+//using forEach:
+
+function capitalize1(s){
+  const capitalizeEven = [];
+  const capitalizeOdd = [];
+  
+  s.split("")
+    .forEach((letter, ind) => {
+    if(ind % 2 === 0) {
+      capitalizeEven.push(letter.toUpperCase());
+      capitalizeOdd.push(letter)
+    } else {
+      capitalizeEven.push(letter);
+      capitalizeOdd.push(letter.toUpperCase());
+    }
+  })
+  
+  const stringEven = capitalizeEven.join("");
+  const stringOdd = capitalizeOdd.join("");
+  
+  return [stringEven, stringOdd];
+};
+
+//using map:
+
+function capitalize2(s){
+  return [s,s].map((_,ind) => {
+    if(ind % 2 === 0) {
+      return s.split("")
+            .map((letter,ind) => ind % 2 === 0 ? letter.toUpperCase(): letter)
+            .join("")
+    } else {
+      return s.split("")
+            .map((letter,ind) => ind % 2 === 1 ? letter.toUpperCase(): letter)
+            .join("")
+    }
+  })
+};
+
+/* or simply:
+function capitalize(s){
+  const odd = s.split("").map((l, i) => i % 2 !== 0 ? l.toUpperCase() : l).join("");
+  const even = s.split("").map((l, i) => i % 2 === 0 ? l.toUpperCase() : l).join("");
+  return [even, odd];
+}; */
+
+//using reduce (best solution- best time/space complexity):
+
+function capitalize3(s){
+  return s.split("")
+        .reduce((acc, crr, ind) => {
+    acc[0] += ind % 2 === 0 ? crr.toUpperCase(): crr;
+    acc[1] += ind % 2 === 1 ? crr.toUpperCase(): crr;
+    return acc;
+  },["", ""])
+};
