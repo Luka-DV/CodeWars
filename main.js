@@ -5293,3 +5293,33 @@ function capitalize3(s){
     return acc;
   },["", ""])
 };
+
+
+/* +++++++++7 kyu
+Anagram Detection
+An anagram is the result of rearranging the letters of a word to produce a new word (see wikipedia).
+Note: anagrams are case insensitive
+Complete the function to return true if the two arguments given are anagrams of each other; return false otherwise. */
+
+const isAnagram1 = (test, original) => {
+  
+  if(test.length !== original.length) return false;
+  
+  const sortedLettersInTest = [...test.toLowerCase()].sort();
+  const sortedLettersInOrigiinal = [...original.toLowerCase()].sort();
+  
+  for(let i = 0; i < sortedLettersInOrigiinal.length; i++) {
+    if(sortedLettersInTest[i] !== sortedLettersInOrigiinal[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+//or simply:
+
+const isAnagram2 = (test, original) => {
+  const testString = test.toLowerCase().split('').sort().join('');
+  const originalString = original.toLowerCase().split('').sort().join('');
+  return testString === originalString;
+};
