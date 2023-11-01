@@ -5323,3 +5323,22 @@ const isAnagram2 = (test, original) => {
   const originalString = original.toLowerCase().split('').sort().join('');
   return testString === originalString;
 };
+
+
+/* ++++++++++6 kyu
+Stop gninnipS My sdroW!
+Write a function that takes in a string of one or more words, and returns the same string, but with all five or more letter words reversed (Just like the name of this Kata). Strings passed in will consist of only letters and spaces. Spaces will be included only when more than one word is present. */
+
+function spinWords(string){
+  const arrayFromStr = string.split(" ");
+  
+  const reversedWordsArr = arrayFromStr.map(word => {
+                            if(word.length >= 5) {
+                              return word.split("")
+                                          .reverse()
+                                          .join("");
+                            } else return word;
+                           });
+                           
+  return reversedWordsArr.join(" ");
+}
