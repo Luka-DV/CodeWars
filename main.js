@@ -5387,3 +5387,58 @@ function toCamelCase(str){
         .join("");
 }
 
+
+
+/* ++++++++++6 kyu
+Split Strings
+Complete the solution so that it splits the string into pairs of two characters. If the string contains an odd number of characters then it should replace the missing second character of the final pair with an underscore ('_').
+Examples:
+* 'abc' =>  ['ab', 'c_']
+* 'abcdef' => ['ab', 'cd', 'ef'] */
+
+function solution(str){
+  const finalArray = [];
+  
+  for(let i = 0; i <= str.length; i++) {
+    if(i === str.length && i % 2 === 1) {
+      finalArray.push(`${str[i-1]}_`);
+    } else if(i % 2 === 1) {
+      finalArray.push(`${str[i-1]}${str[i]}`);
+    } 
+  }
+  
+  return finalArray;
+}
+
+//OR (better):
+
+function solution(str){
+  const finalArray = [];
+  
+  if(str.length % 2 === 1) {
+    str += "_";
+  }
+  
+  for(let i = 1; i < str.length; i += 2) {
+    finalArray.push(`${str[i-1]}${str[i]}`);
+  }
+  
+  return finalArray;
+}
+
+
+
+/* function solution(str){2
+  const finalArray = [];
+  const  splitArray = str.split("");
+  
+  for(let i = 0; i <= splitArray.length; i++) {
+    if(i === splitArray.length &&  i % 2 === 1) {
+      finalArray.push(`${splitArray[i-1]}_`)
+    } else if(i % 2 === 1) {
+      finalArray.push(`${splitArray[i-1]}${splitArray[i]}`);
+    } 
+  }
+  
+  return finalArray;
+} */
