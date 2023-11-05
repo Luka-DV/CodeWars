@@ -5427,7 +5427,6 @@ function solution(str){
 }
 
 
-
 /* function solution(str){2
   const finalArray = [];
   const  splitArray = str.split("");
@@ -5442,3 +5441,84 @@ function solution(str){
   
   return finalArray;
 } */
+
+
+/* 
++++++++++++5 kyu
+Rot13
+ROT13 is a simple letter substitution cipher that replaces a letter with the letter 13 letters after it in the alphabet. ROT13 is an example of the Caesar cipher.
+
+Create a function that takes a string and returns the string ciphered with Rot13. If there are numbers or special characters included in the string, they should be returned as they are. Only letters from the latin/english alphabet should be shifted, like in the original Rot13 "implementation". */
+
+function rot13(message){
+  const alhphabetString = "abcdefghijklmnopqrstuvwxyz";
+  
+  return message.split("")
+        .map((char) => {
+          if(char.charCodeAt() >= 97 && char.charCodeAt() <= 122) {   
+            let j = alhphabetString.indexOf(char);    
+            for(let i = 1; i <= 13; i++) {          
+              j++;
+              if(j === alhphabetString.length) {
+                j = 0;
+              }             
+              if(i === 13) {
+                return alhphabetString[j];
+              } 
+            }  
+          };
+
+          if(char.charCodeAt() >= 65 && char.charCodeAt() <= 90) {
+            let j = alhphabetString.indexOf(char.toLowerCase());
+            for(let i = 1; i <= 13; i++) {
+              j++;
+              if(j === alhphabetString.length) {
+                j = 0;
+              }
+              if(i === 13) {
+                return alhphabetString[j].toUpperCase();
+              } 
+            }  
+          }
+          return char;
+        })
+        .join("");
+}
+            
+//Refactored:
+
+function rot13(message){
+  const alhphabetString = "abcdefghijklmnopqrstuvwxyz";
+  
+  return message.split("")
+        .map((char) => {
+          if((char.charCodeAt() >= 65 && char.charCodeAt() <= 90) || (char.charCodeAt() >= 97 && char.charCodeAt() <= 122)) {   
+            let j = alhphabetString.indexOf(char.toLowerCase());
+            for(let i = 1; i <= 13; i++) {          
+              j++;
+              if(j === alhphabetString.length) {
+                j = 0;
+              }                
+              if(i === 13) {
+                return char === char.toLowerCase() ? alhphabetString[j] : alhphabetString[j].toUpperCase();
+              } 
+            }
+          }
+          return char;
+        })
+        .join("");
+}
+
+//OR:
+
+function rot13(message) {
+  return message.split("")
+    .map(char => {
+      if ((char.charCodeAt() >= 65 && char.charCodeAt() <= 90) || (char.charCodeAt() >= 97 && char.charCodeAt() <= 122)) {
+        const shift = char.toLowerCase() <= 'm' ? 13 : -13;
+        return String.fromCharCode(char.charCodeAt() + shift);
+      }
+      return char;
+    })
+    .join("");
+}
