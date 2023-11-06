@@ -5522,3 +5522,71 @@ function rot13(message) {
     })
     .join("");
 }
+
+
+/* ++++++++++++7 kyu
+Sum of odd numbers
+Given the triangle of consecutive odd numbers:
+
+             1
+          3     5
+       7     9    11
+   13    15    17    19
+21    23    25    27    29
+...
+Calculate the sum of the numbers in the nth row of this triangle (starting at index 1) e.g.: (Input --> Output)
+1 -->  1
+2 --> 3 + 5 = 8 */
+
+function rowSumOddNumbers(n) {
+
+  if(n===1) return 1;
+
+  const calculateEndNum = x => {
+    if(x === 2) return 2;
+    return 2*(x-1) + calculateEndNum(x-1);
+  }
+
+    return n**3 - n**2 + n + calculateEndNum(n);
+}
+
+
+//OR:
+
+
+function rowSumOddNumbers(n) {
+
+  const startingNumAtRowN = n*(n-1) + 1;
+
+  const arrayOfNumAtRowN = [startingNumAtRowN];
+
+  for(let i = 1; i <= n-1; i++) {
+    let nextNum = startingNumAtRowN + 2*i;
+    arrayOfNumAtRowN.push(nextNum);
+    
+  }
+
+  return arrayOfNumAtRowN.reduce((acc, crr) => acc + crr, 0);
+}
+
+//refactored:
+
+function rowSumOddNumbers(n) {
+
+  const startingNumAtRowN = n*(n-1) + 1;
+
+  const arrayOfNumAtRowN = [startingNumAtRowN];
+
+  for(let i = 0; i < n - 1; i++) {
+    arrayOfNumAtRowN.push(arrayOfNumAtRowN[i]+2);
+  }
+  return arrayOfNumAtRowN.reduce((acc, crr) => acc + crr, 0);
+}
+
+//OR JUST:
+
+
+function rowSumOddNumbers(n) {
+
+  return n**3;
+}
