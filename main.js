@@ -5599,26 +5599,26 @@ According to the creation myths of the Abrahamic religions, Adam and Eve were th
 
 You have to do God's job. The creation method must return an array of length 2 containing objects (representing Adam and Eve). The first object in the array should be an instance of the class Man. The second should be an instance of the class Woman. Both objects have to be subclasses of Human. Your job is to implement the Human, Man and Woman classes. */
 
-class God{
+class God1{
   static create(){
     return [new Man("Homo Sapiens", "man"), new Woman("Homo Sapiens", "woman")];
   }
 }
 
-class Human {
+class Human1 {
   constructor(species) {
     this.species = species;
   }
 }
 
-class Man extends Human {
+class Man extends Human1 {
   constructor(species, body) {
     super(species);
     this.body = body;
   }
 }
 
-class Woman extends Human {
+class Woman extends Human1 {
   constructor(species, body) {
     super(species);
     this.body = body;
@@ -5627,12 +5627,30 @@ class Woman extends Human {
 
 //or just:
 
-class God{
+class God2{
     static create(){
       return [new Man, new Woman];
     }
   }
 
-class Human{}
-class Man extends Human{}
-class Woman extends Human{}
+class Human2{}
+class Man2 extends Human2{}
+class Woman2 extends Human2{}
+
+
+/* ++++++++++++8 kyu
+Classic Hello World
+You are given a method called main, make it print the line Hello World!, (yes, that includes a new line character at the end) and don't return anything
+Note that for some languages, the function main is the entry point of the program.
+
+Here's how it will be tested:
+    Solution.main("parameter1","parameter2"); */
+
+
+// Print "Hello World!" to the screen
+class Solution{
+  
+  static main() {
+    console.log("Hello World!");
+  }
+}
