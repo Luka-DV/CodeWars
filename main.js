@@ -5661,7 +5661,7 @@ Basic Classes, this kata is mainly aimed at the new JS ES6 Update introducing cl
 Task
 Your task is to complete this Class, the Person class has been created. You must fill in the Constructor method to accept a name as string and an age as number, complete the get Info property and getInfo method/Info getter which should return johns age is 34 */
 
-class Person {
+class Person5 {
   constructor(name, age) {
     this.name = name;
     this.age = age;
@@ -5706,4 +5706,39 @@ function isSantaClausable(obj) {
     return typeof obj[methodName] == 'function';
   });
 }
+
+
+/* ++++8 kyu
+Barking mad
+Teach snoopy and scooby doo how to bark using object methods. Currently only snoopy can bark and not scooby doo.
+snoopy.bark(); // return "Woof"
+scoobydoo.bark(); // undefined
+Use method prototypes to enable all Dogs to bark. */
+
+function Dog9 (breed) {
+  this.breed = breed;
+}
+
+const snoopy = new Dog9("Beagle");
+
+const scoobydoo = new Dog9("Great Dane");
+
+Dog9.prototype.bark = function() {
+  return "Woof";
+}
+
+//as a class:
+
+class Dog2 {
+  constructor(breed) {
+    this.breed = breed;
+  }
+  bark() {
+    return "Woof";
+  }
+}
+
+const snoopy1 = new Dog2("Beagle");
+
+const scoobydoo1= new Dog2("Great Dane");
 
