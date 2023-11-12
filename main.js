@@ -5790,8 +5790,27 @@ const Router2 = function() {
   }
 }
 
+//using a Map:
 
-const router = new Router2;
-router.bind('/hello', 'GET', function(){ return 'hello world'; });
+function Router3() {
+  this.routing = new Map();
+  
+  this.bind = function(url, method, action) {
+    this.routing.set(`${method}: ${url}`, action);
+  }
+  
+  this.runRequest = function(url, method) {
+    if(this.routing.has(`${method}: ${url}`)) {
+      return this.routing.get(`${method}: ${url}`)();
+    }
+    return 'Error 404: Not Found';
+  }
+}
 
-console.log(router.runRequest('/hello', 'GET')) // returns 'hello world';
+/* const router = new Router3;
+
+router.bind('/hello', 'GET', function() { return 'hello world'; });
+router.bind('/login', 'GET', function() { return 'Please log-in.'; });
+
+console.log(router.runRequest('/hello', 'GET'))
+console.log(router.runRequest('/login', 'GET')) */
