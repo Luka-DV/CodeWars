@@ -5814,3 +5814,35 @@ router.bind('/login', 'GET', function() { return 'Please log-in.'; });
 
 console.log(router.runRequest('/hello', 'GET'))
 console.log(router.runRequest('/login', 'GET')) */
+
+
+/* +++++++5 kyu
+Moving Zeros To The End 
+Write an algorithm that takes an array and moves all of the zeros to the end, preserving the order of the other elements.
+moveZeros([false,1,0,1,2,0,1,3,"a"]) // returns[false,1,1,2,1,3,"a",0,0] */
+
+function moveZeros(arr) {
+
+  const arrayOfZeros = [];
+ 
+  for(let i = 0; i < arr.length; i++) {
+    if(arr[i] === 0) {
+      arr.splice(i,1);
+      arrayOfZeros.push(0);
+      i--;
+    }
+  }
+  return arr.concat(arrayOfZeros);
+}
+
+console.log(moveZeros1([1,2,0,0,0,1,0,1,0,3,0,1]));
+
+
+//or simply:
+
+function moveZeros1(arr) {
+
+  return arr.filter(element => element !== 0)
+            .concat(arr.filter(element => element === 0));
+}
+
