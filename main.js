@@ -5846,3 +5846,50 @@ function moveZeros1(arr) {
             .concat(arr.filter(element => element === 0));
 }
 
+
+/* +++++++++++6 kyu
+Which are in?
+Given two arrays of strings a1 and a2 return a sorted array r in lexicographical order of the strings of a1 which are substrings of strings of a2.
+Example 1:
+a1 = ["arp", "live", "strong"]
+a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
+returns ["arp", "live", "strong"]
+Example 2:
+a1 = ["tarp", "mice", "bull"]
+a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
+returns []
+Notes:
+    Arrays are written in "general" notation. See "Your Test Cases" for examples in your language.
+    In Shell bash a1 and a2 are strings. The return is a string where words are separated by commas.
+    Beware: In some languages r must be without duplicates. */
+
+
+
+function inArray(array1,array2){
+  return array1.filter((array1Item) => {
+    for(let array2Item of array2) {
+      for(let i = 0; i <= (array2Item.length - array1Item.length); i++) {
+        if(array2Item.substring(i, i + (array1Item.length)) === array1Item) {
+          return true;
+        }
+      }
+    }
+  })
+  .sort();
+}
+
+//or shorter with the use of the some method:
+
+function inArray2(arr1, arr2) {
+  return arr1.filter(arr1Item => {
+    return arr2.some(arr2Item => {
+      return arr2Item.indexOf(arr1Item) !== -1;
+    })
+  }).sort();
+}
+
+
+/* a2 = ["lively", "alive", "harp", "sharp", "armstrong"]
+a1 = ["xyz", "strong","live"]
+console.log(inArray2(a1, a2)); */
+
