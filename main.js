@@ -5893,3 +5893,70 @@ function inArray2(arr1, arr2) {
 a1 = ["xyz", "strong","live"]
 console.log(inArray2(a1, a2)); */
 
+/* +++++++8 kyu
+Total amount of points
+Our football team has finished the championship.
+Our team's match results are recorded in a collection of strings. Each match is represented by a string in the format "x:y", where x is our team's score and y is our opponents score.
+For example: ["3:1", "2:2", "0:1", ...]
+Points are awarded for each match as follows:
+    if x > y: 3 points (win)
+    if x < y: 0 points (loss)
+    if x = y: 1 point (tie)
+We need to write a function that takes this collection and returns the number of points our team (x) got in the championship by the rules given above. */
+
+function points(games) {
+  return games.reduce((acc, crr) => {
+    if(crr[0] > crr[2]) acc += 3;
+    else if(crr[0] == crr[2]) acc += 1;
+    return acc;
+  }, 0)
+}
+
+
+
+/* +++++++++++6 kyu
+Mexican Wave
+In this simple Kata your task is to create a function that turns a string into a Mexican Wave. You will be passed a string and you must return that string in an array where an uppercase letter is a person standing up. 
+Rules
+ 1.  The input string will always be lower case but maybe empty.
+
+ 2.  If the character in the string is whitespace then pass over it as if it was an empty seat
+Example
+wave("hello") => ["Hello", "hEllo", "heLlo", "helLo", "hellO"] */
+
+
+function wave(str){
+  const mexicanArray = [];
+  
+  for(let i = 0; i < str.length; i++) {
+    if(str[i] === " ") continue;
+    let currentWord = str.split("")
+            .map((letter, ind) => ind === i ? letter.toUpperCase() : letter)
+            .join("");
+    
+    mexicanArray.push(currentWord);
+  }
+  
+  return mexicanArray;
+}
+
+//faster:
+
+
+function wave2(str){
+  const mexicanArray = [];
+  
+  for(let i = 0; i < str.length; i++) {
+    if(str[i] === " ") continue;
+
+    const currentWordArray = str.split("");
+    currentWordArray[i] = currentWordArray[i].toUpperCase();
+
+    mexicanArray.push(currentWordArray.join(""));
+  }
+  
+  return mexicanArray;
+}
+
+console.log(wave2("hello world"));
+
