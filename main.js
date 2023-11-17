@@ -5999,18 +5999,98 @@ function countPositivesSumNegatives(input) {
   return [positiveNum, negativeNum];
 }
 
-//OR - best of both solutions:
+//OR - best of both solutions improved:
 
 function countPositivesSumNegatives(input) {
   if(!input || !input.length) return [];
   
   return input.reduce((acc, crr) => {
     if(crr > 0) {
-      acc[0] = (acc[0] || 0) + 1;
+      acc[0] += 1;
     } else if (crr < 0) {
-      acc[1] = (acc[1] || 0) + crr;
+      acc[1] += crr;
     }
     return acc;
   },[0,0]);
 }
+
+
+/* ++++++++++8 kyu
+Find the first non-consecutive number
+Your task is to find the first element of an array that is not consecutive.
+By not consecutive we mean not exactly 1 larger than the previous element of the array.
+E.g. If we have an array [1,2,3,4,6,7,8] then 1 then 2 then 3 then 4 are all consecutive but 6 is not, so that's the first non-consecutive number.
+If the whole array is consecutive then return null2.
+The array will always have at least 2 elements1 and all elements will be numbers. The numbers will also all be unique and in ascending order. The numbers could be positive or negative and the first non-consecutive could be either too! */
+
+
+function firstNonConsecutive (arr) {
+  for(let i = 1; i < arr.length; i++) {
+    if(arr[i] !== arr[i-1] + 1) return arr[i];
+  }
+  return null;
+}
+
+
+function AgencyContractor(hourlyRate, hours, taxRate){
+  this.hourlyRate = hourlyRate
+  this.hours = hours
+  this.taxRate = taxRate
+  this.calculateProfit = function() {
+    return this.hourlyRate * this.hours * (1 - this.taxRate)
+  }
+  this.invoiceClient = function(){
+    return `Your invoice total is ${this.hourlyRate * this.hours}`
+  }
+}
+
+
+class AgencyContractor1 {
+  constructor(hourlyRate, hours, taxRate) {
+    this.hours = hours;
+    this.taxRate = taxRate;
+    let rate = hourlyRate;
+    let calculateProfit = () => {
+      return rate * this.hours * (1 - this.taxRate);
+    };
+  } 
+  showProfit = function () {
+      return calculateProfit();
+    };
+
+  invoiceClient = function () {
+      return `Your invoice total is ${rate * this.hours}`;
+    };
+  }
+
+
+let leon = new AgencyContractor(250,160,0.35)
+
+
+
+class AgencyContractor2 {
+
+  #private;
+
+  constructor(hourlyRate, hours, taxRate, private1) {
+    this.#private = private1;
+    this.hourlyRate = hourlyRate;
+    this.hours = hours;
+    this.taxRate = taxRate;
+    this.calculateProfit = function () {
+      return this.hourlyRate * this.hours * (1 - this.taxRate);
+    };
+    this.invoiceClient = function () {
+      return `Your invoice total is ${this.hourlyRate * this.hours}`;
+    };
+  }
+}
+
+let leon2 = new AgencyContractor2(250,160,.35, 999)
+
+leon2.#private = 2;
+
+
+
+
 
