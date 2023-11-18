@@ -6032,6 +6032,47 @@ function firstNonConsecutive (arr) {
 }
 
 
+/* +++++++++++6 kyu
+Multiplication table
+Your task, is to create N×N multiplication table, of size provided in parameter.
+For example, when given size is 3:
+1 2 3
+2 4 6
+3 6 9
+For the given example, the return value should be:
+[[1,2,3],[2,4,6],[3,6,9]] */
+
+const multiplicationTable = function(size) {
+  const multiplicationTable = [];
+  for(let i = 1; i <= size; i++) {
+    const oneRow = [];
+    for(let j = 1; j <= size; j++) {
+      oneRow.push(i*j)
+    }
+    multiplicationTable.push(oneRow);
+  }
+  return multiplicationTable;
+}
+
+//or using different methods, a bit more memory efficient(space complexity):
+
+
+const multiplicationTable2 = function(size) {
+  
+  const table = new Array(size);
+  
+  for(let i = 0; i < size; i++) {
+    table[i] = new Array(size).fill(i+1).map((num, ind) => {
+      return num * (ind+1);
+    });
+  }
+  
+  return table;
+}
+
+
+
+
 function AgencyContractor(hourlyRate, hours, taxRate){
   this.hourlyRate = hourlyRate
   this.hours = hours
@@ -6052,19 +6093,20 @@ class AgencyContractor1 {
     let rate = hourlyRate;
     let calculateProfit = () => {
       return rate * this.hours * (1 - this.taxRate);
-    };
-  } 
-  showProfit = function () {
+    ;
+    } 
+    this.showProfit = function () {
       return calculateProfit();
     };
-
+  }
   invoiceClient = function () {
       return `Your invoice total is ${rate * this.hours}`;
     };
   }
 
 
-let leon = new AgencyContractor(250,160,0.35)
+let leon = new AgencyContractor1(250,160,0.35)
+console.log(leon.showProfit())
 
 
 
@@ -6088,7 +6130,7 @@ class AgencyContractor2 {
 
 let leon2 = new AgencyContractor2(250,160,.35, 999)
 
-leon2.#private = 2;
+//leon2.#private = 2;
 
 
 
