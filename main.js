@@ -6070,69 +6070,31 @@ const multiplicationTable2 = function(size) {
   return table;
 }
 
+/* +++++++6 kyu
+Highest Rank Number in an Array
+Complete the method which returns the number which is most frequent in the given input array. If there is a tie for most frequent number, return the largest number among them.
+Note: no empty arrays will be given. 
+Examples:
+[12, 10, 8, 12, 7, 6, 4, 10, 12]              -->  12
+[12, 10, 8, 12, 7, 6, 4, 10, 12, 10]          -->  12*/
 
-
-
-function AgencyContractor(hourlyRate, hours, taxRate){
-  this.hourlyRate = hourlyRate
-  this.hours = hours
-  this.taxRate = taxRate
-  this.calculateProfit = function() {
-    return this.hourlyRate * this.hours * (1 - this.taxRate)
-  }
-  this.invoiceClient = function(){
-    return `Your invoice total is ${this.hourlyRate * this.hours}`
-  }
+function highestRank(arr){
+  
+  let mostFrequentNumber = [-Infinity , 0];
+  
+  const numFrequency = new Map();
+  
+  for(let num of arr) {
+    numFrequency.has(num) ? numFrequency.set(num, numFrequency.get(num) + 1) : numFrequency.set(num, 1);
+    if((numFrequency.get(num) > mostFrequentNumber[1]) || 
+       (numFrequency.get(num) === mostFrequentNumber[1] && num > mostFrequentNumber[0])) {
+      mostFrequentNumber = [num, numFrequency.get(num)];
+      }
+    }
+  
+  return mostFrequentNumber[0];
 }
 
-
-class AgencyContractor1 {
-  constructor(hourlyRate, hours, taxRate) {
-    this.hours = hours;
-    this.taxRate = taxRate;
-    let rate = hourlyRate;
-    let calculateProfit = () => {
-      return rate * this.hours * (1 - this.taxRate);
-    ;
-    } 
-    this.showProfit = function () {
-      return calculateProfit();
-    };
-  }
-  invoiceClient = function () {
-      return `Your invoice total is ${rate * this.hours}`;
-    };
-  }
-
-
-let leon = new AgencyContractor1(250,160,0.35)
-console.log(leon.showProfit())
-
-
-
-class AgencyContractor2 {
-
-  #private;
-
-  constructor(hourlyRate, hours, taxRate, private1) {
-    this.#private = private1;
-    this.hourlyRate = hourlyRate;
-    this.hours = hours;
-    this.taxRate = taxRate;
-    this.calculateProfit = function () {
-      return this.hourlyRate * this.hours * (1 - this.taxRate);
-    };
-    this.invoiceClient = function () {
-      return `Your invoice total is ${this.hourlyRate * this.hours}`;
-    };
-  }
-}
-
-let leon2 = new AgencyContractor2(250,160,.35, 999)
-
-//leon2.#private = 2;
-
-
-
+//time complexity O(n);
 
 
