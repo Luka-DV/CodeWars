@@ -6098,3 +6098,31 @@ function highestRank(arr){
 //time complexity O(n);
 
 
+/* ++++++++++7 kyu
+Row Weights
+Scenario
+Several people are standing in a row divided into two teams.
+The first person goes into team 1, the second goes into team 2, the third goes into team 1, and so on.
+Task
+Given an array of positive integers (the weights of the people), return a new array/tuple of two integers, where the first one is the total weight of team 1, and the second one is the total weight of team2.
+Notes
+  Array size is at least 1.
+  All numbers will be positive. */
+
+function rowWeights(array){
+
+  return array.reduce((acc, crr, ind) => {
+    ind % 2 === 0 ? acc[0] += crr : acc[1] += crr;
+    return acc;
+  }, [0,0]);
+}
+
+  //or - sleeker:
+
+function rowWeights(array){
+  return array.reduce((acc, crr, ind) => {
+    acc[ ind % 2 ] += crr;
+    return acc;
+    }, [0,0]);
+}
+
