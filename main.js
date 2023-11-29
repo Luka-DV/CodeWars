@@ -6126,3 +6126,26 @@ function rowWeights(array){
     }, [0,0]);
 }
 
+
+/* ++++++++++++6 kyu
+The Supermarket Queue
+There is a queue for the self-checkout tills at the supermarket. Your task is write a function to calculate the total time required for all the customers to check out!
+input
+    customers: an array of positive integers representing the queue. Each integer represents a customer, and its value is the amount of time they require to check out.
+    n: a positive integer, the number of checkout tills.
+output
+The function should return an integer, the total time required. */
+
+
+function queueTime(customers, n) {
+  
+  const arrayQueue = new Array(customers.length < n ? customers.length : n).fill(0);
+
+  for(let person of customers) {
+    const shorterstTill = arrayQueue.findIndex( queue => queue === Math.min(...arrayQueue));
+    arrayQueue[shorterstTill] += person;
+  }
+  return arrayQueue.length > 0 ? Math.max(...arrayQueue) : 0;
+};
+
+
