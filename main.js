@@ -6149,3 +6149,45 @@ function queueTime(customers, n) {
 };
 
 
+/* +++++++++++7 kyu
+JavaScript class-like objects
+For this exercise you should create a JavaScript class like object called "Animal" that takes in "name" and "type" arguments. It should have a toString method that returns a human readable string indicating the argument information passed in. It should also allow the name property to be set.
+The following is an example of how the final code would be used and what the expected return values should be:
+var dog = new Animal('Max', 'dog');
+dog.toString(); // should return 'Max is a dog'
+dog.type; // should == 'dog'
+dog.name; // should == 'Max'
+dog.name = 'Lassie'; // should set name to 'Lassie' */
+
+function Animal(name, type) {
+  this.name = name;
+  this.type = type;
+}
+
+Animal.prototype.toString = function() {
+  return `${this.name} is a ${this.type}`;
+}
+
+
+/* 7 kyu
++++++++++++++++++Singleton Pattern
+In software engineering, the singleton pattern is a design pattern that restricts the instantiation of a class to one object. This is useful when exactly one object is needed to coordinate actions across the system.
+Create an Singleton pattern, so there is one object in system.
+Example:
+var obj1 = new Singleton();
+var obj2 = new Singleton();
+obj1 === obj2; // => true
+obj1.test = 1;
+obj2.test; // => 1 */
+
+class Singleton {
+  constructor() {
+    if (Singleton._instance) {
+      return Singleton._instance
+    }
+    Singleton._instance = this;
+  }
+}
+
+
+
