@@ -6159,12 +6159,12 @@ dog.type; // should == 'dog'
 dog.name; // should == 'Max'
 dog.name = 'Lassie'; // should set name to 'Lassie' */
 
-function Animal(name, type) {
+function Animal33(name, type) {
   this.name = name;
   this.type = type;
 }
 
-Animal.prototype.toString = function() {
+Animal33.prototype.toString = function() {
   return `${this.name} is a ${this.type}`;
 }
 
@@ -6189,5 +6189,143 @@ class Singleton {
   }
 }
 
+const instance = new Singleton();
 
+
+//Steve Griffith:
+
+let obj = (function () {
+    let objInstance; //private variable
+    function create() { //private function to create methods and properties
+      let _isRunning = true;
+      function currentState() {
+        return _isRunning;
+      }
+      return  {
+        currentState: currentState
+      }
+    }
+    return {
+      getInstance : function() {
+        if(!objInstance) {
+          objInstance = create();
+        }
+        return objInstance;
+      }
+    };
+})();
+
+let obj1 = obj.getInstance();
+let obj2 = obj.getInstance();
+console.log("OBJ 1 ",obj1.currentState());
+console.log("OBJ 2 ",obj2.currentState());
+console.log("IS equal: ",obj1 === obj2);
+
+
+
+/* +++++++++7 kyu
+Sorted? yes? no? how?
+Complete the method which accepts an array of integers, and returns one of the following:
+    "yes, ascending" - if the numbers in the array are sorted in an ascending order
+    "yes, descending" - if the numbers in the array are sorted in a descending order
+    "no" - otherwise
+You can assume the array will always be valid, and there will always be one correct answer. */
+
+
+function isSortedAndHow1(array) {
+   
+  if(array.every((_, ind) => array[ind] < (array[ind+1] ?? Infinity) || (array[ind] === (array[ind+1])))) {
+     return "yes, ascending";
+  } else if (array.every((_, ind) => array[ind] > (array[ind+1] ?? -Infinity) || (array[ind] === (array[ind+1])))) {
+     return "yes, descending";
+  } else {
+    return "no";
+  }
+}
+
+//more efficient:
+
+function isSortedAndHow(array) {
+  
+  let ascending = false;
+  let descending = false;
+  
+  for(let i = 1; i < array.length; i++) {
+    if((array[i] > array[i-1] || array[i] === array[i-1]) && !descending ) {
+      ascending = true;
+    } else if ((array[i] < array[i-1] || array[i] === array[i-1])  && !ascending) {
+      descending = true;
+    } else {
+      return "no"
+    }
+  } 
+  return ascending ? "yes, ascending" : "yes, descending";
+}
+
+
+/* +++++++++++6 kyu
+Simple Encryption #1 - Alternating Split
+Implement a pseudo-encryption algorithm which given a string S and an integer N concatenates all the odd-indexed characters of S with all the even-indexed characters of S, this process should be repeated N times.
+Examples:
+encrypt("012345", 1)  =>  "135024"
+encrypt("012345", 2)  =>  "135024"  ->  "304152"
+encrypt("012345", 3)  =>  "135024"  ->  "304152"  ->  "012345"
+
+encrypt("01234", 1)  =>  "13024"
+encrypt("01234", 2)  =>  "13024"  ->  "32104"
+encrypt("01234", 3)  =>  "13024"  ->  "32104"  ->  "20314"
+Together with the encryption function, you should also implement a decryption function which reverses the process.
+If the string S is an empty value or the integer N is not positive, return the first argument without changes. */
+
+function encrypt(text, n) {
+  
+  let encryptedText = text;
+  
+  for(let j = 1; j <= n; j++) {
+    
+    let oddCharacters = "";
+    let evenCharacters = "";
+    
+    for(let i = 0; i < encryptedText.length; i++) {
+      if(i % 2 === 1) {
+        oddCharacters += encryptedText[i];
+      } else {
+        evenCharacters += encryptedText[i];
+      }
+    } 
+    
+    encryptedText = oddCharacters + evenCharacters;  
+  }
+  
+  return encryptedText;
+}
+
+
+function decrypt(encryptedText, n) {
+  
+  if(!encryptedText || n < 1) {
+    return encryptedText;
+  } 
+  
+  let decryptedText = encryptedText;
+  
+  for(let j = 1; j <= n; j++) {
+    
+    let decrypted = "";
+    
+    for(let i = Math.floor(decryptedText.length/2); i < decryptedText.length; i++) {
+      decrypted += decryptedText[i];
+      if(decryptedText.length % 2 === 1 && i === decryptedText.length - 1) {
+        break;
+      } else {
+        let jumpToNextNum = i - Math.floor(decryptedText.length/2);
+        decrypted += decryptedText[jumpToNextNum];
+      }    
+    }
+    
+    decryptedText = decrypted;  
+  }
+  
+  return decryptedText;
+}
 
