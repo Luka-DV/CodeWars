@@ -6384,6 +6384,50 @@ Notes
     Array/list numbers could be a mixture of positives, negatives also zeroes . */
 
 
+function adjacentElementsProduct(array) {
+  return array.reduce((acc, crr, ind, arr) => {
+    return acc = crr * arr[ind+1] > acc ? crr * arr[ind+1] : acc;
+  }, -Infinity);
+}
+
+/* +++++++++++++++++7 kyu
+My Language Skills
+Task
+You are given a dictionary/hash/object containing some languages and your test results in the given languages. Return the list of languages where your test score is at least 60, in descending order of the scores.
+Note: the scores will always be unique (so no duplicate values)
+Examples
+{"Java": 10, "Ruby": 80, "Python": 65}    -->  ["Ruby", "Python"]
+{"Hindi": 60, "Dutch" : 93, "Greek": 71}  -->  ["Dutch", "Greek", "Hindi"]
+{"C++": 50, "ASM": 10, "Haskell": 20}     -->  [] */
+
+
+function myLanguages(results) {
+
+  const unsortedLang = [];
+  
+  for(let prop in results) {
+    if(results[prop] >= 60) {
+      unsortedLang.push(prop);
+    }
+  }
+  
+  const sortedLang = unsortedLang.sort((a,b) => {
+    if(results[a] < results[b]) return 1;
+    else if(results[a] > results[b]) return -1;
+    else return 0;
+  })
+  
+  return sortedLang;
+}
+
+//OR: 
+
+function myLanguages(results) {
+
+  return Object.keys(results)
+  .filter(lang => results[lang] > 59)
+  .sort((a,b) => results[b] - results[a]);
+}
 
 
 
