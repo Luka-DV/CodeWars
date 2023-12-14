@@ -6491,4 +6491,62 @@ function digits(n) {
 }
 
 
+/* ++++6 kyu
+Build Tower
 
+Build a pyramid-shaped tower, as an array/list of strings, given a positive integer number of floors. A tower block is represented with "*" character.
+For example, a tower with 3 floors looks like this:
+[
+  "  *  ",
+  " *** ", 
+  "*****"
+] */
+
+function towerBuilder(nFloors) {
+  
+  const towerArray = [];
+  
+  for(let i = 1; i <= nFloors; i++) {
+    
+    let line = "";
+    
+    for(let j = 1; j <= 3; j++) {
+      
+      if(j !== 2) {
+        
+        let emptySpace = "";
+        for(let e = 1; e <= nFloors - i; e++) {
+          emptySpace += " ";
+        }
+        line += emptySpace;
+        
+      } else {
+        
+        let filledSpace = "";
+        for(let f = 1; f <= 2*i -1; f++) {
+          filledSpace += "*"
+        }
+        line += filledSpace;
+      }
+    }
+    
+    towerArray.push(line);
+  }
+  
+  return towerArray;
+}
+
+
+//Or just:
+
+function towerBuilder(nFloors) {
+  const towerArray = [];
+  
+  for(let i = 1; i <= nFloors; i++) {
+    towerArray.push(" ".repeat(nFloors - i)
+             + "*".repeat(2*i -1)
+             + " ".repeat(nFloors - i))
+  }
+  
+  return towerArray;
+}
