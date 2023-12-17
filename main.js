@@ -6601,3 +6601,51 @@ function evenNumbers(array, number) {
   
 } */
 
+
+/* +++++++++++7 kyu
+Minimize Sum Of Array (Array Series #1) 
+Task
+Given an array of integers , Find the minimum sum which is obtained from summing each Two integers product (the smallest and bigest left over numbers)*/
+
+function minSum(arr) {
+  
+  arr.sort((a,b) => a-b);
+  let minSum = 0;
+  
+  for(let i = 0; i <= arr.length/2 - 1; i++) {
+    minSum += arr[i] * arr.at(-(i+1));
+  }
+  
+  return minSum;
+}
+
+/* +++++++++7 kyu
+Fun with ES6 Classes #3 - Cuboids, Cubes and Getters
+Define the following classes.
+I. Cuboid
+The object constructor for the class Cuboid should receive exactly three arguments in the following order: length, width, height and store these three values in this.length, this.width and this.height respectively.
+The class Cuboid should then have a getter surfaceArea which returns the surface area of the cuboid and a getter volume which returns the volume of the cuboid.
+II. Cube
+class Cube is a subclass of class Cuboid. The constructor function of Cube should receive one argument only, its length, and use that value passed in to set this.length, this.width and this.height. */
+
+class Cuboid {
+  constructor(length, width, height) {
+    this.length = length; //or : Object.assign(this, { length, width, height })
+    this.width = width;
+    this.height = height;
+  }
+  
+  get surfaceArea() {
+    return 2*(this.length*this.width) + 2*(this.length*this.height) + 2*(this.width*this.height);
+  }
+  
+  get volume() {
+      return this.length * this.width * this.height   
+  }
+}
+class Cube extends Cuboid {
+  constructor(length) {
+    super(length, length, length);
+  }
+}
+
