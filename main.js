@@ -6649,3 +6649,34 @@ class Cube extends Cuboid {
   }
 }
 
+
+/* +++++++7 kyu
+Fun with ES6 Classes #4 - Cubes and Setters
+Define a class Cube whose constructor function takes exactly one parameter length and stores the value of the argument into this.length. You will then define both a getter and a setter for the surfaceArea and volume of the cube.
+
+No initial code will be given. You are free to use whatever syntax you like to complete this Kata but it is highly recommended that you use ES6 syntax and features to complete this Kata. */
+
+
+class Cube2 {
+  constructor(length) {
+    this.length = length;
+  }
+  
+  get surfaceArea() {
+    return 6*(this.length**2)
+  }
+  
+  set surfaceArea(area) {
+    this.length = Math.sqrt(area/6);
+  }
+  
+  get volume() {
+    return this.length**3;
+  }
+  
+  set volume(volume) {
+    this.length = Math.cbrt(volume)
+  }
+}
+
+
