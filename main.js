@@ -6688,9 +6688,87 @@ To demonstrate this, you'll have to add a new method (called my_new_method in Ru
 returns
 "ABC" */
 
-String3.prototype.myNewMethod = function() {
+/* String3.prototype.myNewMethod = function() {
   return this.toUpperCase();
+} */
+
+
+
+/* IBM reddit "kata"
+You're given an array of positive integers. The first line contains the n number of elements in the array. Pick two indices i and j. Add array[i] + array[j]. The cost of the operation is the sum of those two integers. Add that operation cost as a new element to the array, then remove the two elements you added together. Continue until there is only one element left in the array. Find the minimum overall cost. */
+
+const integerArray = [4, 1, 2];
+
+function returnMinimumCost1(array, rollingCost = 0) {
+
+  if(array.length === 1) {
+    console.log(rollingCost)
+    return rollingCost;
+  }
+
+  const firstSmallestNum = Math.min(...array);
+  array.splice(array.indexOf(firstSmallestNum),1);
+
+  const secondSmallestNum = Math.min(...array);
+  array.splice(array.indexOf(secondSmallestNum),1);
+
+  rollingCost += firstSmallestNum + secondSmallestNum;
+
+  array.push(firstSmallestNum + secondSmallestNum);
+
+  returnMinimumCost1(array, rollingCost);
 }
 
+
+//or (more efficient): 
+
+
+function returnMinimumCost2(array, rollingCost = 0) {
+
+  if(array.length === 1) {
+    console.log(rollingCost)
+    return rollingCost;
+  }
+
+  let firstLowestNum =  Infinity;
+  let firstLowestInd = -1;
+
+  let secondLowestNum =  Infinity;
+  let secondLowestInd = -1;
+
+  for(let i = 0; i < array.length; i++) {
+    if(array[i] < firstLowestNum) {
+
+      secondLowestNum = firstLowestNum;
+      secondLowestInd = firstLowestInd;
+
+      firstLowestNum = array[i];
+      firstLowestInd = i;
+
+    } else if (array[i] < secondLowestNum) {
+      secondLowestNum = array[i];
+      secondLowestInd = i;
+    }
+  }
+
+  rollingCost +=  firstLowestNum + secondLowestNum;
+
+  if(firstLowestInd > secondLowestInd) {
+    array.splice(firstLowestInd, 1);
+    array.splice(secondLowestInd, 1);
+  } else {
+    array.splice(secondLowestInd, 1);
+    array.splice(firstLowestInd, 1);
+  }
+
+  array.push(firstLowestNum + secondLowestNum);
+
+  returnMinimumCost2(array, rollingCost);
+}
+
+returnMinimumCost1(integerArray)
+
+
+//even better solution would be using a min-heap!
 
 
