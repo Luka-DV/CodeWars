@@ -6873,3 +6873,76 @@ function isSolved(board) {
   
   return xWon ? 1 : oWon ? 2 : unfinished ? -1 : 0;    
 }
+
+
+
+
+//FizzBuzz
+
+//simple:
+
+function fizzBuzz36(num) {
+
+  for(let i = 1; i <= num; i++) {
+
+    let result = "";
+
+    if(i % 3 === 0) {
+      result += "Fizz";
+    }
+    if(i % 5 === 0) {
+      result += "Buzz";
+    }
+
+    console.log(result || i);
+  }
+}
+
+//using an array of arrays:
+
+function fizzBuzz37(num) {
+
+  const fizzBuzzArray = [
+    [3, "Fizz"],
+    [5, "Buzz"]
+  ];
+
+  for(let i = 1; i <= num; i++) {
+
+    let result = "";
+
+    for(let [number, word] of fizzBuzzArray) {
+      if(i % number === 0) {
+        result += word;
+      }
+    }
+
+    console.log(result || i);
+  }
+}
+
+//using a Map, potentialy the most scalable and "clear":
+
+function fizzBuzz38(num) {
+
+  const fizzBuzzMap = new Map([
+    [3, "Fizz"],
+    [5, "Buzz"]
+  ]);
+
+  for(let i = 1; i <= num; i++) {
+
+    let result = "";
+
+    for(let [key, value] of fizzBuzzMap) {
+      if(i % key === 0) {
+        result += value;
+      } 
+    }
+
+    console.log(result || i);
+  }
+}
+
+
+fizzBuzz38(100);
