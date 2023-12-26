@@ -6946,3 +6946,40 @@ function fizzBuzz38(num) {
 
 
 fizzBuzz38(100);
+
+
+/* ++++7 kyu
+Maximum Triplet Sum (Array Series #7) 
+Task
+Given an array/list [] of n integers , find maximum triplet sum in the array Without duplications .
+Notes :
+    Array/list size is at least 3 .
+    Array/list numbers could be a mixture of positives , negatives and zeros .
+    Repetition of numbers in the array/list could occur , So (duplications are not included when summing). */
+
+
+//prep
+
+//P: array of integers
+//R: return whole num
+
+//E: 
+function maxTriSum(numbers){
+
+  const uniqueNums = new Set(numbers);
+
+  const threeBigestNums = [...uniqueNums].toSorted((a,b) => b - a).filter((_, ind) => ind < 3);
+  //or [...uniqueNums].toSorted((a,b) => a - b).slice(-3);
+
+  return threeBigestNums.reduce((acc, crr) => {
+    acc += crr;
+    return acc;
+  }, 0)
+  
+  //find 3 bigest unique nums
+  //add and return them
+}
+
+maxTriSum([2,2,3,4,4,5]) // 3 + 4 + 5 = 12;
+maxTriSum([-21, -5, 0, 5]) // -5 + 0 + 5 = 0;
+
