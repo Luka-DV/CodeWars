@@ -6983,3 +6983,24 @@ function maxTriSum(numbers){
 maxTriSum([2,2,3,4,4,5]) // 3 + 4 + 5 = 12;
 maxTriSum([-21, -5, 0, 5]) // -5 + 0 + 5 = 0;
 
+
+/* +++++7 kyu
+Add property to every object in array 
+Your task is to add a new property usersAnswer to every object in the array questions. The value of usersAnswer should be set to null. The solution should work for array of any length.  */
+
+//P: array of objects
+//R: returns, modified array of objects
+// questions : 
+
+function addProp(questions) {
+  
+  //map 
+  // add userAnswer: null;
+  
+  return questions.map(object => {
+    object.usersAnswer = null;
+    return object;
+  })
+}
+
+//addProp(questions);
