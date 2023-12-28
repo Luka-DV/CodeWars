@@ -7003,4 +7003,31 @@ function addProp(questions) {
   })
 }
 
-//addProp(questions);
+//or simply:
+
+questions.forEach(object => object.usersAnswer = null);
+
+
+
+/* ++++7 kyu
+Sort arrays - 1
+Just a simple sorting usage. Create a function that returns the elements of the input-array / list sorted in lexicographical order */
+
+
+const sortme = function( names ){
+  
+  return names.sort((a,b) =>  {
+    if(a < b) return -1;
+    else if (a > b) return 1;
+    else return 0;
+  });
+}
+
+//or simply .sort():
+
+const sortme2 = function( names ){
+  return names.sort()
+}
+
+//MDN: If omitted (the compare func.), the array elements are converted to strings, then sorted according to each character's Unicode code point value.
+
