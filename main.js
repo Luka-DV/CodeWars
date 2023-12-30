@@ -7080,3 +7080,41 @@ Object.assign(Array1.prototype, {
 });
 
 
+/* +++++7 kyu
+Smallest value of an array
+Write a function that can return the smallest value of an array or the index of that value. The function's 2nd parameter will tell whether it should return the value or the index.
+Assume the first parameter will always be an array filled with at least 1 number and no duplicates. Assume the second parameter will be a string holding one of two values: 'value' and 'index'.
+min([1,2,3,4,5], 'value') // => 1
+min([1,2,3,4,5], 'index') // => 0 */
+
+
+//P: arr of nums, int
+//R: return, smallest num/index of num
+
+
+function min1(arr, toReturn) {
+  
+  //Ps: //1. find smallest num
+  //2. value- return num, if index return index
+  
+  const smallestValue = Math.min(...arr);
+  
+  if(toReturn === "index") {
+    return arr.indexOf(smallestValue);
+  }
+  
+  return smallestValue;
+
+}
+
+// E: min1([1,2,3]) // num: 1; index: 0
+
+
+function min2(arr, toReturn) {
+  
+  const smallestValue = Math.min(...arr);
+  
+  return toReturn === "index" ? arr.indexOf(smallestValue) : smallestValue;
+}
+
+
