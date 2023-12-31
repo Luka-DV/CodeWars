@@ -7005,7 +7005,7 @@ function addProp(questions) {
 
 //or simply:
 
-questions.forEach(object => object.usersAnswer = null);
+//questions.forEach(object => object.usersAnswer = null);
 
 
 
@@ -7043,7 +7043,7 @@ Explanation:
     even() must return an array of all even numbers
     odd() must return an array of all odd numbers
 Note: the original array must not be changed in any case! */
-
+/* 
 Array1.prototype.square = function() {
   return this.map(num => num**2);
 }
@@ -7077,7 +7077,7 @@ Object.assign(Array1.prototype, {
   average() {return this.reduce((acc,crr) => acc + crr, 0) / this.length;},
   even() {return this.filter(num => !(num % 2));},
   odd() {return this.filter(num => num % 2);}
-});
+}); */
 
 
 /* +++++7 kyu
@@ -7155,5 +7155,64 @@ function deepCount2(a, count = a.length){
   return count;
 }
 
+
+
+
+/* +++++++++7 kyu
+Honey to the Bee
+Find out why the amount of honey in the hive is not increasing. */
+
+//the code:
+
+function Bee(capacity, hive) {
+  this.capacity = capacity;
+  this.hive = hive;
+}
+
+function Hive() {
+  this.pollen = 100;
+}
+
+//TODO: The amount of honey in the hive is not increasing.
+Hive.prototype.addPollen = function(pollen) {
+  this.pollen += pollen;
+}
+
+Hive.prototype.getPollen = function() {
+  return this.pollen;
+}
+
+Bee.prototype.unloadPollen = function() {
+  hive.addPollen(this.capacity);
+}
+
+
+//Solution:
+
+
+class Bee{
+  constructor(capacity, hive) {
+    this.capacity = capacity;
+    this.hive = hive;
+  }
+  
+  unloadPollen() {
+    this.hive.addPollen(this.capacity);
+  }
+}
+
+class Hive{
+  constructor() {
+    this.pollen = 100;
+  }
+  
+  addPollen(pollen) {
+    this.pollen += pollen;
+  }
+  
+  getPollen() {
+    return this.pollen;
+  }
+}
 
 
