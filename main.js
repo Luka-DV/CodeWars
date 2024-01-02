@@ -7216,3 +7216,85 @@ class Hive{
 }
 
 
+
+/* ++++++++++6 kyu
+Jokes you've been 'awaiting' for ... promise
+There is a made up API URL (http://great.jokes/christmas) that you can call to a get list of Christmas jokes in JSON format.
+Your challenge
+    Write an async function which takes an apiUrl and jokeId which returns a promise.
+    The data will need to be filtered to get the specified joke by id.
+    When you got the joke it should be accessible through a simple API of saySetup and sayPunchLine methods.
+Handle error cases
+    If a joke can't be found throw an error message in this format new Error('No jokes found id: {jokeId}').
+    Getting jokes from a another API URL may return a different data shape, throw this error message new Error('No jokes at url: {url}') for an unexpected shape.
+Throw error in a promise sty */
+
+
+function sayJoke(apiUrl, jokeId){
+  
+  return fetch(apiUrl)
+      .then(res => res.json())
+      .then(data => {
+      
+      if(!data.jokes) {
+        throw new Error(`No jokes at url: ${apiUrl}`)
+      }
+      
+      const correctJoke = data.jokes.find(joke => {
+        return joke.id === jokeId;
+      })
+      
+      if(!correctJoke) {
+        throw new Error(`No jokes found id: ${jokeId}`)
+      }
+      
+      return {
+        saySetup() {
+          return correctJoke.setup;
+        },
+        sayPunchLine() {
+          return correctJoke.punchLine
+        }
+      }
+      
+      })
+      .catch(err => {
+        throw err;
+      })
+  }
+
+
+  //OR:
+
+async function sayJoke(apiUrl, jokeId){
+  
+  try {  
+    const url = apiUrl;
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if(!data.jokes) {
+      throw new Error(`No jokes at url: ${url}`);
+    }
+    
+    for(let joke of data.jokes) {
+      if(joke.id === jokeId) {
+        let setup = joke.setup;
+        let punchline = joke.punchLine;
+      
+        return {
+          saySetup() {
+              return setup;
+            },
+            sayPunchLine() {
+              return punchline;
+            }
+        }
+      }
+    }
+    throw new Error(`No jokes found id: ${jokeId}`);
+  } catch(err) {
+      throw err;
+  } 
+}
+
