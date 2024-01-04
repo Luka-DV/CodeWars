@@ -7298,3 +7298,20 @@ async function sayJoke(apiUrl, jokeId){
   } 
 }
 
+
+/* ++++7 kyu
+A Promise is a Promise
+Create a resolved javascript Promise that will return 'Hello World!'. */
+
+async function promiseHelloWorld() {
+  
+  const hello = (() => "Hello World!")();
+  return hello;
+}
+
+//OR
+
+function promiseHelloWorld() {
+  return Promise.resolve('Hello World!');
+}
+
