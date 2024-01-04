@@ -7315,3 +7315,25 @@ function promiseHelloWorld() {
   return Promise.resolve('Hello World!');
 }
 
+
+
+/* +++++++6 kyu
+I Promise Not To Optimize
+...now your task is to write the function antiOptimizeAsync, which takes a single parameter task (a function), and immediately returns a Promise that only resolves to the return value of task() at least 11 seconds (and at most 12 seconds) after antiOptimizeAsync is called.
+
+As with Voile's kata, task will always be an arbitrary function that might run for any duration between 0 to 10 seconds. */
+
+function antiOptimizeAsync(task) {
+  return new Promise (resolve =>{
+    
+    const startTaskTime = new Date().getTime();
+    const taskResult = task();
+    const endTaskTime = new Date().getTime();
+    const delayNeeded = 11000 - (endTaskTime - startTaskTime);
+
+    setTimeout(() => {  
+      resolve(taskResult);
+    }, delayNeeded);
+  })
+}
+
