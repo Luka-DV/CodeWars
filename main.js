@@ -7374,3 +7374,25 @@ function nbYear(p0, percent, aug, p) {
 }
 
 
+/* +++++++++6 kyu
+Are they the "same"?
+Given two arrays a and b write a function comp(a, b) (orcompSame(a, b)) that checks whether the two arrays have the "same" elements, with the same multiplicities (the multiplicity of a member is the number of times it appears). "Same" means, here, that the elements in b are the elements in a squared, regardless of the order. */
+
+
+function comp(array1, array2){
+  if(!array1 || !array2){
+    return false;
+  }
+  
+  for(let num of array2) {      
+     const indexOfCheckedNum = array1.findIndex(arr1Num => arr1Num === Math.sqrt(num))  
+     if(indexOfCheckedNum === -1) {
+       return false;
+     } else {
+       array1.splice(indexOfCheckedNum, 1);
+     } 
+  }
+  
+  return true;
+}
+
