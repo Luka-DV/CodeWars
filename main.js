@@ -7397,6 +7397,7 @@ function comp(array1, array2){
 }
 
 
+
 /* +++++++++6 kyu
 Persistent Bugger
 Write a function, persistence, that takes in a positive parameter num and returns its multiplicative persistence, which is the number of times you must multiply the digits in num until you reach a single digit.
@@ -7404,8 +7405,6 @@ For example (Input --> Output):
 39 --> 3 (because 3*9 = 27, 2*7 = 14, 1*4 = 4 and 4 has only one digit)
 999 --> 4 (because 9*9*9 = 729, 7*2*9 = 126, 1*2*6 = 12, and finally 1*2 = 2)
 4 --> 0 (because 4 is already a one-digit number) */
-
-
 
 function persistence(num, mPersistence = 0) {
   if(num < 10) return mPersistence;
@@ -7415,5 +7414,35 @@ function persistence(num, mPersistence = 0) {
   
   return persistence(num, ++mPersistence);
 }
+
+
+/* ++++6 kyu
+Title Case
+Write a function that will convert a string into title case, given an optional list of exceptions (minor words). The list of minor words will be given as a string with each word separated by a space. Your function should ignore the case of the minor words string -- it should behave in the same way even if the case of the minor word string is changed.
+First argument (required): the original string to be converted.
+Second argument (optional): space-delimited list of minor words that must always be lowercase except for the first word in the string. The JavaScript/CoffeeScript tests will pass undefined when this argument is unused */
+
+function titleCase(title, minorWords) {
+  
+  if(!title) return title;
+  
+  const exceptions = minorWords ? minorWords.toLowerCase().split(" ") : undefined;
+  
+  const titleCaseString = title.split(" ")
+    .map((word, ind) => {
+      if(ind !== 0 && (exceptions ? exceptions.includes(word.toLowerCase()) : false)){
+        //OR:  if(ind !== 0 && (exceptions && exceptions.includes(word.toLowerCase())))
+         return word.toLowerCase();
+         }
+      return word[0].toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(" ")
+  
+  return titleCaseString;
+}
+
+
+
+
 
 
