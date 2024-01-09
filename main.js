@@ -7442,6 +7442,38 @@ function titleCase(title, minorWords) {
 }
 
 
+/* ++++7 kyu
+Count the Digit
+Take an integer n (n >= 0) and a digit d (0 <= d <= 9) as an integer.
+Square all numbers k (0 <= k <= n) between 0 and n.
+Count the numbers of digits d used in the writing of all the k**2.
+Implement the function taking n and d as parameters and returning this count. */
+
+function nbDig(n, d) {
+  
+  const dString = String(d);
+    
+  let counter = 0;
+  
+  for(let i = 0; i <= n; i++) {
+    const squaredNum = i**2;
+    const numDigitArray = squaredNum.toString().split("");
+    counter +=  numDigitArray.filter(num => num === dString).length;
+  }
+  
+  return counter;
+}
+
+//smart CW solution:
+
+function nbDig(n, d) {
+  const allNumsString = '';
+    for(var i = 0; i <= n; i++){
+      allNumsString += Math.pow(i, 2);
+    }
+  return allNumsString.split(d).length - 1
+}
+
 
 
 
