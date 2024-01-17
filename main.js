@@ -7563,7 +7563,7 @@ Counter.prototype.valueOf = function() {
 
 //or:
 
-class Counter {
+class Counter1 {
   constructor() {
     this.number = 0;
   }
@@ -7646,7 +7646,24 @@ function flatten(array){
 
 //CW:
 
-const flatten = function (lol){
+const flatten2 = function (lol){
   return [].concat.apply([],lol);
+}
+
+/* 6 kyu
+Sum of Digits / Digital Root
+Digital root is the recursive sum of all the digits in a number.
+Given n, take the sum of the digits of n. If that value has more than one digit, continue reducing in this way until a single-digit number is produced. The input will be a non-negative integer. */
+
+function digitalRoot(n) {
+  if(String(n).length === 1) {
+    return n;
+  }
+  
+  const sumOfDigits = `${n}`.split("").reduce((acc, crr) => {
+    return acc + Number(crr);
+    },0)
+  
+  return digitalRoot(sumOfDigits);
 }
 
