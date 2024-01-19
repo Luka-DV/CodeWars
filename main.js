@@ -7633,7 +7633,7 @@ function findOutlier(integers){
   }
 }
 
-/* ++7 kyu
+/* ++++7 kyu
 Flatten
 Write a function that flattens an Array of Array objects into a flat Array. Your function must only do one level of flattening.
 flatten([1,2,3]) // => [1,2,3]
@@ -7650,7 +7650,7 @@ const flatten2 = function (lol){
   return [].concat.apply([],lol);
 }
 
-/* 6 kyu
+/* +++++++++++6 kyu
 Sum of Digits / Digital Root
 Digital root is the recursive sum of all the digits in a number.
 Given n, take the sum of the digits of n. If that value has more than one digit, continue reducing in this way until a single-digit number is produced. The input will be a non-negative integer. */
@@ -7665,5 +7665,37 @@ function digitalRoot(n) {
     },0)
   
   return digitalRoot(sumOfDigits);
+}
+
+
+/* +++++++++++6 kyu
++1 Array
+Given an array of integers of any length, return an array that has 1 added to the value represented by the array.
+    the array can't be empty
+    only non-negative, single digit integers are allowed
+Return nil (or your language's equivalent) for invalid inputs.
+Examples
+Valid arrays
+[4, 3, 2, 5] would return [4, 3, 2, 6]
+[1, 2, 3, 9] would return [1, 2, 4, 0] */
+
+function upArray(arr){
+  
+  if(arr.length === 0) return null;
+  if(arr.some(num => {
+    return num < 0 || num > 9
+  })) return null;
+  
+ for(let i = arr.length - 1; i >= 0; i--) {
+   
+   arr[i] += 1;
+   if(arr[i] === 10) {
+     arr[i] = 0;
+     if(i === 0) {
+       arr.unshift(1)
+     }
+   } else break;
+ }
+  return arr;
 }
 
