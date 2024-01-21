@@ -7713,7 +7713,7 @@ function keysAndValues(data){
 
 
 
-/* 7 kyu
+/* ++++7 kyu
 Return the Missing Element
 Fellow code warrior, we need your help! We seem to have lost one of our sequence elements, and we need your help to retrieve it!
 Our sequence given was supposed to contain all of the integers from 0 to 9 (in no particular order), but one of them seems to be missing.
@@ -7739,12 +7739,31 @@ Spacify
 Modify the spacify function so that it returns the given string with spaces inserted between each character.
 spacify("hello world") // returns "h e l l o   w o r l d" */
 
-function spacify(str) {
+function spacify1(str) {
   const spacifiedString = str.split("").join(" ");
   return spacifiedString;
 }
 
 //or:
 
-const spacify = str => [...str].join(" ");
+const spacify2 = str => [...str].join(" ");
+
+
+/* +++++++++6 kyu
+Reverse every other word in the string
+Reverse every other word in a given string, then return the string. Throw away any leading or trailing whitespace, while ensuring there is exactly one space between each word. Punctuation marks should be treated as if they are a part of the word in this kata */
+
+
+function reverse34(str){
+  
+  const strToArray = str.trim().split(" ");
+  
+  const reversedWordsArr = strToArray.map((word, ind) => {
+    if(ind % 2 !== 0) {
+      return word.split("").reverse().join("");
+    } else return word;
+  })
+  
+  return reversedWordsArr.join(" ");
+}
 
