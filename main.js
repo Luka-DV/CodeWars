@@ -7712,3 +7712,24 @@ function keysAndValues(data){
 }
 
 
+
+/* 7 kyu
+Return the Missing Element
+Fellow code warrior, we need your help! We seem to have lost one of our sequence elements, and we need your help to retrieve it!
+Our sequence given was supposed to contain all of the integers from 0 to 9 (in no particular order), but one of them seems to be missing.
+Write a function that accepts a sequence of unique integers between 0 and 9 (inclusive), and returns the missing element.
+Examples:
+[0, 5, 1, 3, 2, 9, 7, 6, 4] -->8  */
+
+
+
+function getMissingElement(superImportantArray){
+  const sumOfAllPossibleNums = 45;
+  
+  const sumOfArrayNums = superImportantArray.reduce((acc,crr) => acc + crr, 0);
+  
+  const missingNum = sumOfAllPossibleNums - sumOfArrayNums;
+  
+  return missingNum;
+}
+
