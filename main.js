@@ -7808,7 +7808,7 @@ arr.numberOfOccurrences(4) === 0; */
 
 //one:
 
-Object.defineProperty(Array.prototype, 'numberOfOccurrences',{ 
+Object.defineProperty(Array.prototype, 'numberOfOccurrences1',{ 
   value : function numberOfOccurrences(element) {
     const filteredArray = this.filter( num => num === element);
     return filteredArray.length;
@@ -7817,7 +7817,7 @@ Object.defineProperty(Array.prototype, 'numberOfOccurrences',{
 
 //two:
 
-Object.defineProperty(Array.prototype, 'numberOfOccurrences',{ 
+Object.defineProperty(Array.prototype, 'numberOfOccurrences2',{ 
   value : function numberOfOccurrences(element) {
     return this.reduce((acc, crr) => {
       if(crr === element) {
@@ -7836,5 +7836,35 @@ Example:
 largest(2, [7,6,5,4,3,2,1])
 // => [6,7] */
 
+function largest(n, array) {
+  
+  if(!n) return [];
+  
+  array.sort((a,b) => a-b);
+  return array.slice(-n);
+}
 
+
+/* 6 kyu
+Bit Counting
+Write a function that takes an integer as input, and returns the number of bits that are equal to one in the binary representation of that number. You can guarantee that input is non-negative.
+Example: The binary representation of 1234 is 10011010010, so the function should return 5 in this case. */
+
+var countBits1 = function(n) {
+  const binary = n.toString(2);
+  let bitCounter = 0;
+  
+  for(let bit of binary) {
+    if(bit === "1") {
+      bitCounter++;
+    }
+  }
+  return bitCounter;
+};  
+
+//or:
+var countBits2 = function(n) {
+  const binary = n.toString(2);
+  return binary.split("").filter(num => num === "1").length;
+};
 
