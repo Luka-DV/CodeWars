@@ -7845,7 +7845,7 @@ function largest(n, array) {
 }
 
 
-/* 6 kyu
+/* ++++++++++++6 kyu
 Bit Counting
 Write a function that takes an integer as input, and returns the number of bits that are equal to one in the binary representation of that number. You can guarantee that input is non-negative.
 Example: The binary representation of 1234 is 10011010010, so the function should return 5 in this case. */
@@ -7867,4 +7867,40 @@ var countBits2 = function(n) {
   const binary = n.toString(2);
   return binary.split("").filter(num => num === "1").length;
 };
+
+/* ++++7 kyu
+Simple Fun #176: Reverse Letter
+Task
+Given a string str, reverse it and omit all non-alphabetic characters.
+Example
+For str = "krishan", the output should be "nahsirk".
+For str = "ultr53o?n", the output should be "nortlu".
+Input/Output
+    [input] string str
+A string consists of lowercase latin letters, digits and symbols.
+    [output] a string */
+
+
+function reverseLetter1(str) {
+  return str.split("")
+    .filter(char => {
+      const charCode = char.toUpperCase().charCodeAt(0);
+      return charCode >= 65 && charCode <= 90;
+    })
+    .reverse()
+    .join("");
+}
+
+//smart:
+
+function reverseLetter2(str) {
+  let reversedString = "";
+  for (let i = str.length - 1; i >= 0; i--) {
+      if (str[i].toLowerCase() === str[i].toUpperCase()) {
+          continue;
+      }
+      reversedString += str[i];
+  }
+  return reversedString;
+}
 
