@@ -7904,3 +7904,31 @@ function reverseLetter2(str) {
   return reversedString;
 }
 
+
+/* ++++7 kyu
+Round up to the next multiple of 5
+Given an integer as input, can you round it to the next (meaning, "greater than or equal") multiple of 5? */
+
+function roundToNext5a(n){
+  if(n % 5 === 0) {
+    return n;
+  } else {
+    return roundToNext5(n+1);
+  }
+}
+
+//or:
+
+function roundToNext5b(n){
+  while(n % 5 !== 0) n++;
+  return n;
+}
+
+//or:
+
+function roundToNext5c(n){
+  return Math.ceil(n/5)*5;
+}
+
+
+
