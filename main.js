@@ -7932,3 +7932,70 @@ function roundToNext5c(n){
 
 
 
+/* 7 kyu
+Fix string case
+In this Kata, you will be given a string that may have mixed uppercase and lowercase letters and your task is to convert that string to either lowercase only or uppercase only based on:
+    make as few changes as possible.
+    if the string contains equal number of uppercase and lowercase letters, convert the string to lowercase. */
+
+    function solve(s){
+    
+      let lowercase = 0;
+      let uppercase = 0;
+      
+      for(let char of s) {
+        if(char === char.toUpperCase()) {
+          uppercase++;
+        } else {
+          lowercase++;
+        }
+      }
+      
+      if(uppercase > lowercase) {
+        return s.split("") 
+          .map(char => {
+            if(char === char.toLowerCase()) {
+              return char.toUpperCase()
+            }
+            return char; 
+          })
+          .join("");
+      } else {
+        return s.split("") 
+          .map(char => {
+            if(char === char.toUpperCase()) {
+              return char.toLowerCase()
+            }
+            return char; 
+          })
+          .join("");
+    }
+}
+
+//or (better, more efficient):
+
+function solve(s){
+    
+  let lowercase = 0;
+  let uppercase = 0;
+  
+  for(let char of s) {
+    if(char === char.toUpperCase()) {
+      uppercase++;
+    } else {
+      lowercase++;
+    }
+  }
+  
+  if(lowercase === 0 || uppercase === 0) {
+    return s;
+  } else if(uppercase > lowercase) {
+    return s.toUpperCase();
+  } else {
+    return s.toLowerCase();
+  }
+}
+
+
+
+
