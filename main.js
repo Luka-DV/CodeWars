@@ -8072,5 +8072,78 @@ function isValidWalk(walk) {
 
 
 
+function dirReduc(arr){
+  
+  const mapObject = {
+    "NORTH": 1,
+    "SOUTH": -1,
+    "EAST": 3,
+    "WEST": -3
+  }
+   
+  return arr.reduce((acc, crr) => {
+    console.log(crr)
+    if(acc.at(-1) + mapObject[crr] === 0) {
+      acc.pop();
+      return acc;
+    } else {
+      acc.push(crr);
+      return acc;
+    }
+  }, [])
+}
 
+
+/* 
+++++++++++++5 kyu
+Directions Reduction
+...
+Task
+Write a function dirReduc which will take an array of strings and returns an array of strings with the needless directions removed (W<->E or S<->N side by side).
+...
+Notes
+    Not all paths can be made simpler. The path ["NORTH", "WEST", "SOUTH", "EAST"] is not reducible. "NORTH" and "WEST", "WEST" and "SOUTH", "SOUTH" and "EAST" are not directly opposite of each other and can't become such. Hence the result path is itself : ["NORTH", "WEST", "SOUTH", "EAST"]. */
+
+
+
+function dirReduc(arr){
+
+  const mapObject = {
+    "NORTH": 1,
+    "SOUTH": -1,
+    "EAST": 3,
+    "WEST": -3
+  }
+
+  return arr.reduce((acc, crr) => {
+    if(mapObject[acc.at(-1)] + mapObject[crr] === 0) {
+      acc.pop();
+      return acc;
+    } else {
+      acc.push(crr);
+      return acc;
+    }
+  }, [])
+}
+
+//or using a Map:
+
+function dirReduc(arr){
+
+  const mapObject = new Map([
+    ["NORTH",  1],
+    ["SOUTH", -1],
+    ["EAST",   2],
+    ["WEST",  -2]
+  ]);
+
+  return arr.reduce((acc, crr) => {
+    if(mapObject.get(acc.at(-1)) + mapObject.get(crr) === 0) {
+      acc.pop();
+    } else {
+      acc.push(crr);
+    }
+    return acc;
+  }, [])
+}
 
