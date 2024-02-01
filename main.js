@@ -8152,3 +8152,31 @@ function dirReduc(arr){
 Sum of angles
 Find the total sum of internal angles (in degrees) in an n-sided simple polygon. N will be greater than 2. */
 
+function angle(n) {
+  return (n-2) * 180;
+  //"The sum of interior angles can be found by subtracting 2 out of the number of sides and multiplying the result by 180."
+}
+
+/* 7 kyu
+Maximum Multiple
+Task
+Given a Divisor and a Bound , Find the largest integer N , Such That ,
+Conditions :
+    N is divisible by divisor
+    N is less than or equal to bound
+    N is greater than 0. */
+
+function maxMultiple1(divisor, bound){
+
+  for(let N = bound; N > 0; N--) {
+    if(N % divisor === 0) {
+      return N;
+    }
+  }
+}
+
+//or simply:
+
+const maxMultiple2 = (divisor,bound) => bound - bound % divisor;
+
+
