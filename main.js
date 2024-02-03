@@ -8211,4 +8211,43 @@ function prefill(n, v) {
 }
 
 
+/* 6 kyu
+Street Fighter 2 - Character Selection 
+https://www.codewars.com/kata/5853213063adbd1b9b0000be/javascript
+*/
+
+
+function streetFighterSelection(fighters, position, moves){
+  
+  const selectedFighters = [];
+  
+  const inputs = {
+    "up" : () => {
+            if(position[0] === 1) {
+              --position[0];
+            }},
+    "down" : () => {
+            if(position[0] === 0) {
+              ++position[0];
+              }},
+    "left" : () => {
+              --position[1];
+              if(position[1] < 0 ) {
+              position[1] = 5;
+            }},
+    "right" : () => {
+              ++position[1];
+              if(position[1] > 5 ) {
+              position[1] = 0;
+            }}
+  };
+
+  for(let move of moves) {
+    inputs[move]();
+    selectedFighters.push(fighters[position[0]][position[1]]);
+  }
+
+  return selectedFighters;
+}
+
 
