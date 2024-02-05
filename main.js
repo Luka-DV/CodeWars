@@ -8250,10 +8250,32 @@ function streetFighterSelection(fighters, position, moves){
   return selectedFighters;
 }
 
-/* 7 kyu
+/* +++7 kyu
 Nth Smallest Element (Array Series #4)  
 Task
 Given an array/list of integers, find the Nth smallest element in the array */
 
+function nthSmallest(arr, pos){
+  return arr.sort((a, b) => a - b)[pos-1];
+}
 
+
+/* ++++7 kyu
+Array Mapping
+
+Oh no, the map method for arrays has been disabled. Can you fix it?
+
+In case you haven't come across the map method for arrays, here is how it works: */
+
+
+Array.prototype.map33 = function(func) {
+  
+  const mappedArray = [];
+  
+  for(let element of this) {
+    mappedArray.push(func(element));
+  };
+  
+  return mappedArray;
+}
 
