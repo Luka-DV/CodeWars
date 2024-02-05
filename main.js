@@ -8250,4 +8250,10 @@ function streetFighterSelection(fighters, position, moves){
   return selectedFighters;
 }
 
+/* 7 kyu
+Nth Smallest Element (Array Series #4)  
+Task
+Given an array/list of integers, find the Nth smallest element in the array */
+
+
 
