@@ -8299,7 +8299,7 @@ Array.prototype.myMap = function(func, thisArg) {
 }; */
 
 
-/* 7 kyu
+/* ++++7 kyu
 Product Of Maximums Of Array (Array Series #2)
 Task
 Given an array/list [] of integers , Find the product of the k maximal numbers. */
@@ -8309,6 +8309,24 @@ function maxProduct(numbers, size){
     .slice(-size)
     .reduce((acc,crr) => acc*crr, 1);
 }
+
+/*++++7 kyu
+You Can't Code Under Pressure #2
+You need to make a constructor function with two methods (and only these two methods) to return and increment a counter, but the counter should not be directly accessible from outside the function. */
+
+function Counter() {
+  
+  let counter = 0;
+   this.check = function() {
+     return counter;
+   }
+   this.increment = function() {
+     counter++;
+   }
+ };
+
+ 
+
 
 
 
