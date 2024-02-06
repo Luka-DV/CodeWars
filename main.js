@@ -8279,3 +8279,36 @@ Array.prototype.map33 = function(func) {
   return mappedArray;
 }
 
+/* 
+//Imporved for typerrors and thisArg:
+
+Array.prototype.myMap = function(func, thisArg) {
+  if (typeof func !== 'function') {
+    throw new TypeError(func + ' is not a function');
+  }
+  
+  const mappedArray = [];
+  for (let i = 0; i < this.length; i++) {
+    if (i in this) { // Handling sparse arrays
+      const result = func.call(thisArg, this[i], i, this);
+      mappedArray.push(result);
+    }
+  }
+  
+  return mappedArray;
+}; */
+
+
+/* 7 kyu
+Product Of Maximums Of Array (Array Series #2)
+Task
+Given an array/list [] of integers , Find the product of the k maximal numbers. */
+
+function maxProduct(numbers, size){
+  return numbers.sort((a,b) => a - b)
+    .slice(-size)
+    .reduce((acc,crr) => acc*crr, 1);
+}
+
+
+
