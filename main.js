@@ -8325,7 +8325,26 @@ function Counter() {
    }
  };
 
- 
+
+/*  ++++7 kyu
+Maximum Gap (Array Series #4)
+Task
+Given an array/list [] of integers , Find The maximum difference between the successive elements in its sorted form.  */
+
+
+function maxGap (numbers){
+  const sortedArr = numbers.sort((a,b) => a - b);
+  
+  let difference = 0;
+
+  
+  for(let i = 0; i <= sortedArr.length; i++) {
+    
+  }
+  
+  return difference;
+  
+}
 
 
 
