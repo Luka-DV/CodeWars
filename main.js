@@ -8333,19 +8333,35 @@ Given an array/list [] of integers , Find The maximum difference between the suc
 
 
 function maxGap (numbers){
-  const sortedArr = numbers.sort((a,b) => a - b);
+  numbers.sort((a,b) => a - b);
   
   let difference = 0;
 
-  
-  for(let i = 0; i <= sortedArr.length; i++) {
-    
-  }
-  
-  return difference;
-  
+  for(let i = 1; i <= numbers.length; i++) {   
+    const crrDifference = Math.abs(numbers[i-1] - numbers[i]);
+    if(crrDifference > difference) {
+      difference = crrDifference;
+    }
+  } 
+  return difference;  
 }
 
+/* ++++7 kyu
+Array Leaders (Array Series #3)
+Definition
+An element is leader if it is greater than The Sum all the elements to its right side. */
 
-
+function arrayLeaders(numbers){
+  
+  const leadersArray = [];
+  
+  for(let i = 0; i < numbers.length; i++) {
+    const sumOfElementsOnRightSide = numbers.slice(i+1).reduce((acc, crr) => acc + crr, 0);
+    if(numbers[i] > sumOfElementsOnRightSide) {
+      leadersArray.push(numbers[i]);
+    }
+  }
+  
+  return leadersArray;
+}
 
