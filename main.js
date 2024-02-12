@@ -8365,3 +8365,34 @@ function arrayLeaders(numbers){
   return leadersArray;
 }
 
+
+/* ++++7 kyu
+Product Array (Array Series #5)
+Given an array/list [] of integers , Construct a product array Of same size Such That prod[i] is equal to The Product of all the elements of Arr[] except Arr[i].  */
+
+function productArray1a(numbers){
+  
+  return numbers.map((_, i) => {
+    
+    return numbers.reduce((acc, crr, ind) => {
+      if(ind !== i) {
+        acc *= crr
+      }
+        return acc;
+    }, 1);
+  });
+}
+
+//more efficient, calculate product only once:
+
+function productArray2a(numbers){
+  
+  const productOfAllNums = numbers.reduce((acc, crr) => acc * crr, 1);
+  
+  return numbers.map(num => productOfAllNums/num);
+}
+
+
+
+
+
