@@ -8393,6 +8393,27 @@ function productArray2a(numbers){
 }
 
 
+/* ++++7 kyu
+Minimum Steps (Array Series #6)
+TaTask
 
+Given an array of N integers, you have to find how many times you have to add up the smallest numbers in the array until their Sum becomes greater or equal to K.
+Notes:... */
+
+function minimumSteps(numbers, value){
+  
+  numbers.sort((a, b) => a-b);
+  
+  let numOfSteps = -1;
+  let sum = 0;
+  
+  for(let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+    numOfSteps++;
+    if(sum >= value) {
+      return numOfSteps;
+    }
+  }
+}
 
 
