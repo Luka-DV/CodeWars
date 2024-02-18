@@ -8417,3 +8417,41 @@ function minimumSteps(numbers, value){
 }
 
 
+/* ++++7 kyu
+Maximum Triplet Sum (Array Series #7)
+Task
+Given an array/list [] of n integers , find maximum triplet sum in the array Without duplications .
+Notes :
+    Array/list size is at least 3 .
+    Array/list numbers could be a mixture of positives , negatives and zeros .
+    Repetition of numbers in the array/list could occur , So (duplications are not included when summing).
+    Input >> Output Examples
+  
+    maxTriSum ({3,2,6,8,2,3}) ==> return (17) */
+
+
+
+function maxTriSum(numbers){
+  const uniqueNumsArray = [...new Set(numbers)];
+  
+  
+  uniqueNumsArray.sort((a, b) => b-a);
+  
+  //or: .slice(0, 3).reduce((acc, crr) => acc + crr, 0) for an one-liner
+  
+  let numSum = 0;
+  
+  for(let i = 0; i <= 2; i++) {
+    numSum += uniqueNumsArray[i]
+  };
+  
+  return numSum;
+}
+
+
+// smart CW solution:
+const maxTriSum = numbers => {
+  const [a,b,c,...rest] = [...new Set([...numbers])].sort((a,b)=>b-a)
+  return a+b+c;
+}
+
