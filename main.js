@@ -8450,7 +8450,7 @@ function maxTriSum(numbers){
 
 
 // smart CW solution:
-const maxTriSum = numbers => {
+const maxTriSum2 = numbers => {
   const [a,b,c,...rest] = [...new Set([...numbers])].sort((a,b)=>b-a)
   return a+b+c;
 }
@@ -8478,3 +8478,39 @@ Input >> Output Examples
   }
 
   
+
+/*   ++++7 kyu
+  Row Weights
+  Scenario
+Several people are standing in a row divided into two teams.
+The first person goes into team 1, the second goes into team 2, the third goes into team 1, and so on.
+Task
+Given an array of positive integers (the weights of the people), return a new array/tuple of two integers, where the first one is the total weight of team 1, and the second one is the total weight of team 2.
+Notes
+    Array size is at least 1.
+    All numbers will be positive. */
+
+    function rowWeights3(array){
+  
+      return array.reduce((acc, crr, ind) => {
+        if(ind % 2 === 0) {
+          acc[0] += crr;
+        } else {
+          acc[1] += crr;
+        }
+        return acc;
+      }, [0,0])
+    }
+
+    //sleeker:
+
+    function rowWeights3(array){
+  
+      return array.reduce((acc, crr, ind) => {
+        ind % 2 === 0 ? acc[0] += crr : acc[1] += crr;
+        return acc;
+      }, [0,0])
+    }
+
+
+    
