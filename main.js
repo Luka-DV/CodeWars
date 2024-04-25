@@ -8660,3 +8660,27 @@ function factorial(n) {
 
 
 console.log(factorial(14));
+
+/* 8 kyu
+Remove duplicates from list
+
+Define a function that removes duplicates from an array of non negative numbers and returns it as a result.
+
+The order of the sequence has to stay the same. */
+
+function distinct(a) {
+  return [...new Set(a)];
+}
+
+//or, for practice:
+
+function distinct(a) {
+  return a.reduce((acc, crr) => {
+    if(!acc.includes(crr)) {
+      acc.push(crr);
+    }
+    return acc;
+  },[])
+}
+
+
