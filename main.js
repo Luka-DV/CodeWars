@@ -8684,3 +8684,30 @@ function distinct(a) {
 }
 
 
+/* +++++7 kyu
+Thinkful - List and Loop Drills: Inverse Slicer
+Write a function inverse_slice that takes three arguments: a list items, an integer a and an integer b. The function should return a new list with the slice specified by items[a:b] excluded.
+
+For example:
+
+>>>inverse_slice([12, 14, 63, 72, 55, 24], 2, 4)
+[12, 14, 55, 24] */
+
+function inverseSlice(items, a, b) {
+  items.splice(a, b-a);
+  return items;
+}
+
+//or:
+
+function inverseSlice(items, a, b) {
+  return [...items.slice(0,a),...items.slice(b)]
+}
+
+//or:
+
+function inverseSlice(items, a, b) {
+  return items.slice(0,a).concat(items.slice(b));
+}
+
+
