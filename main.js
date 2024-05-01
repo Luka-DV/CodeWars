@@ -8701,7 +8701,7 @@ function inverseSlice(items, a, b) {
 //or:
 
 function inverseSlice(items, a, b) {
-  return [...items.slice(0,a),...items.slice(b)]
+  return [...items.slice(0,a), ...items.slice(b)];
 }
 
 //or:
@@ -8710,4 +8710,28 @@ function inverseSlice(items, a, b) {
   return items.slice(0,a).concat(items.slice(b));
 }
 
+
+/* +++++7 kyu
+The Pony Express
+stations is a list/array of distances (miles) from one station to the next along the Pony Express route.
+
+Implement the riders method/function, to return how many riders are necessary to get the mail from one end to the other.
+
+NOTE: Each rider travels as far as he can, but never more than 100 miles. */
+
+function riders(stations) {
+ 
+  let currentMiles = 0;
+  let numOfRiders = 1;
+  
+  for(let distance of stations) {
+    currentMiles += distance;
+    if(currentMiles > 100) {
+      numOfRiders++;
+      currentMiles = distance;
+    }
+  }
+  
+  return numOfRiders;
+}
 
