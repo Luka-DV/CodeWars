@@ -8753,3 +8753,25 @@ function count(string) {
   return charCount;
 }
 
+/* ++++7 kyu
+Check the exam
+The first input array is the key to the correct answers to an exam, like ["a", "a", "b", "d"]. The second one contains a student's submitted answers.
+The two arrays are not empty and are the same length. Return the score for this array of answers, giving +4 for each correct answer, -1 for each incorrect answer, and +0 for each blank answer, represented as an empty string (in C the space character is used).
+If the score < 0, return 0. */
+
+function checkExam(array1, array2) {
+  
+  let testScore = 0;
+ 
+  for(let ind = 0; ind < array1.length; ind++) {
+    if(array1[ind] === array2[ind]) {
+      testScore += 4;
+    } else if (!array2[ind]) continue;
+      else testScore -= 1;
+    }
+  
+  return testScore < 0 ? 0 : testScore;
+}
+
+
+
