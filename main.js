@@ -8773,5 +8773,24 @@ function checkExam(array1, array2) {
   return testScore < 0 ? 0 : testScore;
 }
 
+/* 
+++++++++6 kyu
+Split Strings
+Complete the solution so that it splits the string into pairs of two characters. If the string contains an odd number of characters then it should replace the missing second character of the final pair with an underscore ('_').
+Examples:
+* 'abc' =>  ['ab', 'c_']
+* 'abcdef' => ['ab', 'cd', 'ef']
+ */
+
+function solution(str){
+  
+  const charPairArray = new Array();
+  
+   for(let ind = 0; ind < str.length; ind += 2) {
+     charPairArray.push(str[ind] + (str[ind + 1] ?? "_")); 
+   }
+  
+  return charPairArray;
+}
 
 
