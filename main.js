@@ -8794,3 +8794,109 @@ function solution(str){
 }
 
 
+// Come up with with a parent class - Contractor Class
+// Extend that parent class into two children - Frontend and Backend
+// Use Encapsulation, Abstraction, Inheritance, and Polymorphism 
+
+//name, role
+//get name and role
+//say Hello and Bye
+
+//tech
+//get tech and set tech
+//say Hello
+
+
+class Contractor {
+  constructor(name, role) {
+      this._name = name;
+      this._role = role;
+  }
+
+  get name() {
+      return this._name;
+  }
+
+  get role() {
+      return this._role;
+  }
+
+  sayHello() {
+      return `Hi! My name name is ${this._name}`;
+  }
+
+  sayBye() {
+      return `Bye bye!`
+  }
+}
+
+class Frontend extends Contractor {
+  constructor(name, role, tech) {
+      super(name, role);
+      this._tech = tech;
+  }
+
+  get tech() {
+      return this._tech;
+  }
+
+  set tech(newTech) {
+      this._tech = newTech;
+  }
+
+  sayHello() {
+      return `Hi, my name is ${this._name} and I am a fronted developer!`
+  }  
+}
+
+class Backend extends Contractor {
+  constructor(name, tech) {
+      super(name, "Backend");
+      this._tech = tech;
+  }
+
+  get tech() {
+      return this._tech;
+  }
+
+  set tech(newTech) {
+      this._tech = newTech;
+  }
+
+  sayHello() {
+      return `Hi, my name is ${this.name} and I am a backend engineer!`
+  }  
+}
+
+//if I use private fields:
+
+class Fullstack extends Contractor {
+  
+  #tech;
+  constructor(name, tech) {
+      super(name, "Fullstack");
+      this.#tech = tech;
+  }
+
+  get tech() {
+      return this.#tech;
+  }
+
+  set tech(newTech) {
+      this.#tech = newTech;
+  }
+
+  sayHello() {
+      return `Hi, my name is ${this.name} and I am a backend engineer!`
+  }  
+}
+
+const jake = new Contractor("Jake", "lead");
+const milka = new Frontend("Milka", "Frontend", "React");
+const luka = new Backend("Luka", "NodeJS");
+const gaber = new Fullstack("Gaber", ["Golang", "Svelte"]);
+
+gaber.tech = "JAM";
+console.table(gaber);
+//console.log(gaber.#tech); gives error
+
