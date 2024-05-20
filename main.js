@@ -8871,9 +8871,9 @@ class Backend extends Contractor {
 //if I use private fields:
 
 class Fullstack extends Contractor {
-  
+    
   #tech;
-  constructor(name, tech) {
+  constructor(name, ...tech) {
       super(name, "Fullstack");
       this.#tech = tech;
   }
@@ -8894,9 +8894,10 @@ class Fullstack extends Contractor {
 const jake = new Contractor("Jake", "lead");
 const milka = new Frontend("Milka", "Frontend", "React");
 const luka = new Backend("Luka", "NodeJS");
-const gaber = new Fullstack("Gaber", ["Golang", "Svelte"]);
+const gaber = new Fullstack("Gaber", "Golang", "Svelte", "PostgreSQL");
 
-gaber.tech = "JAM";
 console.table(gaber);
 //console.log(gaber.#tech); gives error
+
+
 
