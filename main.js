@@ -8807,6 +8807,7 @@ function solution(str){
 //say Hello
 
 
+
 class Contractor {
   constructor(name, role) {
       this._name = name;
@@ -8864,14 +8865,15 @@ class Backend extends Contractor {
   }
 
   sayHello() {
-      return `Hi, my name is ${this.name} and I am a backend engineer!`
+      return `Hi, my name is ${this.name} and I am a back-end engineer!`
   }  
 }
 
-//if I use private fields:
+
+// with private fields
 
 class Fullstack extends Contractor {
-    
+  
   #tech;
   constructor(name, ...tech) {
       super(name, "Fullstack");
@@ -8882,22 +8884,64 @@ class Fullstack extends Contractor {
       return this.#tech;
   }
 
-  set tech(newTech) {
-      this.#tech = newTech;
-  }
+  addTech(newTech) {
+      if(this.#tech.includes(newTech)) {
+          throw new Error("This tech is allready listed!")
+      } else {
+          this.#tech.push(newTech);
+      }
+  } 
 
   sayHello() {
-      return `Hi, my name is ${this.name} and I am a backend engineer!`
+      return `Hi, my name is ${this.name} and I am a fullstack engineer!`
   }  
+}
+
+
+class AngularDev extends Frontend {
+  constructor(name, role, tech, position) {
+      super(name, role, tech);
+      this._position = position;
+  }
+
+  get position() {
+      return this._position;
+  }
+}
+
+class NodeEng extends Backend {
+  constructor(name, position ) {
+      super(name, "NodeJS");
+      this._position = position;
+  }
+
+  get position() {
+      return this._position;
+  }
 }
 
 const jake = new Contractor("Jake", "lead");
 const milka = new Frontend("Milka", "Frontend", "React");
 const luka = new Backend("Luka", "NodeJS");
 const gaber = new Fullstack("Gaber", "Golang", "Svelte", "PostgreSQL");
+const matej = new AngularDev("Matej", "Frontend", "Angular", "senior");
+const bor = new NodeEng("Bor", "mid");
 
-console.table(gaber);
+console.log(matej);
+console.log(bor);
+
+console.log(gaber);
 //console.log(gaber.#tech); gives error
 
+console.log(gaber.tech)
+gaber.addTech("Rust");
+console.log(gaber.tech)
+//gaber.addTech("Golang");
 
+
+const agencyList = [jake, milka, luka, gaber, matej];
+
+for(let person of agencyList) {
+  console.log(person.sayHello());
+}
 
