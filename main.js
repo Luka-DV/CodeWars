@@ -8659,7 +8659,7 @@ function factorial(n) {
 } */
 
 
-console.log(factorial(14));
+console.log(factorial(4));
 
 /* 8 kyu
 Remove duplicates from list
@@ -8944,4 +8944,39 @@ const agencyList = [jake, milka, luka, gaber, matej];
 for(let person of agencyList) {
   console.log(person.sayHello());
 }
+
+
+
+
+/* Implement a function makeCounter that accepts an optional integer value and returns a function. When the returned function is called initially, it returns the initial value if provided, otherwise 0. The returned function can be called repeatedly to return 1 more than the return value of the previous invocation.
+Examples
+
+const counter = makeCounter();
+counter(); // 0
+counter(); // 1
+counter(); // 2
+
+With a custom initial value:
+
+const counter = makeCounter(5);
+counter(); // 5
+counter(); // 6
+counter(); // 7 */
+
+
+function makeCounter(value = 0) {
+  return function() {
+    return value++
+  }
+}
+
+const counter1 = makeCounter(3);
+
+console.log(counter1());
+console.log(counter1());
+
+const counter2 = makeCounter();
+
+console.log(counter2());
+console.log(counter2());
 
