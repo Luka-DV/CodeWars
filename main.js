@@ -9053,3 +9053,75 @@ function arrayDiff(a, b) {
 function arrayDiff(a, b) {
   return a.filter(num => !b.includes(num));
 }
+
+
+//FizzBuzz
+
+console.log("FizzBuzzFunction")
+
+//ver1
+
+// function printFizzBuzz(n) {
+
+//   for(let i = 1; i <= n; i++) {
+//     let num = "";
+//     if(i % 3 === 0) {
+//       num += "Fizz";
+//     }
+//     if(i % 5 === 0) {
+//       num += "Buzz";
+//     }
+
+//     console.log(num || i);
+//   }
+// }
+
+
+//ver2
+
+// function printFizzBuzz(n) {
+
+//   const refObject = {
+//     3: "Fizz",
+//     5: "Buzz",
+//     7: "Pazz"
+//   };
+
+//   for(let i = 1; i <= n; i++) {
+//     let result = "";
+
+//     for(let divider in refObject) {
+//       if(i % divider === 0) {
+//         result += refObject[divider]
+//       }
+//     }
+//     console.log(result || i)
+//   }
+// }
+
+
+//ver3
+
+function printFizzBuzz(n) {
+
+  const refMap = new Map ([
+    [3, "Fizz"],
+    [5, "Buzz"],
+    [7, "Pazz"],
+    [8, "Tezz"]
+  ]);
+
+  for(let i = 1; i <= n; i++) {
+    let result = "";
+
+    for(let [divider, word] of refMap) {
+      if(i % divider === 0) {
+        result += word;
+      }
+    }
+    console.log(result || i)
+  }
+}
+
+
+printFizzBuzz(50);
