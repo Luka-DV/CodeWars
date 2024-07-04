@@ -9253,3 +9253,30 @@ function highAndLow(numbers){
 
   return `${Math.max(...numArray)} ${Math.min(...numArray)}`
 }
+
+
+/* 7 kyu
+List Filtering
+In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out. */
+
+function filter_list(l) {
+  return l.filter(element => typeof element === "number");
+}
+
+/* 6 kyu
+Are they the "same"?
+Given two arrays a and b write a function comp(a, b) (orcompSame(a, b)) that checks whether the two arrays have the "same" elements, with the same multiplicities (the multiplicity of a member is the number of times it appears). "Same" means, here, that the elements in b are the elements in a squared, regardless of the order.
+ */
+
+function comp(array1, array2){
+  if(!array1 || !array2){
+    return false;
+  }
+
+  const squaredSortedArr1 = array1.map(e => e**2).sort( (a,b) => a-b);
+  const sortedArr2 = array2.sort( (a,b) => a-b);
+  
+  return array1.length === array2.length &&
+    squaredSortedArr1.every((e, i) => e === sortedArr2[i]);
+}
+
