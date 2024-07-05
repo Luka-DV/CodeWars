@@ -9280,3 +9280,25 @@ function comp(array1, array2){
     squaredSortedArr1.every((e, i) => e === sortedArr2[i]);
 }
 
+
+/* 7 kyu
+Length and two values.
+Given an integer n and two other values, build an array of size n filled with these two values alternating.
+ */
+
+function alternate(n, firstValue, secondValue){
+  
+  return new Array(n).fill(null).map( (_, ind) => { 
+     return ind % 2 === 0 ? firstValue : secondValue;  
+  })
+}
+
+//better
+
+function alternate(n, firstValue, secondValue){
+
+  return Array.from({length: n}, (_, ind) => ind % 2 === 0 ? firstValue : secondValue);
+}
+
+console.log(alternate(5, true, false))
+
