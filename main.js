@@ -9302,3 +9302,54 @@ function alternate(n, firstValue, secondValue){
 
 console.log(alternate(5, true, false))
 
+
+/* 
+7 kyu
+A Promise is a Promise
+Create a resolved javascript Promise that will return 'Hello World!'. */
+
+function promiseHelloWorld() {
+  return new Promise((resolve, reject) => {
+    resolve("Hello World!");
+  })
+ }
+
+/*  6 kyu
+Title Case
+Write a function that will convert a string into title case, given an optional list of exceptions (minor words). The list of minor words will be given as a string with each word separated by a space. Your function should ignore the case of the minor words string -- it should behave in the same way even if the case of the minor word string is changed.
+First argument (required): the original string to be converted.
+Second argument (optional): space-delimited list of minor words that must always be lowercase except for the first word in the string. The JavaScript/CoffeeScript tests will pass undefined when this argument is unused. */
+
+function titleCase(title, minorWords) {
+  //convert both strings to an array
+  const titleArr = title.split(" ").map( word => word.toLowerCase());
+  const minorWordsArr = minorWords ? minorWords.split(" ").map( word => word.toLowerCase()) : [];
+  
+  //loop through the title array, convert the right elements
+  //> check if index == 0 or element != minorWords
+  const titleCaseArr = titleArr.reduce((acc, crr, ind) => { 
+      if(ind === 0 || !minorWordsArr.includes(crr)) {
+        acc.push(crr.slice(0,1).toUpperCase() + crr.slice(1));
+      } else {
+        acc.push(crr);
+      }
+      return acc;
+    }, []);
+  
+  //convert back to string and return
+  return titleCaseArr.join(" ");
+}
+
+// or, sleeker, more efficient:
+
+function titleCase(title, minorWords) {
+  const minorWordsArr = minorWords ? minorWords.toLowerCase().split(" ") : [];
+  
+  return title.toLowerCase()
+        .split(" ")
+        .map( (e , ind) => {
+          return ind === 0 || !minorWordsArr.includes(e) ? e.slice(0,1).toUpperCase() + e.slice(1) : e;
+          })
+        .join(" ");
+}
+
