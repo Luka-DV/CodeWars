@@ -9414,3 +9414,45 @@ function getLengthOfMissingArray(arrayOfArrays) {
     }
   }
 }
+
+
+/* 6 kyu
+Duplicate Encoder
+ */
+
+function duplicateEncode(word){
+  
+  word = word.toLowerCase();
+  const refObj = {};
+  
+  for(let char of word) {
+    refObj[char] = (refObj[char] ?? 0) + 1; 
+  }
+  
+  let encodedString = "";
+  
+  for(let char of word) {
+    refObj[char] === 1 ? encodedString += "(" : encodedString += ")" ;
+  }
+
+  return encodedString;
+
+  // or just this after first loop:
+  
+  // return Array.from(word, char => refObj[char] === 1 ? '(' : ')').join('');
+}
+
+
+//or, more readable but worse time complexity (On**2)
+
+
+function duplicateEncode(word){
+  
+  return word.toLowerCase()
+    .split("")
+    .map((char, _, arr) => {
+      return arr.indexOf(char) === arr.lastIndexOf(char) ? "(" : ")";
+      })
+    .join("");
+}
+
