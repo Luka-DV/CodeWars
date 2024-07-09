@@ -9456,3 +9456,122 @@ function duplicateEncode(word){
     .join("");
 }
 
+
+/* 6 kyu
+Round Robin Sorting
+Santa believes in fairness and wants to give each giftee a present in turn rather than handing all of an individual's presents to them, then all to the next person, and so on.
+
+Santa would much rather give one to Sarah, one to Mo, one to Kai, one to Charlie, and cycle through until he's out of presents. But if Sarah is only given 10 presents and after the 10th cycle Santa has no more for her, Santa will continue the loop of gift-giving but excluding Sarah.
+
+Write a function which accepts a string[] and returns a string[], re-ordering the random input passed into Santa's defined order.
+
+The output array length will be the same as the input length. The sorted list should be alphabetical by name.
+input:        "Sarah", "Sarah", "Charlie", "Charlie", "Charlie", "Mo", "Mo"
+santa sorted: "Charlie", "Mo", "Sarah", "Charlie", "Mo", "Sarah", "Charlie" */
+
+
+//usign recursion:
+
+function santaSort(unsortedNames) {
+  unsortedNames.sort();
+  
+  function recursiveSorting(unsortedNames) {
+    
+    if(unsortedNames.length === 0) {
+      return [];
+    }
+    
+    const duplicatesArray = [];
+    
+    for(let i = 0; i < unsortedNames.length; ) {
+      if(unsortedNames[i+1] === unsortedNames[i]) {
+        duplicatesArray.push(...unsortedNames.splice(i+1,1));
+      } else {
+        i++;
+      }
+    }
+    return [...unsortedNames, ...recursiveSorting(duplicatesArray)];
+  }
+  
+  return recursiveSorting(unsortedNames);
+}
+
+//without recursion:
+
+function santaSort(unsortedNames) {
+  unsortedNames.sort();
+  
+  const refObject = unsortedNames.reduce( (acc, crr) => {
+    acc[crr] = (acc[crr] ?? 0) + 1;
+    return acc;
+  }, {});
+  
+  const sortedNames = [];
+  let remainingKeys = Object.keys(refObject).length;
+  
+  while(remainingKeys > 0) {
+    for(let name in refObject){
+      sortedNames.push(name);
+      refObject[name] -= 1;
+      if(refObject[name] === 0) {
+        delete refObject[name];
+        remainingKeys -= 1;
+      }
+    }
+  }
+  
+  return sortedNames;
+}
+
+//better:
+
+function santaSort(unsortedNames) {
+  unsortedNames.sort();
+
+  const refObject = unsortedNames.reduce((acc, crr) => {
+    acc[crr] = (acc[crr] ?? 0) + 1;
+    return acc;
+  }, {});
+
+  const sortedNames = [];
+  
+  for (let count = 0; count < unsortedNames.length;) {
+    for (let name in refObject) {
+      if (refObject[name] > 0) {
+        sortedNames.push(name);
+        refObject[name]--;
+        count++;
+      }
+    }
+  }
+
+  return sortedNames;
+}
+
+//cGGT solution using Map:
+function santaSort(unsortedNames) {
+  // Sort the initial array
+  unsortedNames.sort();
+
+  // Create a frequency map to count occurrences
+  const frequencyMap = new Map();
+
+  for (let name of unsortedNames) {
+    frequencyMap.set(name, (frequencyMap.get(name) ?? 0) + 1);
+  }
+
+  // Create the final sorted list
+  const sortedNames = [];
+  while (frequencyMap.size > 0) {
+    for (let [name, count] of frequencyMap) {
+      sortedNames.push(name);
+      if (count === 1) {
+        frequencyMap.delete(name);
+      } else {
+        frequencyMap.set(name, count - 1);
+      }
+    }
+  }
+
+  return sortedNames;
+}
