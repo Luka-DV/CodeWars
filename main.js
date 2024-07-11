@@ -9598,3 +9598,52 @@ function divisors(integer) {
 };
 
 
+/* 7 kyu
+Breaking chocolate problem
+Your task is to split the chocolate bar of given dimension n x m into small squares. Each square is of size 1x1 and unbreakable. Implement a function that will return minimum number of breaks needed.
+For example if you are given a chocolate bar of size 2 x 1 you can split it to single squares in just one break, but for size 3 x 1 you must do two breaks.
+If input data is invalid you should return 0 (as in no breaks are needed if we do not have any chocolate to split). Input will always be a non-negative integer. */
+
+function breakChocolate(n,m) {
+  
+  return !n || !m || n*m === 1 ? 0 : n*m - 1;
+}
+
+
+/* 8 kyu
+"this" is a problem 
+We want to create a constructor function 'NameMe', which takes first name and last name as parameters. The function combines the first and last names and saves the value in "name" property.
+
+We already implemented that function, but when we actually run the code, the "name" property is accessible, but the "firstName" and "lastName" is not accessible. All the properties should be accessible. Can you find what's wrong with it? A test fixture is also available */
+//1
+function NameMe(first, last) {
+  this.firstName = first;
+  this.lastName = last;
+  this.name = this.firstName + ' ' + this.lastName;
+}
+//2
+class NameMe {
+  constructor(first, last) {
+    this.firstName = first;
+    this.lastName = last;
+    this.name = this.firstName + " " + this.lastName;
+  }
+}
+//3
+function NameMe(first, last) {;
+  return {
+    firstName: first,
+    lastName: last,
+    name: first + ' ' + last
+  };
+}
+//4
+function NameMe(first, last) {
+  const person = {
+    firstName: first,
+    lastName: last,
+  };
+  person.name = person.firstName + ' ' + person.lastName;
+  return person;
+}
+  
