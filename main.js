@@ -9615,35 +9615,77 @@ function breakChocolate(n,m) {
 We want to create a constructor function 'NameMe', which takes first name and last name as parameters. The function combines the first and last names and saves the value in "name" property.
 
 We already implemented that function, but when we actually run the code, the "name" property is accessible, but the "firstName" and "lastName" is not accessible. All the properties should be accessible. Can you find what's wrong with it? A test fixture is also available */
+
+
 //1
 function NameMe(first, last) {
   this.firstName = first;
   this.lastName = last;
   this.name = this.firstName + ' ' + this.lastName;
 }
-//2
-class NameMe {
-  constructor(first, last) {
-    this.firstName = first;
-    this.lastName = last;
-    this.name = this.firstName + " " + this.lastName;
-  }
-}
-//3
-function NameMe(first, last) {;
-  return {
-    firstName: first,
-    lastName: last,
-    name: first + ' ' + last
-  };
-}
-//4
-function NameMe(first, last) {
-  const person = {
-    firstName: first,
-    lastName: last,
-  };
-  person.name = person.firstName + ' ' + person.lastName;
-  return person;
-}
+// //2
+// class NameMe {
+//   constructor(first, last) {
+//     this.firstName = first;
+//     this.lastName = last;
+//     this.name = this.firstName + " " + this.lastName;
+//   }
+// }
+// //3
+// function NameMe(first, last) {;
+//   return {
+//     firstName: first,
+//     lastName: last,
+//     name: first + ' ' + last
+//   };
+// }
+// //4
+// function NameMe(first, last) {
+//   const person = {
+//     firstName: first,
+//     lastName: last,
+//   };
+//   person.name = person.firstName + ' ' + person.lastName;
+//   return person;
+// }
   
+
+
+/* 7 kyu
+Leap Years
+In this kata you should simply determine, whether a given year is a leap year or not. In case you don't know the rules, here they are:
+    Years divisible by 4 are leap years,
+    but years divisible by 100 are not leap years,
+    but years divisible by 400 are leap years. */
+
+    function isLeapYear(year) {
+      if(year % 4 === 0) {
+        if(year % 100 === 0) {
+          if(year % 400 === 0) {
+            return true;
+          }
+          return false;  
+        }  
+        return true;
+      }
+      return false;
+    }
+
+//better:
+
+function isLeapYear(year) {
+  return year % 4 !== 0 ? 
+    false : year % 100 !== 0 ? 
+    true : year % 400 === 0 ? 
+    true : false;
+}
+
+//or
+
+function isLeapYear(year) {
+  return year % 400 === 0 ? 
+    true : year % 100 === 0 ?
+    false : year % 4 === 0 ? 
+    true : false;
+}
+
