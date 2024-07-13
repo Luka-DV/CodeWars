@@ -9658,18 +9658,18 @@ In this kata you should simply determine, whether a given year is a leap year or
     but years divisible by 100 are not leap years,
     but years divisible by 400 are leap years. */
 
-    function isLeapYear(year) {
-      if(year % 4 === 0) {
-        if(year % 100 === 0) {
-          if(year % 400 === 0) {
-            return true;
-          }
-          return false;  
-        }  
+function isLeapYear(year) {
+  if(year % 4 === 0) {
+    if(year % 100 === 0) {
+      if(year % 400 === 0) {
         return true;
       }
-      return false;
-    }
+      return false;  
+    }  
+    return true;
+  }
+  return false;
+}
 
 //better:
 
@@ -9689,3 +9689,24 @@ function isLeapYear(year) {
     true : false;
 }
 
+
+
+/* 7 kyu
+Parts of a list
+Write a function partlist that gives all the ways to divide a list (an array) of at least two elements into two non-empty parts.
+Each two non empty parts will be in a pair (or an array for languages without tuples or a structin C - C: see Examples test Cases - )
+Each part will be in a string
+Elements of a pair must be in the same order as in the original array.
+a = ["az", "toto", "picaro", "zone", "kiwi"] -->
+[["az", "toto picaro zone kiwi"], ["az toto", "picaro zone kiwi"], ["az toto picaro", "zone kiwi"], ["az toto picaro zone", "kiwi"]] */
+
+function partlist(arr) {
+    
+  const partedArrays = [];
+  
+  for(let i = 0; i < arr.length - 1; i++) {
+    partedArrays.push([arr.slice(0, i+1).join(" "), arr.slice(i+1).join(" ")])
+  }
+  
+  return partedArrays;
+}
