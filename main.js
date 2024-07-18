@@ -9761,3 +9761,66 @@ function solution(digits){
   
   return Number(largestNum);
 }
+
+/* 7 kyu
+Lost number in number sequence
+An ordered sequence of numbers from 1 to N is given. One number might have deleted from it, then the remaining numbers were mixed. Find the number that was deleted.
+If no number was deleted from the starting array, your function should return the int 0.
+Note: N may be 1 or less (in the latter case, the first array will be []). */
+
+// 1
+
+function findDeletedNumber(arr, mixArr) {
+  
+  if(arr.length === mixArr.length) return 0;
+  
+  mixArr.sort((a,b) => a - b);
+  
+  for(let i = 0; i < mixArr.length; i++) {
+    if(mixArr[i] !== i + 1) {
+      return i + 1;
+    }
+  }
+  
+  return arr[arr.length - 1];
+}
+
+// 2 better
+
+function findDeletedNumber(arr, mixArr) {
+  if(arr.length === mixArr.length) return 0;
+  
+  mixArr.sort((a,b) => a - b);
+  
+  for(let i = 0; i < arr.length; i++) {
+    if(arr[i] !== mixArr[i]) {
+      return arr[i];
+    }
+  }
+}
+
+//cw , even better:
+
+function findDeletedNumber(arr, mixArr) {
+  const arrSum = arr.reduce((a,b) => a + b, 0);
+  const mixArrSum = mixArr.reduce((a,b) => a + b, 0);
+  return arrSum - mixArrSum;
+}
+
+/* 7 kyu
+Tidy Number (Special Numbers Series #9)
+Definition
+A Tidy number is a number whose digits are in non-decreasing order.
+Task
+Given a number, Find if it is Tidy or not .  */
+
+function tidyNumber(n){
+  const numString = n.toString(); // String(n);
+  
+  for(let i = 0; i < numString.length - 1; i++) {
+    if(numString[i] > numString[i + 1]) return false;
+  }
+  
+  return true;
+}
+
