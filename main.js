@@ -9849,3 +9849,20 @@ function largestPairSum (numbers) {
 }
 
 
+/* 5 kyu
+Replicate `new
+TL;DR: write a nouveau function that replicates all the behavior of the new operator. */
+
+function nouveau (Constructor, ...args) {
+
+  const instance = Object.create(Constructor.prototype);
+  //Object.create(Constructor.prototype) creates a new object (instance) that has Constructor.prototype as its prototype.
+  
+  const result = Constructor.apply(instance, args);
+  //Constructor.apply(instance, args) invokes the constructor function with "instance" as "this" and the spread arguments (args)
+  // This initializes "instance" as if it were created with nev Constructor(...args)
+  
+  return result === Object(result) ? result : instance;
+  //Object(result) converts result to an object. If result is already an object, the conversion has no effect. If result is a primitive, it converts to an object wrapper (e.g., nev Number(result)).
+}
+
