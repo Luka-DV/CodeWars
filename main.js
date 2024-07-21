@@ -9866,3 +9866,52 @@ function nouveau (Constructor, ...args) {
   //Object(result) converts result to an object. If result is already an object, the conversion has no effect. If result is a primitive, it converts to an object wrapper (e.g., nev Number(result)).
 }
 
+
+/* 6 kyu
+Simple Substitution Cipher Helper
+A simple substitution cipher replaces one character from an alphabet with a character from an alternate alphabet, where each character's position in an alphabet is mapped to the alternate alphabet for encoding or decoding.
+E.g.
+var abc1 = "abcdefghijklmnopqrstuvwxyz";
+var abc2 = "etaoinshrdlucmfwypvbgkjqxz";
+var sub = new SubstitutionCipher(abc1, abc2);
+sub.encode("abc") // => "eta"
+sub.encode("xyz") // => "qxz"
+sub.decode("eta") // => "abc"
+sub.decode("qxz") // => "xyz"
+If a character provided is not in the opposing alphabet, simply leave it as be. */
+
+
+function SubstitutionCipher(abc1, abc2) {
+  
+  this.encode = function (str) {
+    return Array.from(str, char => abc2[abc1.indexOf(char)] ?? char).join("");
+  }
+  this.decode = function (str) {
+    return Array.from(str, char => abc1[abc2.indexOf(char)] ?? char).join("");
+  }
+}
+
+// if you cant use the Nullish coalescing operator:
+
+
+function SubstitutionCipher(abc1, abc2) {
+  
+  this.encode = function (str) {
+    return Array.from(str, char => abc2[abc1.indexOf(char)] || char).join("");
+  }
+  this.decode = function (str) {
+    return Array.from(str, char => abc1[abc2.indexOf(char)] || char).join("");
+  }
+}
+
+//or
+
+function SubstitutionCipher(abc1, abc2) {
+  
+  this.encode = function (str) {
+    return Array.from(str, char => abc2[abc1.indexOf(char)] ? abc2[abc1.indexOf(char)] : char).join("");
+  }
+  this.decode = function (str) {
+    return Array.from(str, char => abc1[abc2.indexOf(char)] ? abc1[abc2.indexOf(char)] : char).join("");
+  }
+}
