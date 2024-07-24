@@ -9915,3 +9915,22 @@ function SubstitutionCipher(abc1, abc2) {
     return Array.from(str, char => abc1[abc2.indexOf(char)] ? abc1[abc2.indexOf(char)] : char).join("");
   }
 }
+
+
+/* 7 kyu
+Double value every next call
+This kata is about static method that should return different values.
+
+On the first call it must be 1, on the second and others - it must be a double from previous value. */ 
+
+class Class {
+  
+  static staticNum = 1;
+  
+  static getNumber() {
+    const num = this.staticNum; //or Class.staticNum
+    this.staticNum *= 2;
+    return num;
+  }
+}
+
