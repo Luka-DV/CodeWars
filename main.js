@@ -10134,3 +10134,76 @@ class Counter {
 }
 
 
+/* 7 kyu
+Seeing Shows at the Edinburgh Fringe!
+It is your first time at the Edinburgh Fringe Festival, and you are looking to see somes shows! The problem is that there are so many shows that choosing which ones to see can be stressful.
+Instead, you have decided to make a function to help you to see as many consecutive shows as possible each evening, thus eliminating the pesky problem of making actual decisions.
+As input, you will receive an array of objects representing different shows in the following format:
+{
+  name: "Little Death Club",
+  time: 8,
+  length: 1,
+  price: 15,
+}
+The goal is to create a function that returns which shows you will be able to see consecutively that night, as well as the total cost. There are a few rules:
+    You will always go to the earliest show in the list, and then always go to the next available show
+    If multiple shows are at the same time, choose the show with the cheapest price regardless of the length (because seeing so many shows gets expensive!)
+    If there happens to be multiple shows at the same time with the same price, choose the first show in the order of the list
+    Time is represented in integers, and all shows begin between 5pm (5) and 11:30pm (11.5)
+    At least 30min (0.5) is needed between each show (in order to make it to the next venue!) This means that if you see a 1 hour long show at 6pm (6), the next possible show that you could see would be at 7:30 (7.5) or later.
+    The function should return an array that includes the array of shows (names) that you will be going to, as well as the total price as an integer
+    i.e. [['Little Death Club', 'show2', 'show3'], 30]
+    If the supplied input is empty ( [ ] ), return [ ["No shows to see!"], 0 ]
+     */
+
+
+
+function chooseShows(showList) {
+  if (showList.length === 0) {
+    return [["No shows to see!"], 0];
+  }
+
+  // Sort by time first, then by price if times are equal
+  const orderedShowList = showList.sort((showA, showB) => {
+    if (showA.time === showB.time) {
+      return showA.price - showB.price;
+    }
+    return showA.time - showB.time;
+  });
+
+  const showsToSee = [[], 0];
+
+  showsToSee[0].push(orderedShowList[0].name);
+  showsToSee[1] += orderedShowList[0].price;
+
+  let currentTime = orderedShowList[0].time + orderedShowList[0].length + 0.5;
+
+  for (let i = 1; i < orderedShowList.length; i++) {
+    if (orderedShowList[i].time >= currentTime) {
+      showsToSee[0].push(orderedShowList[i].name);
+      showsToSee[1] += orderedShowList[i].price;
+      currentTime = orderedShowList[i].time + orderedShowList[i].length + 0.5;
+    }
+  }
+
+  return showsToSee;
+}
+
+/* 
+//CW
+function chooseShows(showList) {
+  if(!showList.length) return [['No shows to see!'], 0];
+  let res = [[],0], timeStart = 5;
+  showList.sort( (a,b) => a.time - b.time || a.price - b.price );
+  showList.forEach(show => {
+    if(show.time >= timeStart) {
+      timeStart = 0.5 + show.length + show.time;
+      res[0].push(show.name);
+      res[1] += show.price;
+    }
+  });
+  return res;
+} 
+*/
+
+
