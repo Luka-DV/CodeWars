@@ -10287,7 +10287,6 @@ function chineseZodiac(year){
   
 }
 
-
 /* 7 kyu
 The Office III - Broken Photocopier
 The bloody photocopier is broken... Just as you were sneaking around the office to print off your favourite binary code!
@@ -10299,4 +10298,5 @@ function broken(x){
     .map(num => num === "1" ? "0" : "1" )
     .join("");
 }
+
 
