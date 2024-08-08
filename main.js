@@ -10332,3 +10332,45 @@ function findSenior(list) {
 }
 
 
+/* 6 kyu
+Coding Meetup #8 - Higher-Order Functions Series - Will all continents be represented?
+You will be given a sequence of objects (associative arrays in PHP) representing data about developers who have signed up to attend the next coding meetup that you are organising.
+Your task is to return:
+    true if all of the following continents / geographic zones will be represented by at least one developer: 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania'.
+    false otherwise. */
+
+//easiest, but not efficient:
+function allContinents(list) {
+  const allCont = [];
+  
+  for(let dev of list) {
+    allCont.push(dev.continent);
+  }
+  
+  const continentsRepresented = new Set(allCont);
+  
+  return continentsRepresented.size === 5;
+  
+}
+
+//faster, more efficient:
+
+function allContinents(list) {
+  
+  const devContinents = new Set();
+  
+  for(let dev of list) {
+      devContinents.add(dev.continent);
+      if(devContinents.size === 5) return true;
+  } 
+  
+  return false;
+}
+
+//cw solution, little less efficient:
+function allContinents(list) {
+  return ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'].every(x => list.some(y => x==y.continent));
+}
+
+
+
