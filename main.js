@@ -10373,4 +10373,30 @@ function allContinents(list) {
 }
 
 
+/* 6 kyu
+Coding Meetup #9 - Higher-Order Functions Series - Is the meetup age-diverse?
+Description:
+You will be given an array of objects (associative arrays in PHP) representing data about developers who have signed up to attend the next coding meetup that you are organising.
+Your task is to return:
 
+    true if developers from all of the following age groups have signed up: teens, twenties, thirties, forties, fifties, sixties, seventies, eighties, nineties, centenarian (at least 100 years young).
+    false otherwise. */
+
+
+function isAgeDiverse(list) {
+  
+  const ageGroupsSet = new Set();
+  
+  for(let dev of list) {
+    if(dev.age >= 100) {
+      ageGroupsSet.add("10");
+    } else {
+      const ageGroup = String(dev.age)[0];
+      ageGroupsSet.add(ageGroup);
+    }
+    
+    if(ageGroupsSet.size === 10) return true;
+  }
+  
+  return false;
+}
