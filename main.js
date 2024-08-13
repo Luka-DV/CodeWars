@@ -10391,12 +10391,27 @@ function isAgeDiverse(list) {
     if(dev.age >= 100) {
       ageGroupsSet.add("10");
     } else {
-      const ageGroup = String(dev.age)[0];
-      ageGroupsSet.add(ageGroup);
+        const ageGroup = String(dev.age)[0];
+        ageGroupsSet.add(ageGroup);
     }
     
     if(ageGroupsSet.size === 10) return true;
   }
   
   return false;
+}
+
+
+/* 6 kyu
+Coding Meetup #10 - Higher-Order Functions Series - Create usernames
+write a function that adds the username property to each object in the input array
+firstName in lower-case;
+first letter of the lastName in lower-case; and
+the birth year which for the purpose of this kata is calculated simply by subtracting age from the current year. Please make sure that your function delivers the correct birth year irrespective of when it will be executed, for example it should also work correctly for a meetup organised in 10-years-time. */
+
+function addUsername(list) {
+  return list.map( dev => {
+    dev.username = (dev.firstName + dev.lastName[0]).toLowerCase() + (new Date().getFullYear() - dev.age);
+    return dev;
+  })
 }
