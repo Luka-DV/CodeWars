@@ -10440,4 +10440,44 @@ function getAverageAge(list) {
 }
 
 
+/* 5 kyu
+Moving Zeros To The End
+Write an algorithm that takes an array and moves all of the zeros to the end, preserving the order of the other elements.
+moveZeros([false,1,0,1,2,0,1,3,"a"]) // returns[false,1,1,2,1,3,"a",0,0] */
+
+function moveZeros(arr) {
+  
+  const zeroArr = new Array();
+
+  for(let i = 0; i < arr.length; i++) {
+    if(arr[i] === 0) {
+      arr.splice(i, 1);
+      zeroArr.push(0);
+      i--;
+    }
+  }
+  //return [...arr, ...zeroArr];
+  return arr.concat(zeroArr);
+}
+
+//actually more efficient:
+
+function moveZeros(arr) {
+  const nonZeroArr = arr.filter(num => num !== 0);
+  const zeroArr = arr.filter(num => num === 0);
+  
+  return [...nonZeroArr, ...zeroArr];
+}
+
+//or
+
+function moveZeros(arr) {
+  
+  const nonZeroArr = [];
+  const zeroArr = [];
+  
+  arr.forEach(num => num === 0 ? zeroArr.push(0) : nonZeroArr.push(num));
+  
+  return nonZeroArr.concat(zeroArr);
+}
 
