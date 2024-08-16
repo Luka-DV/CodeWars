@@ -10481,3 +10481,18 @@ function moveZeros(arr) {
   return nonZeroArr.concat(zeroArr);
 }
 
+
+/* 7 kyu
+Coding Meetup #12 - Higher-Order Functions Series - Find GitHub admins
+...write a function that when executed as findAdmin(list1, 'JavaScript') returns only the JavaScript developers who are GitHub admins:... */
+
+function findAdmin(list, lang) {
+  return list.filter(dev => dev.language === lang 
+                     && dev.githubAdmin === "yes");
+}
+
+// with destructuring:
+
+const findAdmin = (list, lang) =>
+  list.filter(({language, githubAdmin}) => language === lang && githubAdmin === `yes`);
+
