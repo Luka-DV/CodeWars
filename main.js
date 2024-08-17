@@ -10004,33 +10004,33 @@ The Dog constructor should accept 4 arguments in the specified order: name, age,
 Dogs have an identical introduce/Introduce method as any other animal, but they have their own method called greetMaster/GreetMaster which accepts no arguments and returns "Hello (insert_master_name_here)" (of course not the literal string but replace the (insert_master_name_here) with the name of the dog's master). */
 
 
-class Shark extends Animal {
-  constructor(name, age, status) {
-    super(name, age, 0, "shark", status);
-  }
-}
+// class Shark extends Animal {
+//   constructor(name, age, status) {
+//     super(name, age, 0, "shark", status);
+//   }
+// }
 
-class Cat extends Animal {
-  constructor(name, age, status) {
-    super(name, age, 4, "cat", status);
-  }
+// class Cat extends Animal {
+//   constructor(name, age, status) {
+//     super(name, age, 4, "cat", status);
+//   }
   
-  introduce() {
-    return `Hello, my name is ${this.name} and I am ${this.age} years old.  Meow meow!`;
-    // or just: return `${super.introduce()}  Meow meow!`;
-  } 
-}
+//   introduce() {
+//     return `Hello, my name is ${this.name} and I am ${this.age} years old.  Meow meow!`;
+//     // or just: return `${super.introduce()}  Meow meow!`;
+//   } 
+// }
 
-class Dog extends Animal {
-  constructor(name, age, status, master) {
-    super(name, age, 4, "dog", status);
-      this.master = master;
-  }
+// class Dog extends Animal {
+//   constructor(name, age, status, master) {
+//     super(name, age, 4, "dog", status);
+//       this.master = master;
+//   }
   
-  greetMaster() {
-   return `Hello ${this.master}`;
-  }
-}
+//   greetMaster() {
+//    return `Hello ${this.master}`;
+//   }
+// }
 
 
 
@@ -10046,7 +10046,7 @@ Define these methods:
 `getVolume()` return the volume of the `Block`
 `getSurfaceArea()` return the surface area of the `Block` */
 
-class Block{
+class Block0{
 
   constructor([width, length , height]){
     this.width = width;
@@ -10077,7 +10077,7 @@ class Block{
 
 //or:
 
-class Block{
+class Block1{
 
   constructor(data){
   [ this.width ,
@@ -10119,7 +10119,7 @@ c + 1; // 2
 c > 1; // false */
 
 
-class Counter {
+class Counter3 {
   constructor() {
     this.counter = 0;
   }
@@ -10493,6 +10493,76 @@ function findAdmin(list, lang) {
 
 // with destructuring:
 
-const findAdmin = (list, lang) =>
+const findAdmin2 = (list, lang) =>
   list.filter(({language, githubAdmin}) => language === lang && githubAdmin === `yes`);
 
+
+/* 6 kyu
+Coding Meetup #13 - Higher-Order Functions Series - Is the meetup language-diverse?
+You will be given an array of objects representing data about developers who have signed up to attend the next web development meetup that you are organising. Three programming languages will be represented: Python, Ruby and JavaScript.
+Your task is to return either:
+    true if the number of meetup participants representing any of the three programming languages is ** at most 2 times higher than the number of developers representing any of the remaining programming languages**; or
+    false otherwise.
+ */
+
+function isLanguageDiverse(list) {
+
+  const refObject = list.reduce((acc, {language}) => {
+    acc[language] = (acc[language] || 0) + 1;
+    return acc;
+  }, {});
+  
+  let maxLangOccurrance = refObject["Ruby"];
+  let minLangOccurrance = refObject["Ruby"];
+  
+  for(let lang in refObject) {
+    if(refObject[lang] > maxLangOccurrance) {
+      maxLangOccurrance = refObject[lang];
+    } else if (refObject[lang] < minLangOccurrance) {
+      minLangOccurrance = refObject[lang];
+    }
+  }
+  
+  return maxLangOccurrance <= minLangOccurrance*2;
+}
+
+//without hardcoding:
+
+
+function isLanguageDiverse(list) {
+
+  const refObject = list.reduce((acc, {language}) => {
+    acc[language] = (acc[language] || 0) + 1;
+    return acc;
+  }, {});
+  
+  const numOfLanOcc = Object.values(refObject);
+  
+  let maxLangOccurrance = numOfLanOcc[0];
+  let minLangOccurrance = numOfLanOcc[0];
+  
+  for(let lang in refObject) {
+    if(refObject[lang] > maxLangOccurrance) {
+      maxLangOccurrance = refObject[lang];
+    } else if (refObject[lang] < minLangOccurrance) {
+      minLangOccurrance = refObject[lang];
+    }
+  }
+  
+  return maxLangOccurrance <= minLangOccurrance*2;
+}
+
+
+// most readable and simple but a bit less performant:
+
+function isLanguageDiverse(list) {
+
+  const refObject = list.reduce((acc, {language}) => {
+    acc[language] = (acc[language] || 0) + 1;
+    return acc;
+  }, {});
+  
+  const numOfLanOcc = Object.values(refObject);
+  
+  return Math.max(...numOfLanOcc) <= Math.min(...numOfLanOcc)*2;
+}
