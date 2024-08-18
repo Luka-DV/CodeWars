@@ -10566,3 +10566,27 @@ function isLanguageDiverse(list) {
   
   return Math.max(...numOfLanOcc) <= Math.min(...numOfLanOcc)*2;
 }
+
+
+/* 7 kyu
+Coding Meetup #14 - Higher-Order Functions Series - Order the food
+Your task is to return an object which includes the count of food options selected by the developers on the meetup sign-up form.. */
+
+function orderFood(list) {
+
+  return list.reduce((acc, { meal }) => {
+    acc[meal] = (acc[meal] || 0) + 1;
+    return acc;
+  }, {});
+}
+
+//or:
+
+function orderFood(list) {
+  const foodOptions = {};
+  
+  list.forEach(({ meal }) => foodOptions[meal] ? foodOptions[meal]++ : foodOptions[meal] = 1);
+  
+  return foodOptions;
+}
+
