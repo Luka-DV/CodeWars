@@ -10590,3 +10590,25 @@ function orderFood(list) {
   return foodOptions;
 }
 
+
+
+/* 6 kyu
+Coding Meetup #15 - Higher-Order Functions Series - Find the odd names
+...write a function that when executed as findOddNames(list1) returns only the developers where if you add the ASCII representation of all characters in their first names, the result will be an odd number: */
+
+function findOddNames(list) {
+  
+  function isNameOdd(dev) {
+    const sumOfLetters = dev.firstName
+      .split("")
+      .reduce((acc, crr) => {
+        acc += crr.charCodeAt(0);
+        return acc;
+      }, 0)
+    
+    return sumOfLetters % 2 === 1;
+  }
+  
+  return list.filter(isNameOdd);
+}
+
