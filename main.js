@@ -10612,3 +10612,45 @@ function findOddNames(list) {
   return list.filter(isNameOdd);
 }
 
+/* 7 kyu
+Coding Meetup #17 - Higher-Order Functions Series - Sort by programming language.
+Write a function that returns the array sorted alphabetically by the programming language. In case there are some developers that code in the same language, sort them alphabetically by the first name... */
+
+function sortByLanguage(list) {
+  return list.sort((dev1, dev2) => {
+    if( dev1.language === dev2.language) {
+      if(dev1.firstName < dev2.firstName) {
+        return -1;
+      } else if (dev1.firstName > dev2.firstName) {
+        return 1;
+      } else return 0
+    } else {
+       if(dev1.language < dev2.language) {
+        return -1;
+      } else if (dev1.language > dev2.language) {
+        return 1;
+      } else return 0
+      ;
+    }
+  })
+}
+
+//or
+
+function sortByLanguage(list) {
+  return list.sort((a, b) => a.language === b.language ? 
+    a.firstName.localeCompare(b.firstName) : a.language.localeCompare(b.language));
+}
+
+//or
+
+function sortByLanguage(list) {
+  return list.sort((a,b) => {
+    if (a.language == b.language) {
+      return a.firstName > b.firstName ? 1 : -1;
+    }
+    return a.language > b.language ? 1 : -1;
+  });
+  
+}
+
