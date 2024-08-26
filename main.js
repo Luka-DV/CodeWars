@@ -10806,3 +10806,113 @@ function Cube(length) {
     });
 }
 
+
+/* 6 kyu
+Fun with ES6 Classes #6 - Fake Files (Basic)
+Task:... */
+
+class File {
+  constructor(fullName, contents) {
+    this._fullName = fullName;
+    this._filename = (() => {
+      const nameArr = this._fullName.split(".");
+      nameArr.pop();
+      return nameArr.join(".");
+    })();
+    this._extension = (() => {
+      return this._fullName.split(".").at(-1);
+    })();
+    this._contents = contents;
+    this._lineNum = -1;
+    this._charNum = -1;
+  }
+  
+  get fullName() {
+    return this._fullName;
+  }
+  
+  get filename() {
+    return this._filename;
+  }
+  
+  get extension() {
+    return this._extension;
+  }
+  
+  getContents() {
+    return this._contents;
+  }
+  
+  write(str) {
+    if(this.getContents().length === 0) {
+      this._contents = str;
+    } else {
+      this._contents += `\n${str}`;
+    }
+    
+  }
+  
+  gets() {
+    this._lineNum++;
+    return this._contents.split("\n")[this._lineNum];
+  }
+  
+  getc() {
+    this._charNum++;
+    return this._contents[this._charNum];
+  }
+}
+
+
+// refactored:
+
+class File {
+  constructor(fullName, contents) {
+    this._fullName = fullName;
+    
+    const nameArr = this._fullName.split(".");
+    this._extension =  nameArr.pop();
+    this._filename = nameArr.join(".");
+    
+    this._contents = contents;
+    
+    this._lineNum = -1;
+    this._charNum = -1;
+  }
+  
+  get fullName() {
+    return this._fullName;
+  }
+  
+  get filename() {
+    return this._filename;
+  }
+  
+  get extension() {
+    return this._extension;
+  }
+  
+  getContents() {
+    return this._contents;
+  }
+  
+  write(str) {
+    if(this.getContents().length === 0) {
+      this._contents = str;
+    } else {
+      this._contents += `\n${str}`;
+    }
+    
+  }
+  
+  gets() {
+    this._lineNum++;
+    return this._contents.split("\n")[this._lineNum];
+  }
+  
+  getc() {
+    this._charNum++;
+    return this._contents[this._charNum];
+  }
+}
+
