@@ -10971,3 +10971,28 @@ function solution(str){
  return splitStringArray;
 }
 
+
+/* 6 kyu
+Break camelCase
+Complete the solution so that the function will break up camel casing, using a space between words.
+Example
+"camelCasing"  =>  "camel Casing"
+"identifier"   =>  "identifier"
+""             =>  ""
+ */
+
+
+function solution(string) {
+  let noCamelCaseAllowed = "";
+  
+  for(let char of string) {
+    if(char === char.toUpperCase()) {
+      noCamelCaseAllowed += ` ${char}`
+      continue;
+    }
+    noCamelCaseAllowed += char;
+  }
+  
+  return noCamelCaseAllowed;
+}
+
