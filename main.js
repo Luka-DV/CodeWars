@@ -11005,3 +11005,44 @@ function repeatStr (n, s) {
   return s.repeat(n);
 }
 
+/* 6 kyu
+Create Phone Number */
+
+function createPhoneNumber1(numbers){
+  let phoneNumber = "";
+  
+  for(let i = 0; i < numbers.length; i++) {
+    switch(i) {
+      case 0: 
+        phoneNumber += "(" + numbers[i];
+        break;
+      case 2:
+        phoneNumber += numbers[i] + ")";
+        break;
+      case 3: 
+        phoneNumber += " " + numbers[i];
+        break;
+      case 5:
+        phoneNumber += numbers[i] + "-";
+        break;
+      default:
+        phoneNumber += numbers[i];
+    }
+  }
+  
+  return phoneNumber;
+}
+
+//smart cw solution:
+
+
+function createPhoneNumber2(numbers){
+  let phoneNumber = "(nnn) nnn-nnnn";
+  
+  for(let i = 0; i < numbers.length; i++) {
+    phoneNumber = phoneNumber.replace("n", numbers[i]);
+  }
+  
+  return phoneNumber;
+}
+
