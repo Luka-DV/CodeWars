@@ -11066,3 +11066,33 @@ function toCamelCase(str){
   }
   return camelString;
 }
+
+/* 
+6 kyu
+Grouped by commas
+Finish the solution so that it takes an input n (integer) and returns a string that is the decimal representation of the number grouped by commas after every 3 digits.
+Assume: 0 <= n < 2147483647 */
+
+function groupByCommas(n) {
+  const numberAsString = `${n}`;
+  
+  let numberAsStringWithCommas = "";
+  
+  for(let i = 1;  i <= numberAsString.length ; i++) {
+    
+    if(i !== 1 && (i - 1) % 3 === 0 ) {
+      numberAsStringWithCommas = numberAsString[numberAsString.length - i] + "," + numberAsStringWithCommas;
+    } else {
+      numberAsStringWithCommas = numberAsString[numberAsString.length - i] + numberAsStringWithCommas;
+    }
+  }
+  
+  return numberAsStringWithCommas;
+}
+
+// smart cw solution:
+
+function groupByCommas(n) {
+  return n.toLocaleString("en-GB");
+}
+
