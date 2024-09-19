@@ -11122,36 +11122,55 @@ class PaginationHelper {
     this.collection = collection;
     this.itemsPerPage = itemsPerPage;
 	}
+
 	itemCount() {
 	  return this.collection.length;
 	}
+
 	pageCount() {
 	 return Math.ceil(this.itemCount()/this.itemsPerPage);
 	}
+
 	pageItemCount(pageIndex) {
-    
     if(pageIndex < 0 || pageIndex + 1 > this.pageCount()) {
       return -1;
     }
     
     if(pageIndex + 1 === this.pageCount()) {
-      
-      const modulo = this.itemCount() % this.itemsPerPage;
-      
+      const modulo = this.itemCount() % this.itemsPerPage; 
       return modulo ? modulo : this.itemsPerPage;
-      
     }
     
     return this.itemsPerPage;
 	}
   
-	pageIndex(itemIndex) {
-    
+	pageIndex(itemIndex) { 
     if(itemIndex < 0 || itemIndex + 1 > this.itemCount()) {
       return -1;
     }
     
-    return Math.ceil((itemIndex + 1) / this.itemsPerPage) -1
+    return Math.ceil((itemIndex + 1) / this.itemsPerPage) -1;
     
 	}
 }
+
+/* 6 kyu
+Unique In Order
+Implement the function unique_in_order which takes as argument a sequence and returns a list of items without any elements with the same value next to each other and preserving the original order of elements.
+uniqueInOrder('AAAABBBCCDAABBB') == ['A', 'B', 'C', 'D', 'A', 'B']
+uniqueInOrder('ABBCcAD')         == ['A', 'B', 'C', 'c', 'A', 'D']
+uniqueInOrder([1,2,2,3,3])       == [1,2,3] */
+
+const uniqueInOrder1 = iterable => {
+  const iterableArray = typeof iterable === "string" ? iterable.split("") : iterable;
+  
+  for(let i = 0; i < iterableArray.length; i++ ) {
+    if(iterableArray[i + 1] === iterableArray[i]) {
+      iterableArray.splice(i + 1, 1);
+      i--;
+    }
+  }
+  
+  return iterableArray;
+}
+
