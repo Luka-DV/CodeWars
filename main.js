@@ -11174,3 +11174,46 @@ const uniqueInOrder1 = iterable => {
   return iterableArray;
 }
 
+
+
+/* 6 kyu
+Counting Duplicates
+Count the number of Duplicates
+Write a function that will return the count of distinct case-insensitive alphabetic characters and numeric digits that occur more than once in the input string. The input string can be assumed to contain only alphabets (both uppercase and lowercase) and numeric digits. */
+
+function duplicateCount(text){
+
+  const textLowerCaseArray = text.toLowerCase().split("");
+  
+  const referenceObject = textLowerCaseArray.reduce( (acc, crr) => {
+    acc[crr] = (acc[crr] || 0) + 1;
+    return acc;
+    }, {});
+  
+  let numberOfDuplicates = 0;
+
+  for(let prop in referenceObject) {
+    if(referenceObject[prop] > 1) {
+      numberOfDuplicates ++;
+    }
+  }
+
+  return numberOfDuplicates;
+}
+
+//without the second for loop:
+
+function duplicateCount(text) {
+
+  const textLowerCaseArray = text.toLowerCase().split("");
+  
+  const referenceObject = textLowerCaseArray.reduce( (acc, crr) => {
+    acc[crr] = (acc[crr] || 0) + 1;
+    return acc;
+    }, {});
+  
+  const numberOfDuplicates = Object.values(referenceObject).filter(number => number > 1).length;
+
+  return numberOfDuplicates;
+}
+
