@@ -10663,7 +10663,7 @@ Define a class Person with the following properties:
     A method sayFullName/SayFullName that accepts no arguments and returns the full name (e.g. "John Doe")
     A class/static method greetExtraTerrestrials/GreetExtraTerrestrials that accepts one parameter raceName and returns "Welcome to Planet Earth raceName". For example, if the race name is "Martians", it should say "Welcome to Planet Earth Martians" */
 
-class Person {
+class PersonA {
   constructor(firstName = "John", lastName = "Doe", age = 0, gender = "Male") {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -10695,13 +10695,13 @@ Dogs have an identical introduce/Introduce method as any other animal, but they 
 
 // Get Coding :)
 
-class Shark extends Animal {
+class SharkA extends Animal {
   constructor(name, age, status) {
     super(name, age, 0, "shark", status);
   }
 }
 
-class Cat extends Animal {
+class CatA extends Animal {
   constructor(name, age, status) {
     super(name, age, 4, "cat", status );
   }
@@ -10712,7 +10712,7 @@ class Cat extends Animal {
   }
 }
 
-class Dog extends Animal {
+class DogA extends Animal {
   constructor(name, age, status, master) {
     super(name, age, 4, "dog", status);
     this.master = master;
@@ -10727,7 +10727,7 @@ class Dog extends Animal {
 /* 7 kyu
 Fun with ES6 Classes #3 - Cuboids, Cubes and Getters */
 
-class Cuboid {
+class CuboidA {
   constructor(length, width, height) {
     this.length = length;
     this.width = width;
@@ -10745,7 +10745,7 @@ class Cuboid {
   }
 }
   
-class Cube extends Cuboid {
+class CubeA extends CuboidA {
   constructor(length) {
     super(length, length, length);
   }
@@ -10758,7 +10758,7 @@ No initial code will be given. You are free to use whatever syntax you like to c
 
 // ES6 class
 
-class Cube {
+class CubeB {
   constructor(length) {
     this.length = length;
   }
@@ -10782,7 +10782,7 @@ class Cube {
 
 // constructor function
 
-function Cube(length) {
+function CubeC(length) {
   
   this.length = length;
   
@@ -10811,7 +10811,7 @@ function Cube(length) {
 Fun with ES6 Classes #6 - Fake Files (Basic)
 Task:... */
 
-class File {
+class FileA {
   constructor(fullName, contents) {
     this._fullName = fullName;
     this._filename = (() => {
@@ -11216,4 +11216,18 @@ function duplicateCount(text) {
 
   return numberOfDuplicates;
 }
+
+
+// Closure
+
+function newCounter() {
+  let count = 0;
+  const counter = () => {
+    count++;
+    return count;
+  }
+  return counter;
+}
+
+const addOneTest = newCounter();
 
