@@ -11258,3 +11258,22 @@ function spinWords(string){
     .join(" ");
 }
 
+/* 6 kyu
+Bit Counting
+Write a function that takes an integer as input, and returns the number of bits that are equal to one in the binary representation of that number. You can guarantee that input is non-negative. */
+
+function countBits(number) {
+  const numberToBinaryString = number.toString(2);
+  let numOfBitsEqualToOne = 0;
+  
+  for(let bit of numberToBinaryString) {
+    if(bit === "1") numOfBitsEqualToOne++;
+  }
+  
+  return numOfBitsEqualToOne;
+}
+
+//shorter but a bit slower:
+
+countBits2 = n => n.toString(2).split('0').join('').length;
+
