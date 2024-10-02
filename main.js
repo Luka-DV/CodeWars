@@ -11277,3 +11277,39 @@ function countBits(number) {
 
 countBits2 = n => n.toString(2).split('0').join('').length;
 
+/* 
+6 kyu
+Who likes it?
+You probably know the "like" system from Facebook and other pages. People can "like" blog posts, pictures or other items. We want to create the text that should be displayed next to such an item. */
+
+function likes(names) {
+  switch(names.length) {
+      case 0:
+        return "no one likes this";
+      case 1: 
+        return `${names[0]} likes this`;
+      case 2: 
+        return `${names[0]} and ${names[1]} like this`;
+      case 3:
+        return `${names[0]}, ${names[1]} and ${names[2]} like this`;
+      default:
+        return `${names[0]}, ${names[1]} and ${names.length - 2} others like this`;
+  }
+}
+
+// or with a map:
+
+function likes(names) {
+  const likesDescriptionMap = new Map([
+    [0, "no one likes this"],
+    [1, `${names[0]} likes this`],
+    [2, `${names[0]} and ${names[1]} like this`],
+    [3, `${names[0]}, ${names[1]} and ${names[2]} like this`],
+    [4, `${names[0]}, ${names[1]} and ${names.length - 2} others like this`]
+  ]);
+  
+  const stringOption = names.length > 4 ? 4 : names.length;
+
+  return likesDescriptionMap.get(stringOption);
+}
+
