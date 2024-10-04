@@ -11313,3 +11313,42 @@ function likes(names) {
   return likesDescriptionMap.get(stringOption);
 }
 
+
+/* Huntober #1 challenge
+Given a number as an input, print out every integer from 1 to that number. However, when the integer is divisible by 3, print out “Fizz”; when it’s divisible by 5, print out “Buzz”; when it’s divisible by both 3 and 5, print out “Fizz Buzz”. */
+
+//Par: number
+//R: console.log(num)
+//E: fizzBuzz(5): 1, 2, Fizz, 4, FizzBuzz
+//PS: 
+
+//take in number
+//create a loop to given number
+//console.log every iteration
+
+console.log("newFizzBuzz:")
+
+function fizzBuzz36(number) {
+  const referenceObject = {
+    3: "Fizz",
+    5: "Buzz"
+  }
+
+  for(let i = 1; i <= number; i++) {
+    let output = "";
+    for(let [number, word] of Object.entries(referenceObject)) {
+      if(i % number === 0) {
+        output += word;
+      }
+    }
+
+    console.log(output || i);
+  }
+}
+
+class FizzBuzz {
+
+}
+
+fizzBuzz36(36);
+
