@@ -11348,7 +11348,38 @@ function fizzBuzz36(number) {
 
 class FizzBuzz {
 
+  constructor() {
+    this.referenceObject = {
+      3: "Fizz",
+      5: "Buzz"
+    }
+  }
+
+  printFizzBuzz(number) {
+    for(let i = 1; i <= number; i++) {
+      let output = "";
+      for(let [number, word] of Object.entries(this.referenceObject)) {
+        if(i % number === 0) {
+          output += word;
+        }
+      }
+  
+      console.log(output || i);
+    }
+  }
+
+  addDivisorAndWord(number, word) {
+    this.referenceObject[number] = word;
+  }
+
 }
 
 fizzBuzz36(36);
 
+
+const fizzi = new FizzBuzz();
+console.log("Classdddddddddd")
+fizzi.printFizzBuzz(21);
+fizzi.addDivisorAndWord(7, "Dazz");
+console.log("classssswwwwwwwwww")
+fizzi.printFizzBuzz(21);
