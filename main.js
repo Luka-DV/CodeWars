@@ -11383,3 +11383,35 @@ fizzi.printFizzBuzz(21);
 fizzi.addDivisorAndWord(7, "Dazz");
 console.log("classssswwwwwwwwww")
 fizzi.printFizzBuzz(21);
+
+
+/* 6 kyu 
++1 Array
+Given an array of integers of any length, return an array that has 1 added to the value represented by the array.
+If the array is invalid (empty, or contains negative integers or integers with more than 1 digit), return nil (or your language's equivalent). */
+
+//first attempt
+
+function upArray(arr){
+  if(!arr.length || arr.some( num => num < 0 || num > 9)) {
+    return null;
+  }
+  
+  const arrToNum =  Number(arr.join(""));
+  
+  let addOneToNumAndString = `${arrToNum + 1}`;
+  
+  if(addOneToNumAndString.length < arr.length) {
+    const diffInLength = arr.length - addOneToNumAndString.length;
+    
+    for(let i = 1; i <= diffInLength; i++) {
+      addOneToNumAndString = "0" + addOneToNumAndString;
+    }
+  }
+
+  return addOneToNumAndString.split("").map(Number);
+    
+}
+
+// doesnt work for big numbers
+
