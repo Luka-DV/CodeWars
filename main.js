@@ -11415,3 +11415,31 @@ function upArray(arr){
 
 // doesnt work for big numbers
 
+
+
+function upArray(arr){
+  if(!arr.length || arr.some( num => num < 0 || num > 9)) {
+    return null;
+  }
+  
+ for(let i = arr.length - 1; i >= 0; i--) {
+    arr[i] += 1;
+
+    if(arr[i] !== 10) {
+      break;
+    }
+
+    arr[i] = 0;
+
+    if(!i) {
+      arr.unshift(1);
+    }
+ }
+  
+  return arr;
+}
+
+
+//works
+
+
