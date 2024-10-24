@@ -11485,3 +11485,33 @@ console.log(titleCase('a clash of KINGS', 'a an the of'));
 console.log(titleCase('THE WIND IN THE WILLOWS', 'The In'));
 console.log(titleCase('the quick brown fox'));
 
+
+
+/* 6 kyu
+Find the odd int
+Given an array of integers, find the one that appears an odd number of times.
+There will always be only one integer that appears an odd number of times. */
+
+function findOdd(A) {
+  
+  const refObject = {};
+  
+  for(let num of A) {
+    refObject[num] = (refObject[num] || 0) + 1;
+  }
+
+/*   
+or simply:
+  const refObject = A.reduce((acc, crr) => {
+    acc[crr] = (acc[crr] || 0) + 1;
+    return acc;
+  }, {})
+*/
+
+  for(let num in refObject) {
+    if(refObject[num] % 2 === 1) {
+      return +num;
+    }
+  }
+}
+
